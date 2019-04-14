@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using SadovodClasses;
 
 namespace WebApplication3.Controllers
 {
@@ -19,7 +20,7 @@ namespace WebApplication3.Controllers
         [HttpGet]
         public async Task<JsonResult> Get()
         {
-            return new JsonResult("example");
+            return new JsonResult(ExampleClass.ExampleMethod());
         }
         //api/Example/GetByID?id=needId
         [Route("GetByID/")]

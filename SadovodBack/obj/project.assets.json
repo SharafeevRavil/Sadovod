@@ -4438,6 +4438,16 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
+      },
+      "SadovodClasses/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/SadovodClasses.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SadovodClasses.dll": {}
+        }
       }
     }
   },
@@ -12080,13 +12090,19 @@
         "system.xml.xpath.xdocument.4.3.0.nupkg.sha512",
         "system.xml.xpath.xdocument.nuspec"
       ]
+    },
+    "SadovodClasses/1.0.0": {
+      "type": "project",
+      "path": "../SadovodClasses/SadovodClasses.csproj",
+      "msbuildProject": "../SadovodClasses/SadovodClasses.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
       "Microsoft.AspNetCore.App >= 2.2.0",
       "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
-      "Microsoft.NETCore.App >= 2.2.0"
+      "Microsoft.NETCore.App >= 2.2.0",
+      "SadovodClasses >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -12121,7 +12137,11 @@
       },
       "frameworks": {
         "netcoreapp2.2": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\home\\Desktop\\Sadovod\\SadovodClasses\\SadovodClasses.csproj": {
+              "projectPath": "C:\\Users\\home\\Desktop\\Sadovod\\SadovodClasses\\SadovodClasses.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
