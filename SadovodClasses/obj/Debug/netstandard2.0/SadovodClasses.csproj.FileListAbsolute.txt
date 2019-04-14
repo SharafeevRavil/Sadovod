@@ -1,9 +1,0 @@
-C:\Users\home\Desktop\Sadovod\SadovodClasses\bin\Debug\netstandard2.0\SadovodClasses.deps.json
-C:\Users\home\Desktop\Sadovod\SadovodClasses\bin\Debug\netstandard2.0\SadovodClasses.dll
-C:\Users\home\Desktop\Sadovod\SadovodClasses\bin\Debug\netstandard2.0\SadovodClasses.pdb
-C:\Users\home\Desktop\Sadovod\SadovodClasses\obj\Debug\netstandard2.0\SadovodClasses.csprojAssemblyReference.cache
-C:\Users\home\Desktop\Sadovod\SadovodClasses\obj\Debug\netstandard2.0\SadovodClasses.csproj.CoreCompileInputs.cache
-C:\Users\home\Desktop\Sadovod\SadovodClasses\obj\Debug\netstandard2.0\SadovodClasses.AssemblyInfoInputs.cache
-C:\Users\home\Desktop\Sadovod\SadovodClasses\obj\Debug\netstandard2.0\SadovodClasses.AssemblyInfo.cs
-C:\Users\home\Desktop\Sadovod\SadovodClasses\obj\Debug\netstandard2.0\SadovodClasses.dll
-C:\Users\home\Desktop\Sadovod\SadovodClasses\obj\Debug\netstandard2.0\SadovodClasses.pdb

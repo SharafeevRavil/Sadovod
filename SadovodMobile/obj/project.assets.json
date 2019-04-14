@@ -289,16 +289,6 @@
         "runtime": {
           "lib/monoandroid81/Xamarin.Essentials.dll": {}
         }
-      },
-      "SadovodClasses/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "compile": {
-          "bin/placeholder/SadovodClasses.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/SadovodClasses.dll": {}
-        }
       }
     }
   },
@@ -742,16 +732,10 @@
         "xamarin.essentials.1.0.1.nupkg.sha512",
         "xamarin.essentials.nuspec"
       ]
-    },
-    "SadovodClasses/1.0.0": {
-      "type": "project",
-      "path": "../SadovodClasses/SadovodClasses.csproj",
-      "msbuildProject": "../SadovodClasses/SadovodClasses.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "MonoAndroid,Version=v8.1": [
-      "SadovodClasses >= 1.0.0",
       "Xamarin.Android.Support.Core.Utils >= 28.0.0.1",
       "Xamarin.Android.Support.CustomTabs >= 28.0.0.1",
       "Xamarin.Android.Support.Design >= 28.0.0.1",
@@ -759,24 +743,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\home\\.nuget\\packages\\": {},
+    "C:\\Users\\Ильсур\\.nuget\\packages\\": {},
     "C:\\ProgramData\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\home\\Desktop\\Sadovod\\SadovodMobile\\SadovodMobile.csproj",
+      "projectUniqueName": "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodMobile\\SadovodMobile.csproj",
       "projectName": "SadovodMobile",
-      "projectPath": "C:\\Users\\home\\Desktop\\Sadovod\\SadovodMobile\\SadovodMobile.csproj",
-      "packagesPath": "C:\\Users\\home\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\home\\Desktop\\Sadovod\\SadovodMobile\\obj\\",
+      "projectPath": "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodMobile\\SadovodMobile.csproj",
+      "packagesPath": "C:\\Users\\Ильсур\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodMobile\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
         "C:\\ProgramData\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\home\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Ильсур\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -789,11 +773,7 @@
       },
       "frameworks": {
         "monoandroid81": {
-          "projectReferences": {
-            "C:\\Users\\home\\Desktop\\Sadovod\\SadovodClasses\\SadovodClasses.csproj": {
-              "projectPath": "C:\\Users\\home\\Desktop\\Sadovod\\SadovodClasses\\SadovodClasses.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       }
     },
