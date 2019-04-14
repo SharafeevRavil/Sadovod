@@ -3,56 +3,51 @@ using System.Collections.Generic;
 
 namespace SadovodClasses
 {
-	public class GardenBed : GardenBedCare								//Класс "грядка"
-	{
-		public class PlantType											//Класс "растения"
-		{
-			private string TypeName;									//Название растения
-			private string SortName;									//Сорт растения
+    public class GardenBed
+    {
+        //Раcтение на грядке
+        public PlantType Plant
+        {
+            get;
+        }
 
-			public PlantType(string TypeName, string SortName)
-			{
-				this.TypeName = TypeName;
-				this.SortName = SortName;
-			}
+        //Заметки о растениях
+        public List<string> Notes
+        {
+            get;
+        }
 
-		}
+        //Тип грядки
+        public GardenBedType BedType
+        {
+            get; set;
+        }
 
-		public enum GardenBedType										//Перечесление, для указания где расположена грядка		
-		{
-			Alfresco,													//Под открытым небом
-			Hotbed,														//В парнике
-			Greenhouse													//В теплице
-		}
-		private List<PlantType> plants;									//Список раcтений на грядке
-		private string notes;											//Заметки о растениях
-		protected GardenBedType BedType;
+        public GardenBed(PlantType plantType, GardenBedType bedType = GardenBedType.Alfresco)
+        {
+            Plant = plantType;
+            BedType = bedType;
+            Notes = new List<string>();
+        }
 
-		public GardenBed(GardenBedType BedType = GardenBedType.Alfresco)
-		{
-			plants = new List<PlantType>();
-			this.BedType = BedType;
-		}
-
-		public void AddPlant(string TypeName, string SortName)          //Добавление новых растений в грядку
-		{																//Параметры - названия типа и сорта расстения
-			var plantToAdd = new PlantType(TypeName, SortName);
-			plants.Add(plantToAdd);
-		}
-
-		public void RemovePlant(int numberOfPlant)						//Убрать n-ое растение из грядки
-		{
-			plants.RemoveAt(numberOfPlant - 1);
-		}
-
-		public void AddNote(string notesToMake)						   //Сделать заметку о грядке
-		{
-			notes += notesToMake;
-		}
-
-		public void DeleteNote()                            //Очистить заметки о грядке
-		{
-			notes = null;
-		}
-	}
+        //Сделать заметку о грядке
+        public void AddNote(string notesToMake)
+        {
+            Notes.Add(notesToMake);
+        }
+        //Удалить заметку о грядке
+        public bool DeleteNote(int index)
+        {
+            if (index >= Notes.Count || index < 0)
+            {
+                return false;
+            }
+            Notes.RemoveAt(index);
+            return true;
+        }
+        public bool DeleteNote(string note)
+        {
+            return Notes.Remove(note);
+        }
+    }
 }
