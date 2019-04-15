@@ -16,3 +16,12 @@ C:\Users\Ильсур\source\repos\Sadovod2\SadovodClasses\obj\Debug\netstandard
 C:\Users\Ильсур\source\repos\Sadovod2\SadovodClasses\obj\Debug\netstandard2.0\SadovodClasses.AssemblyInfo.cs
 C:\Users\Ильсур\source\repos\Sadovod2\SadovodClasses\obj\Debug\netstandard2.0\SadovodClasses.dll
 C:\Users\Ильсур\source\repos\Sadovod2\SadovodClasses\obj\Debug\netstandard2.0\SadovodClasses.pdb
+C:\Users\bazil\Desktop\Sadovod\SadovodClasses\bin\Debug\netstandard2.0\SadovodClasses.deps.json
+C:\Users\bazil\Desktop\Sadovod\SadovodClasses\bin\Debug\netstandard2.0\SadovodClasses.dll
+C:\Users\bazil\Desktop\Sadovod\SadovodClasses\bin\Debug\netstandard2.0\SadovodClasses.pdb
+C:\Users\bazil\Desktop\Sadovod\SadovodClasses\obj\Debug\netstandard2.0\SadovodClasses.csprojAssemblyReference.cache
+C:\Users\bazil\Desktop\Sadovod\SadovodClasses\obj\Debug\netstandard2.0\SadovodClasses.csproj.CoreCompileInputs.cache
+C:\Users\bazil\Desktop\Sadovod\SadovodClasses\obj\Debug\netstandard2.0\SadovodClasses.AssemblyInfoInputs.cache
+C:\Users\bazil\Desktop\Sadovod\SadovodClasses\obj\Debug\netstandard2.0\SadovodClasses.AssemblyInfo.cs
+C:\Users\bazil\Desktop\Sadovod\SadovodClasses\obj\Debug\netstandard2.0\SadovodClasses.dll
+C:\Users\bazil\Desktop\Sadovod\SadovodClasses\obj\Debug\netstandard2.0\SadovodClasses.pdb

@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\home\\Desktop\\Sadovod\\SadovodBack\\SadovodBack.csproj": {}
+    "C:\\Users\\bazil\\Desktop\\Sadovod\\SadovodBack\\SadovodBack.csproj": {}
   },
   "projects": {
-    "C:\\Users\\home\\Desktop\\Sadovod\\SadovodBack\\SadovodBack.csproj": {
+    "C:\\Users\\bazil\\Desktop\\Sadovod\\SadovodBack\\SadovodBack.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\home\\Desktop\\Sadovod\\SadovodBack\\SadovodBack.csproj",
+        "projectUniqueName": "C:\\Users\\bazil\\Desktop\\Sadovod\\SadovodBack\\SadovodBack.csproj",
         "projectName": "SadovodBack",
-        "projectPath": "C:\\Users\\home\\Desktop\\Sadovod\\SadovodBack\\SadovodBack.csproj",
-        "packagesPath": "C:\\Users\\home\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\home\\Desktop\\Sadovod\\SadovodBack\\obj\\",
+        "projectPath": "C:\\Users\\bazil\\Desktop\\Sadovod\\SadovodBack\\SadovodBack.csproj",
+        "packagesPath": "C:\\Users\\bazil\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bazil\\Desktop\\Sadovod\\SadovodBack\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\ProgramData\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\home\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\bazil\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -32,8 +32,8 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\home\\Desktop\\Sadovod\\SadovodClasses\\SadovodClasses.csproj": {
-                "projectPath": "C:\\Users\\home\\Desktop\\Sadovod\\SadovodClasses\\SadovodClasses.csproj"
+              "C:\\Users\\bazil\\Desktop\\Sadovod\\SadovodClasses\\SadovodClasses.csproj": {
+                "projectPath": "C:\\Users\\bazil\\Desktop\\Sadovod\\SadovodClasses\\SadovodClasses.csproj"
               }
             }
           }
@@ -73,21 +73,21 @@
         }
       }
     },
-    "C:\\Users\\home\\Desktop\\Sadovod\\SadovodClasses\\SadovodClasses.csproj": {
+    "C:\\Users\\bazil\\Desktop\\Sadovod\\SadovodClasses\\SadovodClasses.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\home\\Desktop\\Sadovod\\SadovodClasses\\SadovodClasses.csproj",
+        "projectUniqueName": "C:\\Users\\bazil\\Desktop\\Sadovod\\SadovodClasses\\SadovodClasses.csproj",
         "projectName": "SadovodClasses",
-        "projectPath": "C:\\Users\\home\\Desktop\\Sadovod\\SadovodClasses\\SadovodClasses.csproj",
-        "packagesPath": "C:\\Users\\home\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\home\\Desktop\\Sadovod\\SadovodClasses\\obj\\",
+        "projectPath": "C:\\Users\\bazil\\Desktop\\Sadovod\\SadovodClasses\\SadovodClasses.csproj",
+        "packagesPath": "C:\\Users\\bazil\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bazil\\Desktop\\Sadovod\\SadovodClasses\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\ProgramData\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\home\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\bazil\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
