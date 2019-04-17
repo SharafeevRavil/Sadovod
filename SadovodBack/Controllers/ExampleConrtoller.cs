@@ -75,6 +75,7 @@ namespace WebApplication3.Controllers
         [HttpGet]
         public async Task<JsonResult> Get()
         {
+            
             return new JsonResult("example");
         }
         //api/Example/GetByID?id=needId

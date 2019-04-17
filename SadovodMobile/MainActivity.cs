@@ -7,6 +7,8 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using SadovodClasses;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace SadovodMobile
 {
@@ -43,11 +45,11 @@ namespace SadovodMobile
 
             return base.OnOptionsItemSelected(item);
         }
-
         private void FabOnClick(object sender, EventArgs eventArgs)
         {
             View view = (View) sender;
-            Snackbar.Make(view, "example", Snackbar.LengthLong)
+            var content = Utilites.GetDeserializeJson<string>("/api/example/GetAll");
+            Snackbar.Make(view, content, Snackbar.LengthLong)
                 .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

@@ -111,6 +111,7 @@ class MonoPackageManager_Resources {
 	public static final String[] Assemblies = new String[]{
 		/* We need to ensure that "SadovodMobile.dll" comes first in this list. */
 		"SadovodMobile.dll",
+		"Newtonsoft.Json.dll",
 		"SadovodClasses.dll",
 		"Xamarin.Android.Arch.Core.Common.dll",
 		"Xamarin.Android.Arch.Lifecycle.Common.dll",
