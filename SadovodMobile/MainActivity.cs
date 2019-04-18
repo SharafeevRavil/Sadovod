@@ -18,13 +18,13 @@ namespace SadovodMobile
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            SetContentView(Resource.Layout.activity_main);
+            SetContentView(Resource.Layout.SignIn);
 
             Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
 
-            FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
-            fab.Click += FabOnClick;
+            //FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
+            //fab.Click += FabOnClick;
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
