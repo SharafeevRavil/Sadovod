@@ -2366,8 +2366,8 @@ namespace SadovodMobile
 			// aapt resource value: 0x7F0C0011
 			public const int action_mode_close_button = 2131492881;
 			
-			// aapt resource value: 0x7F020015
-			public const int action_settings = 2130837525;
+			// aapt resource value: 0x7F020021
+			public const int action_settings = 2130837537;
 			
 			// aapt resource value: 0x7F0C0004
 			public const int action_text = 2131492868;
@@ -2393,11 +2393,11 @@ namespace SadovodMobile
 			// aapt resource value: 0x7F0C001A
 			public const int bottom = 2131492890;
 			
-			// aapt resource value: 0x7F020010
-			public const int button1 = 2130837520;
+			// aapt resource value: 0x7F020012
+			public const int button1 = 2130837522;
 			
-			// aapt resource value: 0x7F020014
-			public const int button2 = 2130837524;
+			// aapt resource value: 0x7F020019
+			public const int button2 = 2130837529;
 			
 			// aapt resource value: 0x7F0C001B
 			public const int buttonPanel = 2131492891;
@@ -2521,6 +2521,12 @@ namespace SadovodMobile
 			
 			// aapt resource value: 0x7F020004
 			public const int linearLayout1 = 2130837508;
+			
+			// aapt resource value: 0x7F020010
+			public const int linearLayout2 = 2130837520;
+			
+			// aapt resource value: 0x7F020017
+			public const int linearLayout3 = 2130837527;
 			
 			// aapt resource value: 0x7F0C0040
 			public const int listMode = 2131492928;
@@ -2675,6 +2681,18 @@ namespace SadovodMobile
 			// aapt resource value: 0x7F020013
 			public const int space5 = 2130837523;
 			
+			// aapt resource value: 0x7F020018
+			public const int space6 = 2130837528;
+			
+			// aapt resource value: 0x7F020020
+			public const int space7 = 2130837536;
+			
+			// aapt resource value: 0x7F020014
+			public const int space8 = 2130837524;
+			
+			// aapt resource value: 0x7F020016
+			public const int space9 = 2130837526;
+			
 			// aapt resource value: 0x7F0C006E
 			public const int spacer = 2131492974;
 			
@@ -2726,8 +2744,8 @@ namespace SadovodMobile
 			// aapt resource value: 0x7F0C007C
 			public const int textSpacerNoTitle = 2131492988;
 			
-			// aapt resource value: 0x7F020012
-			public const int textView1 = 2130837522;
+			// aapt resource value: 0x7F020015
+			public const int textView1 = 2130837525;
 			
 			// aapt resource value: 0x7F0C007D
 			public const int text_input_password_toggle = 2131492989;

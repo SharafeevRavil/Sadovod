@@ -2971,7 +2971,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f080079;
         public static final int action_mode_bar_stub=0x7f080078;
         public static final int action_mode_close_button=0x7f08005c;
-        public static final int action_settings=0x7f0800bc;
+        public static final int action_settings=0x7f0800bf;
         public static final int action_text=0x7f08009d;
         public static final int actions=0x7f0800ab;
         public static final int activity_chooser_view_content=0x7f08005d;
@@ -2984,8 +2984,8 @@ containing a value of this type.
         public static final int beginning=0x7f08002f;
         public static final int blocking=0x7f080057;
         public static final int bottom=0x7f08003d;
-        public static final int button1=0x7f0800b4;
-        public static final int button2=0x7f0800b8;
+        public static final int button1=0x7f0800b6;
+        public static final int button2=0x7f0800ba;
         public static final int buttonPanel=0x7f080063;
         public static final int cancel_action=0x7f08009f;
         public static final int center=0x7f080045;
@@ -3040,11 +3040,13 @@ containing a value of this type.
         public static final int line1=0x7f080017;
         public static final int line3=0x7f080018;
         public static final int linearLayout1=0x7f0800ae;
+        public static final int linearLayout2=0x7f0800b4;
+        public static final int linearLayout3=0x7f0800b8;
         public static final int listMode=0x7f08001d;
         public static final int list_item=0x7f080061;
-        public static final int masked=0x7f0800bb;
+        public static final int masked=0x7f0800be;
         public static final int media_actions=0x7f0800a1;
-        public static final int message=0x7f0800b9;
+        public static final int message=0x7f0800bc;
         public static final int middle=0x7f080031;
         public static final int mini=0x7f080053;
         public static final int multiply=0x7f080028;
@@ -3098,6 +3100,8 @@ containing a value of this type.
         public static final int space3=0x7f0800b3;
         public static final int space4=0x7f0800b5;
         public static final int space5=0x7f0800b7;
+        public static final int space6=0x7f0800b9;
+        public static final int space7=0x7f0800bb;
         public static final int spacer=0x7f080064;
         public static final int split_action_bar=0x7f080008;
         public static final int src_atop=0x7f08002a;
@@ -3113,7 +3117,6 @@ containing a value of this type.
         public static final int text2=0x7f08001b;
         public static final int textSpacerNoButtons=0x7f08006a;
         public static final int textSpacerNoTitle=0x7f080069;
-        public static final int textView1=0x7f0800b6;
         public static final int text_input_password_toggle=0x7f08009a;
         public static final int textinput_counter=0x7f080014;
         public static final int textinput_error=0x7f080015;
@@ -3134,7 +3137,7 @@ containing a value of this type.
         public static final int up=0x7f080009;
         public static final int useLogo=0x7f080026;
         public static final int view_offset_helper=0x7f080016;
-        public static final int visible=0x7f0800ba;
+        public static final int visible=0x7f0800bd;
         public static final int withText=0x7f08003c;
         public static final int wrap_content=0x7f08002e;
     }
