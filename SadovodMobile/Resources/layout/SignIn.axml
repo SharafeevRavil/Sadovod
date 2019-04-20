@@ -55,6 +55,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight=".6"
+                android:background="@drawable/round"
                 android:id="@+id/button1" />
             <Space
                 android:layout_width="0dp"

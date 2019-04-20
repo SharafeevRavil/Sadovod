@@ -2971,7 +2971,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f080079;
         public static final int action_mode_bar_stub=0x7f080078;
         public static final int action_mode_close_button=0x7f08005c;
-        public static final int action_settings=0x7f0800c2;
+        public static final int action_settings=0x7f0800c4;
         public static final int action_text=0x7f08009d;
         public static final int actions=0x7f0800ab;
         public static final int activity_chooser_view_content=0x7f08005d;
@@ -3011,6 +3011,8 @@ containing a value of this type.
         public static final int disableHome=0x7f080020;
         public static final int editText1=0x7f0800b0;
         public static final int editText2=0x7f0800b2;
+        public static final int editText3=0x7f0800bf;
+        public static final int editText4=0x7f0800c0;
         public static final int edit_query=0x7f08007e;
         public static final int end=0x7f080030;
         public static final int end_padder=0x7f0800ad;
@@ -3044,9 +3046,9 @@ containing a value of this type.
         public static final int linearLayout3=0x7f0800bb;
         public static final int listMode=0x7f08001d;
         public static final int list_item=0x7f080061;
-        public static final int masked=0x7f0800c1;
+        public static final int masked=0x7f0800c3;
         public static final int media_actions=0x7f0800a1;
-        public static final int message=0x7f0800bf;
+        public static final int message=0x7f0800c1;
         public static final int middle=0x7f080031;
         public static final int mini=0x7f080053;
         public static final int multiply=0x7f080028;
@@ -3140,7 +3142,7 @@ containing a value of this type.
         public static final int up=0x7f080009;
         public static final int useLogo=0x7f080026;
         public static final int view_offset_helper=0x7f080016;
-        public static final int visible=0x7f0800c0;
+        public static final int visible=0x7f0800c2;
         public static final int withText=0x7f08003c;
         public static final int wrap_content=0x7f08002e;
     }
@@ -3218,8 +3220,9 @@ containing a value of this type.
         public static final int select_dialog_multichoice_material=0x7f04003a;
         public static final int select_dialog_singlechoice_material=0x7f04003b;
         public static final int signin=0x7f04003c;
-        public static final int support_simple_spinner_dropdown_item=0x7f04003d;
-        public static final int tooltip=0x7f04003e;
+        public static final int signup=0x7f04003d;
+        public static final int support_simple_spinner_dropdown_item=0x7f04003e;
+        public static final int tooltip=0x7f04003f;
     }
     public static final class menu {
         public static final int menu_main=0x7f0e0000;

@@ -2366,8 +2366,8 @@ namespace SadovodMobile
 			// aapt resource value: 0x7F0C0011
 			public const int action_mode_close_button = 2131492881;
 			
-			// aapt resource value: 0x7F020021
-			public const int action_settings = 2130837537;
+			// aapt resource value: 0x7F020023
+			public const int action_settings = 2130837539;
 			
 			// aapt resource value: 0x7F0C0004
 			public const int action_text = 2131492868;
@@ -2455,6 +2455,12 @@ namespace SadovodMobile
 			
 			// aapt resource value: 0x7F020008
 			public const int editText2 = 2130837512;
+			
+			// aapt resource value: 0x7F020021
+			public const int editText3 = 2130837537;
+			
+			// aapt resource value: 0x7F020022
+			public const int editText4 = 2130837538;
 			
 			// aapt resource value: 0x7F0C002C
 			public const int edit_query = 2131492908;
@@ -3042,6 +3048,9 @@ namespace SadovodMobile
 			
 			// aapt resource value: 0x7F030004
 			public const int SignIn = 2130903044;
+			
+			// aapt resource value: 0x7F030005
+			public const int SignUp = 2130903045;
 			
 			// aapt resource value: 0x7F0F003B
 			public const int support_simple_spinner_dropdown_item = 2131689531;
