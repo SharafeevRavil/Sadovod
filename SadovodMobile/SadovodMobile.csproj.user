@@ -3,5 +3,6 @@
   <PropertyGroup>
     <SelectedDevice>LGE LG-p705</SelectedDevice>
     <DefaultDevice>my_device</DefaultDevice>
+    <AndroidDesignerPreferredTheme>AppTheme</AndroidDesignerPreferredTheme>
   </PropertyGroup>
 </Project>

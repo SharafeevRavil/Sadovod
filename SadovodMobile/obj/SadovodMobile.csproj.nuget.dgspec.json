@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\bazil\\Desktop\\Sadovod\\SadovodMobile\\SadovodMobile.csproj": {}
+    "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodMobile\\SadovodMobile.csproj": {}
   },
   "projects": {
-    "C:\\Users\\bazil\\Desktop\\Sadovod\\SadovodClasses\\SadovodClasses.csproj": {
+    "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodClasses\\SadovodClasses.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bazil\\Desktop\\Sadovod\\SadovodClasses\\SadovodClasses.csproj",
+        "projectUniqueName": "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodClasses\\SadovodClasses.csproj",
         "projectName": "SadovodClasses",
-        "projectPath": "C:\\Users\\bazil\\Desktop\\Sadovod\\SadovodClasses\\SadovodClasses.csproj",
-        "packagesPath": "C:\\Users\\bazil\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bazil\\Desktop\\Sadovod\\SadovodClasses\\obj\\",
+        "projectPath": "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodClasses\\SadovodClasses.csproj",
+        "packagesPath": "C:\\Users\\Ильсур\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodClasses\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\ProgramData\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\bazil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ильсур\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -58,21 +58,21 @@
         }
       }
     },
-    "C:\\Users\\bazil\\Desktop\\Sadovod\\SadovodMobile\\SadovodMobile.csproj": {
+    "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodMobile\\SadovodMobile.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bazil\\Desktop\\Sadovod\\SadovodMobile\\SadovodMobile.csproj",
+        "projectUniqueName": "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodMobile\\SadovodMobile.csproj",
         "projectName": "SadovodMobile",
-        "projectPath": "C:\\Users\\bazil\\Desktop\\Sadovod\\SadovodMobile\\SadovodMobile.csproj",
-        "packagesPath": "C:\\Users\\bazil\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bazil\\Desktop\\Sadovod\\SadovodMobile\\obj\\",
+        "projectPath": "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodMobile\\SadovodMobile.csproj",
+        "packagesPath": "C:\\Users\\Ильсур\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodMobile\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
           "C:\\ProgramData\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\bazil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ильсур\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -86,8 +86,8 @@
         "frameworks": {
           "monoandroid81": {
             "projectReferences": {
-              "C:\\Users\\bazil\\Desktop\\Sadovod\\SadovodClasses\\SadovodClasses.csproj": {
-                "projectPath": "C:\\Users\\bazil\\Desktop\\Sadovod\\SadovodClasses\\SadovodClasses.csproj"
+              "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodClasses\\SadovodClasses.csproj": {
+                "projectPath": "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodClasses\\SadovodClasses.csproj"
               }
             }
           }
