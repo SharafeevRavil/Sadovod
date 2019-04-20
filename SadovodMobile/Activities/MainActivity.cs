@@ -8,7 +8,7 @@ using Android.Views;
 using Android.Widget;
 using SadovodClasses;
 
-namespace SadovodMobile
+namespace SadovodMobile.Activities
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar")]
     public class MainActivity : AppCompatActivity
