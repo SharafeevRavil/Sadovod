@@ -3221,8 +3221,9 @@ containing a value of this type.
         public static int select_dialog_singlechoice_material=0x7f04003b;
         public static int signin=0x7f04003c;
         public static int signup=0x7f04003d;
-        public static int support_simple_spinner_dropdown_item=0x7f04003e;
-        public static int tooltip=0x7f04003f;
+        public static int steads=0x7f04003e;
+        public static int support_simple_spinner_dropdown_item=0x7f04003f;
+        public static int tooltip=0x7f040040;
     }
     public static final class menu {
         public static int menu_main=0x7f0e0000;

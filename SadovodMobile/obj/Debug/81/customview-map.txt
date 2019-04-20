@@ -23,6 +23,7 @@ item;obj\Debug\81\res\menu\menu_main.xml
 item;obj\Debug\81\res\values\styles.xml
 LinearLayout;obj\Debug\81\res\layout\signin.xml
 LinearLayout;obj\Debug\81\res\layout\signup.xml
+LinearLayout;obj\Debug\81\res\layout\steads.xml
 menu;obj\Debug\81\res\menu\menu_main.xml
 RelativeLayout;obj\Debug\81\res\layout\content_main.xml
 resources;obj\Debug\81\res\values\colors.xml

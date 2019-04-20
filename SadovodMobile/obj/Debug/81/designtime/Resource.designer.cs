@@ -3052,6 +3052,9 @@ namespace SadovodMobile
 			// aapt resource value: 0x7F030005
 			public const int SignUp = 2130903045;
 			
+			// aapt resource value: 0x7F030006
+			public const int Steads = 2130903046;
+			
 			// aapt resource value: 0x7F0F003B
 			public const int support_simple_spinner_dropdown_item = 2131689531;
 			
