@@ -390,3 +390,9 @@ C:\Users\Настя\Desktop\Sadovod\SadovodMobile\obj\Debug\81\stamp\_CompileToD
 C:\Users\Настя\Desktop\Sadovod\SadovodMobile\obj\Debug\81\stamp\_GeneratePackageManagerJava.stamp
 C:\Users\Настя\Desktop\Sadovod\SadovodMobile\obj\Debug\81\android\assets\System.Runtime.dll
 C:\Users\Настя\Desktop\Sadovod\SadovodMobile\obj\Debug\81\res\drawable\round.xml
+C:\Users\home\Desktop\Sadovod\SadovodMobile\obj\Debug\81\res\layout\signin.xml
+C:\Users\home\Desktop\Sadovod\SadovodMobile\obj\Debug\81\res\drawable\round.xml
+C:\Users\home\Desktop\Sadovod\SadovodMobile\obj\Debug\81\android\assets\machine.config
+C:\Users\home\Desktop\Sadovod\SadovodMobile\obj\Debug\81\stamp\_CompileToDalvik.stamp
+C:\Users\home\Desktop\Sadovod\SadovodMobile\obj\Debug\81\stamp\_GeneratePackageManagerJava.stamp
+C:\Users\home\Desktop\Sadovod\SadovodMobile\obj\Debug\81\android\assets\System.Runtime.dll
