@@ -78,15 +78,17 @@
             android:layout_height="wrap_content"
             android:id="@+id/space7" />
         <EditText
+            android:inputType="date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText3" />
+            android:id="@id/editText3" />
+        
         <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/space8" />
         <TextView
-            android:text="Периодичность полива"
+            android:text="Периодичность полива в днях"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -95,10 +97,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/space9" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText4" />
+            <EditText
+                android:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText4" />
         <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -123,16 +126,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/space12" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText5" />
+            <EditText
+                android:inputType="date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText5" />
+        
         <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/space13" />
         <TextView
-            android:text="Периодичность прополки"
+            android:text="Периодичность прополки в днях"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -142,6 +147,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/space14" />
         <EditText
+            android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editText6" />
@@ -169,16 +175,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/space17" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText7" />
+            <EditText
+                android:inputType="date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText7" />
+        
         <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/space18" />
         <TextView
-            android:text="Периодичность окучивания"
+            android:text="Периодичность окучивания в днях"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -188,6 +196,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/space19" />
         <EditText
+            android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editText8" />
@@ -215,16 +224,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/space22" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText9" />
+            <EditText
+                android:inputType="date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText9" />
         <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/space23" />
         <TextView
-            android:text="Периодичность удобрения"
+            android:text="Периодичность удобрения в днях"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -234,6 +244,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/space24" />
         <EditText
+            android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editText10" />
