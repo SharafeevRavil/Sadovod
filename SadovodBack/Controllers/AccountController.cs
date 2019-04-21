@@ -44,7 +44,7 @@ namespace SadovodBack.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				User user = new User { Email = model.Email, UserName = model.Email, Year = model.Year };
+				User user = new User { Email = model.Email, UserName = model.Email };
 				/*Метод _userManager.CreateAsync пользователь добавляется в базу данных.
 				 *В качестве параметра передается сам пользователь и его пароль.*/
 				var result = await _userManager.CreateAsync(user, model.Password);
