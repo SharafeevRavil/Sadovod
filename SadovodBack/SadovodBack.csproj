@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -11,11 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
+    <ProjectReference Include="..\SadovodClasses\SadovodClasses.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SadovodClasses\SadovodClasses.csproj" />
+    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>
