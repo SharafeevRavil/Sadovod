@@ -14,16 +14,16 @@ using SadovodClasses;
 
 namespace SadovodMobile
 {
-    public class UserSinglton
+    public class UserSingleton
     {
-        private static UserSinglton instance;
-        public static UserSinglton Instance
+        private static UserSingleton instance;
+        public static UserSingleton Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    Instance = new UserSinglton();
+                    Instance = new UserSingleton();
                 }
                 return instance;
             }
@@ -34,6 +34,12 @@ namespace SadovodMobile
                     instance = value;
                 }
             }
+        }
+
+        public UserSingleton()
+        {
+            //FIXME:: делать загрузку информации о юзере с бека
+            steads = new List<Stead>();
         }
 
         private static List<Stead> steads;
