@@ -54,17 +54,6 @@ C:\Users\Ильсур\source\repos\Sadovod2\SadovodBack\bin\Debug\netcoreapp2.2\
 C:\Users\Ильсур\source\repos\Sadovod2\SadovodBack\obj\Debug\netcoreapp2.2\SadovodBack.TagHelpers.input.cache
 C:\Users\Ильсур\source\repos\Sadovod2\SadovodBack\obj\Debug\netcoreapp2.2\SadovodBack.TagHelpers.output.cache
 C:\Users\Ильсур\source\repos\Sadovod2\SadovodBack\obj\Debug\netcoreapp2.2\SadovodBack.RazorCoreGenerate.cache
-C:\Users\Ильсур\source\repos\Sadovod2\SadovodBack\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\Account\Login.g.cshtml.cs
-C:\Users\Ильсур\source\repos\Sadovod2\SadovodBack\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\Account\Register.g.cshtml.cs
-C:\Users\Ильсур\source\repos\Sadovod2\SadovodBack\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\Account\_ViewImports.g.cshtml.cs
-C:\Users\Ильсур\source\repos\Sadovod2\SadovodBack\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\_ViewImports.g.cshtml.cs
-C:\Users\Ильсур\source\repos\Sadovod2\SadovodBack\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\_ViewStart.g.cshtml.cs
-C:\Users\Ильсур\source\repos\Sadovod2\SadovodBack\obj\Debug\netcoreapp2.2\Razor\Pages\Shared\_CookieConsentPartial.g.cshtml.cs
-C:\Users\Ильсур\source\repos\Sadovod2\SadovodBack\obj\Debug\netcoreapp2.2\Razor\Pages\Shared\_Layout.g.cshtml.cs
-C:\Users\Ильсур\source\repos\Sadovod2\SadovodBack\obj\Debug\netcoreapp2.2\Razor\Pages\Shared\_LoginPartial.g.cshtml.cs
-C:\Users\Ильсур\source\repos\Sadovod2\SadovodBack\obj\Debug\netcoreapp2.2\Razor\Pages\Shared\_ValidationScriptsPartial.g.cshtml.cs
-C:\Users\Ильсур\source\repos\Sadovod2\SadovodBack\obj\Debug\netcoreapp2.2\Razor\Pages\_ViewImports.g.cshtml.cs
-C:\Users\Ильсур\source\repos\Sadovod2\SadovodBack\obj\Debug\netcoreapp2.2\Razor\Pages\_ViewStart.g.cshtml.cs
 C:\Users\Ильсур\source\repos\Sadovod2\SadovodBack\obj\Debug\netcoreapp2.2\SadovodBack.RazorTargetAssemblyInfo.cs
 C:\Users\Ильсур\source\repos\Sadovod2\SadovodBack\obj\Debug\netcoreapp2.2\SadovodBack.Views.pdb
 C:\Users\Ильсур\source\repos\Sadovod2\SadovodBack\obj\Debug\netcoreapp2.2\Razor\Views\Account\Index.g.cshtml.cs

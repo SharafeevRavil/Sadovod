@@ -32,7 +32,7 @@ namespace SadovodBack
 
 			//Сервисы для Entity Framework Core
 			services.AddDbContext<ApplicationContext>(options =>
-				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+				options.UseSqlServer(Configuration.GetConnectionString("ApplicationContextConnection")));
 
 			//Сервисы для работы с Identity
 			services.AddIdentity<User, IdentityRole>()
