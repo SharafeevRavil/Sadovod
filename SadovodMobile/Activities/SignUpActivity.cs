@@ -87,6 +87,7 @@ namespace SadovodMobile.Activities
             if(login != "wrong"){
                 //Переключаю на экран участков
                 Intent intent = new Intent(this, typeof(SteadsActivity));
+                FinishAffinity();
                 StartActivity(intent);
             }
             else

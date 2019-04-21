@@ -20,7 +20,6 @@ namespace SadovodMobile.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            //FIXME:: Нужно указать лаяут грядок
             SetContentView(Resource.Layout.GardenBeds);
 
             //Привязка кнопки добавления грядки
@@ -32,7 +31,6 @@ namespace SadovodMobile.Activities
         public void AddBedAction(object sender, EventArgs eventArgs)
         {
             //Переключаюсь на окно добавления грядки
-            //FIXME:: Нужно написать и указать активити добавления грядки
             Intent intent = new Intent(this, typeof(AddBedActivity));
             StartActivity(intent);
         }
@@ -40,12 +38,10 @@ namespace SadovodMobile.Activities
         //Метод инициализации грядок
         private void InitializeBeds()
         {
-            //FIXME:: Нужно откуда-то получать все грядки пользователя
-            /*
-            foreach (GardenBed bed in USER.BEDS)
+            foreach (GardenBed bed in UserSingleton.Instance.CurrentStead.GardenBeds)
             {
                 AddBed(bed);
-            }*/
+            }
         }
         //Метод добавления грядок
         private void AddBed(GardenBed bed)

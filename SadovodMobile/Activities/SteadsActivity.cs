@@ -20,7 +20,6 @@ namespace SadovodMobile.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            //FIXME:: Нужно указать лаяут участков
             SetContentView(Resource.Layout.Steads);
 
             //Привязка кнопки добавления участка
@@ -28,11 +27,11 @@ namespace SadovodMobile.Activities
             //Инициализация всех участков пользователя
             InitializeSteads();
         }
+
         //Метод действия добавления участка
         public void AddSteadAction(object sender, EventArgs eventArgs)
         {
             //Переключаюсь на окно добавления участка
-            //FIXME:: Нужно написать и указать активити добавления участка 
             Intent intent = new Intent(this, typeof(AddSteadActivity));
             StartActivity(intent);
         }
@@ -40,11 +39,10 @@ namespace SadovodMobile.Activities
         //Метод инициализации участков
         private void InitializeSteads()
         {
-            //FIXME:: Нужно откуда-то получать все участки пользователя
-            /*foreach(Stead stead in USER.STEADS)
+            foreach(Stead stead in UserSingleton.Instance.Steads)
             {
                 AddStead(stead);
-            }*/
+            }
         }
         //Метод добавления грядок
         private void AddStead(Stead stead)

@@ -67,6 +67,7 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Activities\SignInActivity.cs" />
+    <Compile Include="UserSingleton.cs" />
     <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
