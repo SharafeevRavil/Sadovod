@@ -3,7 +3,7 @@
   <PropertyGroup>
     <SelectedDevice>HUAWEI TIT-L01</SelectedDevice>
     <DefaultDevice>my_device</DefaultDevice>
-    <AndroidDesignerPreferredTheme>AppTheme</AndroidDesignerPreferredTheme>
+    <AndroidDesignerPreferredTheme>Theme.DeviceDefault</AndroidDesignerPreferredTheme>
     <AndroidDesignerPreferredDevice>Galaxy Nexus</AndroidDesignerPreferredDevice>
   </PropertyGroup>
 </Project>
