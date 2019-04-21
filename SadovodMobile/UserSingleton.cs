@@ -29,7 +29,7 @@ namespace SadovodMobile
             }
             set
             {
-                if(instance == null)
+                if (instance == null)
                 {
                     instance = value;
                 }
@@ -42,14 +42,14 @@ namespace SadovodMobile
             steads = new List<Stead>();
         }
 
-        private static List<Stead> steads;
-        public static ReadOnlyCollection<Stead> Steads
+        private List<Stead> steads;
+        public ReadOnlyCollection<Stead> Steads
         {
             get => new ReadOnlyCollection<Stead>(steads);
         }
 
-        private static Stead currentStead;
-        public static Stead CurrentStead
+        private Stead currentStead;
+        public Stead CurrentStead
         {
             get
             {
@@ -64,8 +64,8 @@ namespace SadovodMobile
             }
         }
 
-        private static GardenBed currentBed;
-        public static GardenBed CurrentBed
+        private GardenBed currentBed;
+        public GardenBed CurrentBed
         {
             get
             {
