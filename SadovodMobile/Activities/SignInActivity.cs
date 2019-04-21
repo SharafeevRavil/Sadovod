@@ -42,6 +42,7 @@ namespace SadovodMobile.Activities
                 //Переключаю на экран участков
                 Intent intent = new Intent(this, typeof(SteadsActivity));
                 StartActivity(intent);
+                Finish();
             }
             else
             {

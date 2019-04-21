@@ -9,12 +9,12 @@ namespace SadovodClasses
         //Название растения
         public string TypeName
         {
-            get;
+            get; set;
         }
         //Сорт растения
         public string SortName
         {
-            get;
+            get; set;
         }
 
         public PlantType(string typeName, string sortName)
