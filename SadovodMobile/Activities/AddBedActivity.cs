@@ -82,15 +82,14 @@ namespace SadovodMobile.Activities
             waterDate.Text = bed.WaterDate.ToString("dd/MM/yyyy hh:mm");
             waterPeriod.Text = bed.WaterPeriod.ToString();
             //Прополка
-            waterDate.Text = bed.WeedDate.ToString("dd/MM/yyyy hh:mm");
-            waterPeriod.Text = bed.WeedPeriod.ToString();
+            weedDate.Text = bed.WeedDate.ToString("dd/MM/yyyy hh:mm");
+            weedPeriod.Text = bed.WeedPeriod.ToString();
             //Окучивание
-            waterDate.Text = bed.PileUpDate.ToString("dd/MM/yyyy hh:mm");
-            waterPeriod.Text = bed.PileUpPeriod.ToString();
+            pileUpDate.Text = bed.PileUpDate.ToString("dd/MM/yyyy hh:mm");
+            pileUpPeriod.Text = bed.PileUpPeriod.ToString();
             //Удобрение
-            waterDate.Text = bed.FertilizeDate.ToString("dd/MM/yyyy hh:mm");
-            waterPeriod.Text = bed.FertilizePeriod.ToString();
-            //FIXME:: Отрисовать все записки
+            fertilizeDate.Text = bed.FertilizeDate.ToString("dd/MM/yyyy hh:mm");
+            fertilizePeriod.Text = bed.FertilizePeriod.ToString();
         }
 
         //Действие добавления записки

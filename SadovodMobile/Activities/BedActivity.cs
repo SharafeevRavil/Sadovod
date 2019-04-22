@@ -34,41 +34,38 @@ namespace SadovodMobile.Activities
 
             //Привязка поля вида растения
             typeName = FindViewById<EditText>(Resource.Id.editText1);
-            typeName.KeyPress += TypeNameChanged;
             //Привязка поля сорта растения
             sortName = FindViewById<EditText>(Resource.Id.editText2);
-            sortName.KeyPress += SortNameChanged;
-
             //Привязка поля даты полива
             waterDate = FindViewById<EditText>(Resource.Id.editText3);
-            waterDate.KeyPress += TypeNameChanged;
             //Привязка поля периодичности полива
             waterPeriod = FindViewById<EditText>(Resource.Id.editText4);
-            waterPeriod.KeyPress += SortNameChanged;
-
             //Привязка поля даты прополки
             weedDate = FindViewById<EditText>(Resource.Id.editText5);
-            weedDate.KeyPress += TypeNameChanged;
             //Привязка поля периодичности прополки
             weedPeriod = FindViewById<EditText>(Resource.Id.editText6);
-            weedPeriod.KeyPress += SortNameChanged;
-
             //Привязка поля даты окучивания
             pileUpDate = FindViewById<EditText>(Resource.Id.editText7);
-            pileUpDate.KeyPress += TypeNameChanged;
             //Привязка поля периодичности окучивания
             pileUpPeriod = FindViewById<EditText>(Resource.Id.editText8);
-            pileUpPeriod.KeyPress += SortNameChanged;
-
             //Привязка поля даты удобрения
             fertilizeDate = FindViewById<EditText>(Resource.Id.editText9);
-            fertilizeDate.KeyPress += TypeNameChanged;
             //Привязка поля периодичности удобрения
             fertilizePeriod = FindViewById<EditText>(Resource.Id.editText10);
-            fertilizePeriod.KeyPress += SortNameChanged;
 
             //Инициализация всех полей
             Initialize();
+
+            typeName.TextChanged += TypeNameChanged;
+            sortName.TextChanged += SortNameChanged;
+            waterDate.TextChanged += WaterDateChanged;
+            waterPeriod.TextChanged += WaterPeriodChanged;
+            weedDate.TextChanged += WeedDateChanged;
+            weedPeriod.TextChanged += WeedPeriodChanged;
+            pileUpDate.TextChanged += PileUpDateChanged;
+            pileUpPeriod.TextChanged += PileUpPeriodChanged;
+            fertilizeDate.TextChanged += FertilizeDateChanged;
+            fertilizePeriod.TextChanged += FertilizePeriodChanged;
         }
         //Инициализация всех полей
         private void Initialize()
@@ -84,63 +81,80 @@ namespace SadovodMobile.Activities
             pileUpPeriod.Text = bed.PileUpPeriod.ToString();
             fertilizeDate.Text = bed.FertilizeDate.ToString("dd/MM/yyyy hh:mm");
             fertilizePeriod.Text = bed.FertilizePeriod.ToString();
-            //FIXME:: Получать данные из грядки и отрисовывать их(изменить начальный текст)
             //FIXME:: Отрисовать все записки
         }
 
         //Действие при изменении вида растения
         public void TypeNameChanged(object sender, EventArgs eventArgs)
         {
-            //FIXME:: получать данные из поля и изменять их у грядки
+            UserSingleton.Instance.CurrentBed.Plant.TypeName = typeName.Text;
+            UserSingleton.Instance.CurrentStead.InvokeBedsChanged();
         }
         //Действие при изменении сорта растения
         public void SortNameChanged(object sender, EventArgs eventArgs)
         {
-            //FIXME:: получать данные из поля и изменять их у грядки
+            UserSingleton.Instance.CurrentBed.Plant.SortName = sortName.Text;
+            UserSingleton.Instance.CurrentStead.InvokeBedsChanged();
         }
 
         //Действие при изменении даты полива
         public void WaterDateChanged(object sender, EventArgs eventArgs)
         {
-            //FIXME:: получать данные из поля и изменять их у грядки
+            UserSingleton.Instance.CurrentBed.WaterDate = Utilities.DateTimeFormat(waterDate.Text);
         }
         //Действие при изменении периодичности полива
         public void WaterPeriodChanged(object sender, EventArgs eventArgs)
         {
-            //FIXME:: получать данные из поля и изменять их у грядки
+            int result;
+            if (int.TryParse(waterPeriod.Text, out result))
+            {
+                UserSingleton.Instance.CurrentBed.WaterPeriod = result;
+            }
         }
 
         //Действие при изменении даты прополки
         public void WeedDateChanged(object sender, EventArgs eventArgs)
         {
-            //FIXME:: получать данные из поля и изменять их у грядки
+            UserSingleton.Instance.CurrentBed.WeedDate = Utilities.DateTimeFormat(weedDate.Text);
         }
         //Действие при изменении периодичности прополки
         public void WeedPeriodChanged(object sender, EventArgs eventArgs)
         {
-            //FIXME:: получать данные из поля и изменять их у грядки
+            int result;
+            if (int.TryParse(weedPeriod.Text, out result))
+            {
+                UserSingleton.Instance.CurrentBed.WeedPeriod = result;
+            }
         }
 
         //Действие при изменении даты окучивания
         public void PileUpDateChanged(object sender, EventArgs eventArgs)
         {
-            //FIXME:: получать данные из поля и изменять их у грядки
+            UserSingleton.Instance.CurrentBed.PileUpDate = Utilities.DateTimeFormat(pileUpDate.Text);
         }
         //Действие при изменении периодичности окучивания
         public void PileUpPeriodChanged(object sender, EventArgs eventArgs)
         {
-            //FIXME:: получать данные из поля и изменять их у грядки
+            int result;
+            if (int.TryParse(pileUpPeriod.Text, out result))
+            {
+                UserSingleton.Instance.CurrentBed.PileUpPeriod = result;
+            }
         }
 
         //Действие при изменении даты удобрения
         public void FertilizeDateChanged(object sender, EventArgs eventArgs)
         {
-            //FIXME:: получать данные из поля и изменять их у грядки
+            UserSingleton.Instance.CurrentBed.FertilizeDate = Utilities.DateTimeFormat(fertilizeDate.Text);
         }
         //Действие при изменении периодичности удобрения
         public void FertilizePeriodChanged(object sender, EventArgs eventArgs)
         {
-            //FIXME:: получать данные из поля и изменять их у грядки
+            int result;
+            if (int.TryParse(fertilizePeriod.Text, out result))
+            {
+                UserSingleton.Instance.CurrentBed.FertilizePeriod = result;
+            }
         }
     }
 }
