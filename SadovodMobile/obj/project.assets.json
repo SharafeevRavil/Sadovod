@@ -765,11 +765,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodMobile\\SadovodMobile.csproj",
+      "projectUniqueName": "C:\\Users\\Ильсур\\source\\repos\\Sadovod2\\SadovodMobile\\SadovodMobile.csproj",
       "projectName": "SadovodMobile",
-      "projectPath": "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodMobile\\SadovodMobile.csproj",
+      "projectPath": "C:\\Users\\Ильсур\\source\\repos\\Sadovod2\\SadovodMobile\\SadovodMobile.csproj",
       "packagesPath": "C:\\Users\\Ильсур\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodMobile\\obj\\",
+      "outputPath": "C:\\Users\\Ильсур\\source\\repos\\Sadovod2\\SadovodMobile\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
@@ -790,8 +790,8 @@
       "frameworks": {
         "monoandroid81": {
           "projectReferences": {
-            "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodClasses\\SadovodClasses.csproj": {
-              "projectPath": "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodClasses\\SadovodClasses.csproj"
+            "C:\\Users\\Ильсур\\source\\repos\\Sadovod2\\SadovodClasses\\SadovodClasses.csproj": {
+              "projectPath": "C:\\Users\\Ильсур\\source\\repos\\Sadovod2\\SadovodClasses\\SadovodClasses.csproj"
             }
           }
         }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodBack\\SadovodBack.csproj": {}
+    "C:\\Users\\Ильсур\\source\\repos\\Sadovod2\\SadovodBack\\SadovodBack.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodBack\\SadovodBack.csproj": {
+    "C:\\Users\\Ильсур\\source\\repos\\Sadovod2\\SadovodBack\\SadovodBack.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodBack\\SadovodBack.csproj",
+        "projectUniqueName": "C:\\Users\\Ильсур\\source\\repos\\Sadovod2\\SadovodBack\\SadovodBack.csproj",
         "projectName": "SadovodBack",
-        "projectPath": "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodBack\\SadovodBack.csproj",
+        "projectPath": "C:\\Users\\Ильсур\\source\\repos\\Sadovod2\\SadovodBack\\SadovodBack.csproj",
         "packagesPath": "C:\\Users\\Ильсур\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodBack\\obj\\",
+        "outputPath": "C:\\Users\\Ильсур\\source\\repos\\Sadovod2\\SadovodBack\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\ProgramData\\Xamarin\\NuGet\\",
@@ -32,8 +32,8 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodClasses\\SadovodClasses.csproj": {
-                "projectPath": "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodClasses\\SadovodClasses.csproj"
+              "C:\\Users\\Ильсур\\source\\repos\\Sadovod2\\SadovodClasses\\SadovodClasses.csproj": {
+                "projectPath": "C:\\Users\\Ильсур\\source\\repos\\Sadovod2\\SadovodClasses\\SadovodClasses.csproj"
               }
             }
           }
@@ -77,14 +77,14 @@
         }
       }
     },
-    "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodClasses\\SadovodClasses.csproj": {
+    "C:\\Users\\Ильсур\\source\\repos\\Sadovod2\\SadovodClasses\\SadovodClasses.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodClasses\\SadovodClasses.csproj",
+        "projectUniqueName": "C:\\Users\\Ильсур\\source\\repos\\Sadovod2\\SadovodClasses\\SadovodClasses.csproj",
         "projectName": "SadovodClasses",
-        "projectPath": "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodClasses\\SadovodClasses.csproj",
+        "projectPath": "C:\\Users\\Ильсур\\source\\repos\\Sadovod2\\SadovodClasses\\SadovodClasses.csproj",
         "packagesPath": "C:\\Users\\Ильсур\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ильсур\\Source\\Repos\\Sadovod2\\SadovodClasses\\obj\\",
+        "outputPath": "C:\\Users\\Ильсур\\source\\repos\\Sadovod2\\SadovodClasses\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\ProgramData\\Xamarin\\NuGet\\",
