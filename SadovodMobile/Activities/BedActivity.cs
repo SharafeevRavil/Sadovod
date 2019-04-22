@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using SadovodClasses;
 
 namespace SadovodMobile.Activities
 {
@@ -21,8 +22,8 @@ namespace SadovodMobile.Activities
         private EditText waterPeriod;
         private EditText weedDate;
         private EditText weedPeriod;
-        private EditText pillUpDate;
-        private EditText pillUpPeriod;
+        private EditText pileUpDate;
+        private EditText pileUpPeriod;
         private EditText fertilizeDate;
         private EditText fertilizePeriod;
 
@@ -53,11 +54,11 @@ namespace SadovodMobile.Activities
             weedPeriod.KeyPress += SortNameChanged;
 
             //Привязка поля даты окучивания
-            pillUpDate = FindViewById<EditText>(Resource.Id.editText7);
-            pillUpDate.KeyPress += TypeNameChanged;
+            pileUpDate = FindViewById<EditText>(Resource.Id.editText7);
+            pileUpDate.KeyPress += TypeNameChanged;
             //Привязка поля периодичности окучивания
-            pillUpPeriod = FindViewById<EditText>(Resource.Id.editText8);
-            pillUpPeriod.KeyPress += SortNameChanged;
+            pileUpPeriod = FindViewById<EditText>(Resource.Id.editText8);
+            pileUpPeriod.KeyPress += SortNameChanged;
 
             //Привязка поля даты удобрения
             fertilizeDate = FindViewById<EditText>(Resource.Id.editText9);
@@ -72,6 +73,17 @@ namespace SadovodMobile.Activities
         //Инициализация всех полей
         private void Initialize()
         {
+            GardenBed bed = UserSingleton.Instance.CurrentBed;
+            typeName.Text = bed.Plant.TypeName;
+            sortName.Text = bed.Plant.SortName;
+            waterDate.Text = bed.WaterDate.ToString("dd/MM/yyyy hh:mm");
+            waterPeriod.Text = bed.WaterPeriod.ToString();
+            weedDate.Text = bed.WeedDate.ToString("dd/MM/yyyy hh:mm");
+            weedPeriod.Text = bed.WeedPeriod.ToString();
+            pileUpDate.Text = bed.PileUpDate.ToString("dd/MM/yyyy hh:mm");
+            pileUpPeriod.Text = bed.PileUpPeriod.ToString();
+            fertilizeDate.Text = bed.FertilizeDate.ToString("dd/MM/yyyy hh:mm");
+            fertilizePeriod.Text = bed.FertilizePeriod.ToString();
             //FIXME:: Получать данные из грядки и отрисовывать их(изменить начальный текст)
             //FIXME:: Отрисовать все записки
         }

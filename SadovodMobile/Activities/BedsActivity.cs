@@ -54,16 +54,6 @@ namespace SadovodMobile.Activities
             mAdapter.ItemClick += OnBedClick;
             UserSingleton.Instance.CurrentStead.BedsChanged += OnCollectionChanged;
         }
-        /*//Метод добавления грядок
-        private void AddBed(GardenBed bed)
-        {
-            //FIXME:: Нужно добавлять элементы грядок в layout
-
-            //FIXME:: Нужно добавить действие при нажатии на кнопку добавленной грядки
-
-            //FIXME:: Нужно добавить действие при нажатии на кнопки действий в грядке
-        }*/
-
 
         //Событие изменения коллекции грядок
         public void OnCollectionChanged(object sender, EventArgs eventArgs)

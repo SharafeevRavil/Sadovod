@@ -29,10 +29,67 @@ namespace SadovodMobile.Activities
             //Инициализация всех полей
             Initialize();
         }
+        //Экземпляр грядки, который будет добавлен
+        private GardenBed bed;
+        //Поле вида растения
+        private EditText typeName;
+        //Поле сорта растения
+        private EditText sortName;
+        //Поле даты полива
+        private EditText waterDate;
+        //Поле периодичности полива
+        private EditText waterPeriod;
+        //Поле даты прополки
+        private EditText weedDate;
+        //Поле периодичности прополки
+        private EditText weedPeriod;
+        //Поле даты окучивания
+        private EditText pileUpDate;
+        //Поле периодичности окучивания
+        private EditText pileUpPeriod;
+        //Поле даты удобрения
+        private EditText fertilizeDate;
+        //Поле периодичности удобрения
+        private EditText fertilizePeriod;
         //Инициализация всех полей
         private void Initialize()
         {
-            //FIXME:: Получать данные из грядки и отрисовывать их(изменить начальный текст)
+            //Поле вида растения
+            typeName = FindViewById<EditText>(Resource.Id.editText1);
+            //Поле сорта растения
+            sortName = FindViewById<EditText>(Resource.Id.editText2);
+            //Поле даты полива
+            waterDate = FindViewById<EditText>(Resource.Id.editText3);
+            //Поле периодичности полива
+            waterPeriod = FindViewById<EditText>(Resource.Id.editText4);
+            //Поле даты прополки
+            weedDate = FindViewById<EditText>(Resource.Id.editText5);
+            //Поле периодичности прополки
+            weedPeriod = FindViewById<EditText>(Resource.Id.editText6);
+            //Поле даты окучивания
+            pileUpDate = FindViewById<EditText>(Resource.Id.editText7);
+            //Поле периодичности окучивания
+            pileUpPeriod = FindViewById<EditText>(Resource.Id.editText8);
+            //Поле даты удобрения
+            fertilizeDate = FindViewById<EditText>(Resource.Id.editText9);
+            //Поле периодичности удобрения
+            fertilizePeriod = FindViewById<EditText>(Resource.Id.editText10);
+
+            bed = new GardenBed(new PlantType("Вид", "Сорт"));
+            typeName.Text = bed.Plant.TypeName;
+            sortName.Text = bed.Plant.SortName;
+            //Полив
+            waterDate.Text = bed.WaterDate.ToString("dd/MM/yyyy hh:mm");
+            waterPeriod.Text = bed.WaterPeriod.ToString();
+            //Прополка
+            waterDate.Text = bed.WeedDate.ToString("dd/MM/yyyy hh:mm");
+            waterPeriod.Text = bed.WeedPeriod.ToString();
+            //Окучивание
+            waterDate.Text = bed.PileUpDate.ToString("dd/MM/yyyy hh:mm");
+            waterPeriod.Text = bed.PileUpPeriod.ToString();
+            //Удобрение
+            waterDate.Text = bed.FertilizeDate.ToString("dd/MM/yyyy hh:mm");
+            waterPeriod.Text = bed.FertilizePeriod.ToString();
             //FIXME:: Отрисовать все записки
         }
 
@@ -44,30 +101,35 @@ namespace SadovodMobile.Activities
         //Действие добавления грядки
         public void AddBedAction(object sender, EventArgs eventArgs)
         {
-            //Поле вида растения
-            EditText typeName = FindViewById<EditText>(Resource.Id.editText1);
-            //Поле сорта растения
-            EditText sortName = FindViewById<EditText>(Resource.Id.editText2);
-            //Поле даты полива
-            EditText waterDate = FindViewById<EditText>(Resource.Id.editText3);
-            //Поле периодичности полива
-            EditText waterPeriod = FindViewById<EditText>(Resource.Id.editText4);
-            //Поле даты прополки
-            EditText weedDate = FindViewById<EditText>(Resource.Id.editText5);
-            //Поле периодичности прополки
-            EditText weedPeriod = FindViewById<EditText>(Resource.Id.editText6);
-            //Поле даты окучивания
-            EditText pillUpDate = FindViewById<EditText>(Resource.Id.editText7);
-            //Поле периодичности окучивания
-            EditText pillUpPeriod = FindViewById<EditText>(Resource.Id.editText8);
-            //Поле даты удобрения
-            EditText fertilizeDate = FindViewById<EditText>(Resource.Id.editText9);
-            //Поле периодичности удобрения
-            EditText fertilizePeriod = FindViewById<EditText>(Resource.Id.editText10);
 
             //FIXME:: Беру все эти поля нахуй и еще записки в придачу и хуярю все в грядку
 
-            UserSingleton.Instance.CurrentStead.AddBed(new GardenBed(new PlantType(typeName.Text, sortName.Text)));
+            bed.Plant.TypeName = typeName.Text;
+            bed.Plant.SortName = sortName.Text;
+
+            int parseResult;
+            bed.WaterDate = Utilities.DateTimeFormat(waterDate.Text);
+            if (int.TryParse(waterPeriod.Text, out parseResult))
+            {
+                bed.WaterPeriod = parseResult;
+            }
+            bed.WeedDate = Utilities.DateTimeFormat(weedDate.Text);
+            if (int.TryParse(weedPeriod.Text, out parseResult))
+            {
+                bed.WeedPeriod = parseResult;
+            }
+            bed.PileUpDate = Utilities.DateTimeFormat(pileUpDate.Text);
+            if (int.TryParse(pileUpPeriod.Text, out parseResult))
+            {
+                bed.PileUpPeriod = parseResult;
+            }
+            bed.FertilizeDate = Utilities.DateTimeFormat(fertilizeDate.Text);
+            if (int.TryParse(fertilizePeriod.Text, out parseResult))
+            {
+                bed.FertilizePeriod = parseResult;
+            }
+
+            UserSingleton.Instance.CurrentStead.AddBed(bed);
             Finish();
         }
 
