@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -7,6 +8,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 
@@ -36,20 +38,81 @@ namespace SadovodMobile.Activities
             StartActivity(intent);
         }
 
+        RecyclerView mRecyclerView;
+        RecyclerView.LayoutManager mLayoutManager;
+        SteadsAdapter mAdapter;
         //Метод инициализации участков
         private void InitializeSteads()
         {
-            foreach(Stead stead in UserSingleton.Instance.Steads)
+            mRecyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView1);
+            // Plug in the linear layout manager:
+            mLayoutManager = new LinearLayoutManager(this);
+            mRecyclerView.SetLayoutManager(mLayoutManager);
+            // Plug in my adapter:
+            mAdapter = new SteadsAdapter(UserSingleton.Instance.Steads);
+            mRecyclerView.SetAdapter(mAdapter);
+            //Привязываю нажатия на элементы адаптера
+            mAdapter.ItemClick += OnSteadClick;
+            UserSingleton.Instance.SteadsChanged += OnCollectionChanged;
+        }
+        //Событие изменения коллекции участков
+        public void OnCollectionChanged(object sender, EventArgs eventArgs)
+        {
+            mAdapter.NotifyDataSetChanged();
+        }
+        //Событие нажатия на участок
+        private void OnSteadClick(object sender, int position)
+        {
+            //Toast.MakeText(this, $"This is stead {position + 1}", ToastLength.Short).Show();
+            UserSingleton.Instance.CurrentStead = UserSingleton.Instance.Steads[position];
+            //Переключаюсь на окно грядок
+            Intent intent = new Intent(this, typeof(BedsActivity));
+            StartActivity(intent);
+        }
+
+        public class SteadsAdapter : RecyclerView.Adapter
+        {
+            public event EventHandler<int> ItemClick;
+            public ReadOnlyCollection<Stead> Steads;
+            public SteadsAdapter(ReadOnlyCollection<Stead> steads)
             {
-                AddStead(stead);
+                Steads = steads;
+            }
+
+            public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
+            {
+                View itemView = LayoutInflater.From(parent.Context).
+                            Inflate(Resource.Layout.SteadView, parent, false);
+                SteadViewHolder vh = new SteadViewHolder(itemView, OnClick);
+                return vh;
+            }
+
+            public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
+            {
+                SteadViewHolder vh = holder as SteadViewHolder;
+                vh.Button.Text = Steads[position].Name;
+            }
+
+            public override int ItemCount
+            {
+                get { return Steads.Count; }
+            }
+
+            void OnClick(int position)
+            {
+                ItemClick?.Invoke(this, position);
             }
         }
-        //Метод добавления грядок
-        private void AddStead(Stead stead)
+        public class SteadViewHolder : RecyclerView.ViewHolder
         {
-            //FIXME:: Нужно добавлять элементы участков в layout
-            
-            //FIXME:: Нужно добавить действие при нажатии на кнопку добавленного участка
+            public Button Button { get; private set; }
+
+            public SteadViewHolder(View itemView, Action<int> listener) : base(itemView)
+            {
+                // Locate and cache view references:
+                Button = itemView.FindViewById<Button>(Resource.Id.button);
+                Button.Click += (sender, e) => listener(base.LayoutPosition);
+            }
         }
     }
 }

@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Activities\AddBedActivity.cs" />
     <Compile Include="Activities\AddSteadActivity.cs" />
+    <Compile Include="Activities\BedActivity.cs" />
     <Compile Include="Activities\BedsActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Activities\SignUpActivity.cs" />
@@ -153,6 +154,16 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\AddGardenBed.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\SteadView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\BedView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

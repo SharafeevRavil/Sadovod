@@ -81,7 +81,7 @@
             android:inputType="date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@id/editText3" />
+            android:id="@+id/editText3" />
         
         <Space
             android:layout_width="match_parent"
@@ -325,10 +325,6 @@
                     android:id="@+id/space32" />
 
             </LinearLayout>
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="6"
-                android:id="@+id/space33" />
 
 
     </LinearLayout>

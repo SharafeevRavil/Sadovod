@@ -48,6 +48,14 @@ namespace SadovodMobile
             get => new ReadOnlyCollection<Stead>(steads);
         }
 
+        public void AddStead(Stead stead)
+        {
+            steads.Add(stead);
+            SteadsChanged.Invoke(this, new EventArgs());
+        }
+
+        public event EventHandler SteadsChanged;
+
         private Stead currentStead;
         public Stead CurrentStead
         {
