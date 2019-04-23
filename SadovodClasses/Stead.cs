@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections.ObjectModel;
 
 namespace SadovodClasses
 {
@@ -9,6 +10,10 @@ namespace SadovodClasses
     {
         //Поле грядок на участке
         private List<GardenBed> gardenBeds;
+        public ReadOnlyCollection<GardenBed> GardenBeds
+        {
+            get => new ReadOnlyCollection<GardenBed>(gardenBeds);
+        }
 
         public Stead()
         {
