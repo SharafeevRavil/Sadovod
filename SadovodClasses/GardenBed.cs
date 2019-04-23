@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace SadovodClasses
 {
@@ -14,7 +15,7 @@ namespace SadovodClasses
         //Заметки о растениях
         public List<string> Notes
         {
-            get;
+            get; set;
         }
 
         //Тип грядки

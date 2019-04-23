@@ -7,6 +7,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using SadovodClasses;
@@ -82,7 +83,95 @@ namespace SadovodMobile.Activities
             fertilizeDate.Text = bed.FertilizeDate.ToString("dd/MM/yyyy hh:mm");
             fertilizePeriod.Text = bed.FertilizePeriod.ToString();
             //FIXME:: Отрисовать все записки
+
+            mRecyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView1);
+            // Plug in the linear layout manager:
+            mLayoutManager = new LinearLayoutManager(this);
+            mRecyclerView.SetLayoutManager(mLayoutManager);
+            // Plug in my adapter:
+            mAdapter = new NotesAdapter(bed.Notes);
+            mRecyclerView.SetAdapter(mAdapter);
+            //Привязываю нажатия на элементы адаптера
+            mAdapter.NoteChanged += OnNoteChanged;
         }
+
+        private void OnNoteChanged(object sender, NotesArgs args)
+        {
+            UserSingleton.Instance.CurrentBed.Notes[args.Position] = args.Text;
+        }
+
+        private RecyclerView mRecyclerView;
+        private RecyclerView.LayoutManager mLayoutManager;
+        private NotesAdapter mAdapter;
+
+
+        public void AddNoteAction(object sender, EventArgs eventArgs)
+        {
+            UserSingleton.Instance.CurrentBed.AddNote("");
+            mAdapter.NotifyDataSetChanged();
+        }
+
+        public class NotesArgs : EventArgs
+        {
+            public int Position;
+            public string Text;
+
+            public NotesArgs(int pos, string text)
+            {
+                Position = pos;
+                Text = text;
+            }
+        }
+
+        public class NotesAdapter : RecyclerView.Adapter
+        {
+            public event EventHandler<NotesArgs> NoteChanged;
+            public List<string> Notes;
+            public NotesAdapter(List<string> notes)
+            {
+                Notes = notes;
+            }
+
+            public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
+            {
+                View itemView = LayoutInflater.From(parent.Context).
+                            Inflate(Resource.Layout.GardenNoteView, parent, false);
+                SteadViewHolder vh = new SteadViewHolder(itemView, OnNoteChanged);
+                return vh;
+            }
+
+            public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
+            {
+                SteadViewHolder vh = holder as SteadViewHolder;
+                vh.NoteName.Text = $"Записка {position}";
+                vh.Note.Text = Notes[position];
+            }
+
+            public override int ItemCount
+            {
+                get { return Notes.Count; }
+            }
+
+            void OnNoteChanged(int position, string text)
+            {
+                NoteChanged?.Invoke(this, new NotesArgs(position, text));
+            }
+        }
+        public class SteadViewHolder : RecyclerView.ViewHolder
+        {
+            public TextView NoteName { get; private set; }
+            public EditText Note { get; private set; }
+
+            public SteadViewHolder(View itemView, Action<int, string> listener) : base(itemView)
+            {
+                // Locate and cache view references:
+                NoteName = itemView.FindViewById<TextView>(Resource.Id.textView1);
+
+                Note = itemView.FindViewById<EditText>(Resource.Id.editText1);
+                Note.TextChanged += (sender, e) => listener(LayoutPosition, Note.Text);
+            }
+        }
+
 
         //Действие при изменении вида растения
         public void TypeNameChanged(object sender, EventArgs eventArgs)
