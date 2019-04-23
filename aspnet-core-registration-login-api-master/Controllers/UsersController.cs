@@ -17,7 +17,7 @@ namespace WebApi.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route("Account")]
     public class UsersController : ControllerBase
     {
         private IUserService _userService;
@@ -35,7 +35,7 @@ namespace WebApi.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("authenticate")]
+        [HttpPost("Authenticate")]
         public IActionResult Authenticate([FromBody]UserDto userDto)
         {
             var user = _userService.Authenticate(userDto.Username, userDto.Password);
@@ -68,7 +68,7 @@ namespace WebApi.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("register")]
+        [HttpPost("Register")]
         public IActionResult Register([FromBody]UserDto userDto)
         {
             // map dto to entity
