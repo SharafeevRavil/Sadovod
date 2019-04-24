@@ -3,38 +3,39 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using System.IdentityModel.Tokens.Jwt;
-using WebApi.Helpers;
+using SadovodBack.Helpers;
 using Microsoft.Extensions.Options;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
-using WebApi.Services;
-using WebApi.Dtos;
-using WebApi.Entities;
+using SadovodBack.Services;
+using SadovodBack.Dtos;
+using SadovodBack.Entities;
 
-namespace WebApi.Controllers
+namespace SadovodBack.Controllers
 {
-    [Authorize]
-    [ApiController]
-    [Route("Account")]
-    public class UsersController : ControllerBase
-    {
-        private IUserService _userService;
-        private IMapper _mapper;
-        private readonly AppSettings _appSettings;
+	[Authorize]
+	[Route("api/[controller]")]
+	[ApiController]
+	public class UsersController : ControllerBase
+	{
+		private IUserService _userService;
+		private IMapper _mapper;
+		private readonly AppSettings _appSettings;
 
-        public UsersController(
-            IUserService userService,
-            IMapper mapper,
-            IOptions<AppSettings> appSettings)
-        {
-            _userService = userService;
-            _mapper = mapper;
-            _appSettings = appSettings.Value;
-        }
+		public UsersController(
+			IUserService userService,
+			IMapper mapper,
+			IOptions<AppSettings> appSettings)
+		{
+			_userService = userService;
+			_mapper = mapper;
+			_appSettings = appSettings.Value;
+		}
 
-        [AllowAnonymous]
+		[AllowAnonymous]
+		[Route("Authenticate")]
         [HttpPost("Authenticate")]
         public IActionResult Authenticate([FromBody]UserDto userDto)
         {
@@ -68,7 +69,8 @@ namespace WebApi.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("Register")]
+		[Route("Register")]
+		[HttpPost("Register")]
         public IActionResult Register([FromBody]UserDto userDto)
         {
             // map dto to entity

@@ -25,7 +25,7 @@ namespace Identity.Services
 
 			content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-			var response = await client.PostAsync("http://localhost:52634/Account/Register", content);
+			var response = await client.PostAsync("http://localhost:52634/api/Account/Register", content);
 			return response.IsSuccessStatusCode;
 		}
 	}
