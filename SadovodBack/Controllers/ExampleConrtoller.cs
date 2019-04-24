@@ -71,6 +71,7 @@ namespace WebApplication3.Controllers
         [HttpGet]        
         public async Task<JsonResult> DatabaseGetByGardenerID(int id)
         {
+            var str = new List<string>();
             //происходит запрос с id, в базе данных ищутся все строки с id садовода == id, который пришел в запросе
             string sqlExpression = $"SELECT * FROM Steads WHERE GardenerID = {id}";
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -86,10 +87,10 @@ namespace WebApplication3.Controllers
                         object Id = reader.GetValue(0);
                         object Stead = reader.GetValue(1);
                         object GardnerID = reader.GetValue(2);
-                        
+                        str.Add($"{Id},{Stead},{GardnerID}");
                     }
                 }
-                return new JsonResult("");
+                return new JsonResult(str);
             }
         }
 
