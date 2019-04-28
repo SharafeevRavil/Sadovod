@@ -32,7 +32,7 @@ namespace SadovodBack.Controllers
         {
             var user = new User()
             {
-                Id = 0        
+                ID = 0        
             };
             var users = new List<User> {user};
             var jsonUsers = JsonConvert.SerializeObject(users);

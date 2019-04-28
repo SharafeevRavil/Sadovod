@@ -24,8 +24,8 @@ namespace SadovodBack
 			services.AddSingleton<IUserService, UserService>();
 			services.AddSingleton<DataContext, DataContext>();
 			services.AddSingleton<DbContextOptions<DataContext>, DbContextOptions<DataContext>>();
-			services.AddDbContext<DataContext>(options =>
-				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+			//services.AddDbContext<DataContext>(options =>
+			//	options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 			var mappingConfig = new MapperConfiguration(mc =>
 			{

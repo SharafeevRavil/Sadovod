@@ -75,7 +75,7 @@ namespace SadovodBack
 
         public void Update(User userParam, string password = null)
         {
-            var user = _context.Users.Find(userParam.Id);
+            var user = _context.Users.Find(userParam.ID);
 
             if (user == null)
                 throw new AppException("User not found");
@@ -88,8 +88,7 @@ namespace SadovodBack
             }
 
             // update user properties
-            user.FirstName = userParam.FirstName;
-            user.LastName = userParam.LastName;
+            user.Email = userParam.Email;
             user.Username = userParam.Username;
 
             // update password if it was entered

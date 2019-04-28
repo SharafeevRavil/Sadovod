@@ -49,7 +49,7 @@ namespace SadovodBack.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                    new Claim(ClaimTypes.Name, user.ID.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -60,10 +60,9 @@ namespace SadovodBack.Controllers
             // return basic user info (without password) and token to store client side
             return Ok(new
             {
-                Id = user.Id,
+                Id = user.ID,
                 Username = user.Username,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
+                Email = user.Email,
                 Token = tokenString
             });
         }
@@ -73,7 +72,7 @@ namespace SadovodBack.Controllers
         [HttpGet("GetUser/")]
         public string GetUser()
         {
-            return JsonConvert.SerializeObject(new User() { Id = 5, FirstName = "aa", LastName = "ab", Username = "penis" });
+            return JsonConvert.SerializeObject(new User() { ID = 5, Email = "aa@mail.ru", Username = "penis" });
         }
 
         [AllowAnonymous]
