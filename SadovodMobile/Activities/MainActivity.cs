@@ -7,12 +7,10 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using SadovodClasses;
-using System.Net.Http;
-using Newtonsoft.Json;
 
-namespace SadovodMobile
+namespace SadovodMobile.Activities
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar")]
     public class MainActivity : AppCompatActivity
     {
 
@@ -25,8 +23,8 @@ namespace SadovodMobile
             Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
 
-            FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
-            fab.Click += FabOnClick;
+            //FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
+            //fab.Click += FabOnClick;
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -45,11 +43,11 @@ namespace SadovodMobile
 
             return base.OnOptionsItemSelected(item);
         }
+
         private void FabOnClick(object sender, EventArgs eventArgs)
         {
             View view = (View) sender;
-            var content = Utilites.GetDeserializeJson<string>("/api/example/GetAll");
-            Snackbar.Make(view, content, Snackbar.LengthLong)
+            Snackbar.Make(view, "example", Snackbar.LengthLong)
                 .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
