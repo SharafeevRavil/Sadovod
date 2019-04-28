@@ -13,26 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using SadovodClasses;
 
-namespace WebApplication3.Controllers
+namespace SadovodBack.Controllers
 {
-    public class User
-    {
-        public string Id { get; set; }
-
-        public string Name { get; set; }
-
-        public string FirstName { get; set; }
-
-        public string MiddleName { get; set; }
-
-        public string LastName { get; set; }
-
-        public string UserName { get; set; }
-
-        public string Gender { get; set; }
-
-        public string Email { get; set; }
-    }
     public class Garedener
     {
         public string Id { get; set; }
@@ -50,7 +32,7 @@ namespace WebApplication3.Controllers
         {
             var user = new User()
             {
-                Id = "0"        
+                ID = 0        
             };
             var users = new List<User> {user};
             var jsonUsers = JsonConvert.SerializeObject(users);
