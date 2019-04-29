@@ -39,7 +39,26 @@ namespace SadovodMobile
             }
             return true;
         }
-
+        public static string Parse(string stead)
+        {
+            var g = stead.Split(',');
+            var r = new StringBuilder();
+            var l = stead.Where(v => v != '\\').ToList();
+            for (var i = 0; i < l.Count(); i++)
+            {
+                if (l[i] == '{')
+                {
+                    while (l[i] != '}')
+                    {
+                        r.Append(l[i]);
+                        i++;
+                    }
+                    r.Append(l[i]);
+                    break;
+                }
+            }
+            return r.ToString();
+        }
         public static bool IsNumber(char symb)
         {
             return symb >= '0' && symb <= '9';
@@ -49,7 +68,7 @@ namespace SadovodMobile
         {
             return symb >= 'a' && symb <= 'z' || symb >= 'A' && symb <= 'Z';
         }
-
+        
         public static DateTime DateTimeFormat(string input)
         {
             try
