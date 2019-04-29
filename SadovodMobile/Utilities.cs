@@ -44,17 +44,20 @@ namespace SadovodMobile
             var g = stead.Split(',');
             var r = new StringBuilder();
             var l = stead.Where(v => v != '\\').ToList();
+            var flag = false;
             for (var i = 0; i < l.Count(); i++)
             {
                 if (l[i] == '{')
                 {
-                    while (l[i] != '}')
-                    {
-                        r.Append(l[i]);
-                        i++;
-                    }
+                    flag = true;
+
+
+                }
+                if (flag)
+                {
                     r.Append(l[i]);
-                    break;
+                    if (l[i] == '}')
+                        break;
                 }
             }
             return r.ToString();
