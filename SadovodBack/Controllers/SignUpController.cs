@@ -43,9 +43,10 @@ namespace SadovodBack.Controllers
 
         [AllowAnonymous]
         [HttpPost("Authenticate/")]
-        public IActionResult Authenticate([FromBody]UserDto userDto)
+        public IActionResult Authenticate([FromBody]string input)
         {
-            var user = _userService.Authenticate(userDto.Username, userDto.Password);
+            UserDto dto = JsonConvert.DeserializeObject<UserDto>(input);
+            var user = _userService.Authenticate(dto.Username, dto.Password);
 
             if (user == null)
                 return BadRequest(new { message = "Username or password is incorrect" });

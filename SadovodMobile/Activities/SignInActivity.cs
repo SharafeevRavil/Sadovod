@@ -12,6 +12,7 @@ using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Widget;
+using Newtonsoft.Json;
 
 namespace SadovodMobile.Activities
 {
@@ -28,7 +29,13 @@ namespace SadovodMobile.Activities
             //Привязка кнопки регистрации
             FindViewById<Button>(Resource.Id.button2).Click += SignUpOnClick;
         }
-
+        public class UserDto
+        {
+            public int Id { get; set; }
+            public string Email { get; set; }
+            public string Username { get; set; }
+            public string Password { get; set; }
+        }
         //нажатие на кнопку входа
         private async void SignInOnClickAsync(object sender, EventArgs eventArgs)
         {
@@ -44,7 +51,9 @@ namespace SadovodMobile.Activities
             //Делаю запрос https://sadovodhelperexample.azurewebsites.net/api/signup/Authenticate
             //С телом вида {"Username":"penis1","Password":"password"}
             HttpClient client = new HttpClient();
-            HttpContent content = new StringContent($"{{\"Username\":\"{username}\",\"Password\":\"{password}\"");
+            UserDto dto = new UserDto() { Username = username, Password = password };
+            HttpContent content = new StringContent(JsonConvert.SerializeObject(dto));
+            //HttpContent content = new StringContent($"{{\"Username\":\"{username}\",\"Password\":\"{password}\"}}");
             HttpResponseMessage response = await client.PostAsync(
                 "https://sadovodhelperexample.azurewebsites.net/api/signup/Authenticate", content);
             //request.Headers.Add("Accept", "application/json");
