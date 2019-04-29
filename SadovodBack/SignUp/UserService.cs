@@ -66,6 +66,13 @@ namespace SadovodBack
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
+            var rand = new Random();
+            var num = rand.Next();
+            while(_context.Users.Any(x=>x.ID==num))
+            {
+                num = rand.Next();
+            }
+            user.ID = num;
 
             _context.Users.Add(user);
             _context.SaveChanges();
