@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 
 using Android.App;
@@ -22,23 +24,37 @@ namespace SadovodMobile.Activities
             SetContentView(Resource.Layout.SignIn);
 
             //Привязка кнопки входа
-            FindViewById<Button>(Resource.Id.button1).Click += SignInOnClick;
+            FindViewById<Button>(Resource.Id.button1).Click += SignInOnClickAsync;
             //Привязка кнопки регистрации
             FindViewById<Button>(Resource.Id.button2).Click += SignUpOnClick;
         }
 
         //нажатие на кнопку входа
-        private void SignInOnClick(object sender, EventArgs eventArgs)
+        private async void SignInOnClickAsync(object sender, EventArgs eventArgs)
         {
-            string login = FindViewById<EditText>(Resource.Id.editText1).Text;
-            string pass = FindViewById<EditText>(Resource.Id.editText2).Text;
+            string username = FindViewById<EditText>(Resource.Id.editText1).Text;
+            string password = FindViewById<EditText>(Resource.Id.editText2).Text;
 
             //FIXME::
             //ТУТ Я АВТОРИЗУЮСЬ
+
             //Если был успешно авторизован, то переключаю на экран грядок
             //Иначе снизу всплывает сообщение о неправильных данных
-            if (login != "wrong")
+
+            //Делаю запрос https://sadovodhelperexample.azurewebsites.net/api/signup/Authenticate
+            //С телом вида {"Username":"penis1","Password":"password"}
+            HttpClient client = new HttpClient();
+            HttpContent content = new StringContent($"{{\"Username\":\"{username}\",\"Password\":\"{password}\"");
+            HttpResponseMessage response = await client.PostAsync(
+                "https://sadovodhelperexample.azurewebsites.net/api/signup/Authenticate", content);
+            //request.Headers.Add("Accept", "application/json");
+
+            if (response.StatusCode == HttpStatusCode.OK)
             {
+                HttpContent responseContent = response.Content;
+                //var json = await responseContent.ReadAsStringAsync();
+                var ans = responseContent.ToString();
+
                 //Переключаю на экран участков
                 Intent intent = new Intent(this, typeof(SteadsActivity));
                 StartActivity(intent);

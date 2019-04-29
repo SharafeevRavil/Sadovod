@@ -18,6 +18,7 @@ namespace SadovodBack.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class SignUpController : Controller
     {
         private IUserService _userService;
@@ -34,6 +35,12 @@ namespace SadovodBack.Controllers
             _appSettings = appSettings.Value;
         }
 
+        [HttpGet("GetLogin/")]
+        public IActionResult GetLogin()
+        {
+            return Ok($"Ваш логин: {User.Identity.Name}");
+        }
+
         [AllowAnonymous]
         [HttpPost("Authenticate/")]
         public IActionResult Authenticate([FromBody]UserDto userDto)
@@ -43,9 +50,9 @@ namespace SadovodBack.Controllers
             if (user == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
 
-            var tokenHandler = new JwtSecurityTokenHandler();
+            //var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
+            /*var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
@@ -55,7 +62,14 @@ namespace SadovodBack.Controllers
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            var tokenString = tokenHandler.WriteToken(token);
+            var tokenString = tokenHandler.WriteToken(token);*/
+
+            // создаем JWT-токен
+            var jwt = new JwtSecurityToken(
+                    claims: new Claim[] { new Claim(ClaimTypes.Name, user.ID.ToString()) },
+                    expires: DateTime.UtcNow.AddDays(7),
+                    signingCredentials: new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256));
+            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
             // return basic user info (without password) and token to store client side
             return Ok(new
@@ -63,16 +77,8 @@ namespace SadovodBack.Controllers
                 Id = user.ID,
                 Username = user.Username,
                 Email = user.Email,
-                Token = tokenString
+                Token = encodedJwt
             });
-        }
-
-
-        [AllowAnonymous]
-        [HttpGet("GetUser/")]
-        public string GetUser()
-        {
-            return JsonConvert.SerializeObject(new User() { ID = 5, Email = "aa@mail.ru", Username = "penis" });
         }
 
         [AllowAnonymous]
