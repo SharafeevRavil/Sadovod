@@ -74,7 +74,7 @@ namespace SadovodBack.Controllers
 
             // return basic user info (without password) and token to store client side
             return Ok(
-                $"'{{\"Id\":\"{user.ID}\",\"Username\":\"{user.Username}\",\"Email\":\"{user.Email}\",\"Token\":\"{encodedJwt}\"'}}"
+                $"'{{\"Id\":\"{user.ID}\",\"Username\":\"{user.Username}\",\"Email\":\"{user.Email}\",\"Token\":\"{encodedJwt}\"}}'"
             );
         }
 
