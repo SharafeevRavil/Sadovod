@@ -36,6 +36,14 @@ namespace SadovodMobile.Activities
             public string Username { get; set; }
             public string Password { get; set; }
         }
+
+        public class SignedIn
+        {
+            public int id { get; set; }
+            public string username { get; set; }
+            public string email { get; set; }
+            public string token { get; set; }
+        }
         //нажатие на кнопку входа
         private async void SignInOnClickAsync(object sender, EventArgs eventArgs)
         {
@@ -50,13 +58,30 @@ namespace SadovodMobile.Activities
 
             //Делаю запрос https://sadovodhelperexample.azurewebsites.net/api/signup/Authenticate
             //С телом вида {"Username":"penis1","Password":"password"}
-            HttpClient client = new HttpClient();
+            /*HttpClient client = new HttpClient();
             UserDto dto = new UserDto() { Username = username, Password = password };
             HttpContent content = new StringContent(JsonConvert.SerializeObject(dto));
             //HttpContent content = new StringContent($"{{\"Username\":\"{username}\",\"Password\":\"{password}\"}}");
             HttpResponseMessage response = await client.PostAsync(
                 "https://sadovodhelperexample.azurewebsites.net/api/signup/Authenticate", content);
             //request.Headers.Add("Accept", "application/json");
+            */
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("https://sadovodhelperexample.azurewebsites.net");
+
+            //string jsonData = @"{""username"" : ""myusername"", ""password"" : ""mypassword""}"
+
+            UserDto dto = new UserDto() { Username = username, Password = password };
+            string json = $"'{JsonConvert.SerializeObject(dto)}'";
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync("/api/signup/Authenticate", content);
+            HttpResponseMessage response1 = await client.GetAsync("/api/database/DatabaseGetByGardenerID?id=5");
+            var res1 = response1.Content;
+
+            //var signed = JsonConvert.DeserializeObject<SignedIn>(response.Content.ReadAsStringAsync());
+
+            // this result string should be something like: "{"token":"rgh2ghgdsfds"}"
+            var result = response.Content;
 
             if (response.StatusCode == HttpStatusCode.OK)
             {

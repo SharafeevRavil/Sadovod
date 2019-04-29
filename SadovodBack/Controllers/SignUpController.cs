@@ -73,13 +73,9 @@ namespace SadovodBack.Controllers
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
             // return basic user info (without password) and token to store client side
-            return Ok(new
-            {
-                Id = user.ID,
-                Username = user.Username,
-                Email = user.Email,
-                Token = encodedJwt
-            });
+            return Ok(
+                $"'{{\"Id\":\"{user.ID}\",\"Username\":\"{user.Username}\",\"Email\":\"{user.Email}\",\"Token\":\"{encodedJwt}\"'}}"
+            );
         }
 
         [AllowAnonymous]
