@@ -66,30 +66,20 @@ namespace SadovodMobile.Activities
                 "https://sadovodhelperexample.azurewebsites.net/api/signup/Authenticate", content);
             //request.Headers.Add("Accept", "application/json");
             */
+
             var client = new HttpClient();
             client.BaseAddress = new Uri("https://sadovodhelperexample.azurewebsites.net");
-
-            //string jsonData = @"{""username"" : ""myusername"", ""password"" : ""mypassword""}"
-
             UserDto dto = new UserDto() { Username = username, Password = password };
             string json = $"'{JsonConvert.SerializeObject(dto)}'";
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await client.PostAsync("/api/signup/Authenticate", content);
-            HttpResponseMessage response1 = await client.GetAsync("/api/database/DatabaseGetByGardenerID?id=5");
-            var res1 = response1.Content;
-
-            var token = await response.Content.ReadAsStringAsync();
-            //var signed = JsonConvert.DeserializeObject<SignedIn>(resp);
-
-            // this result string should be something like: "{"token":"rgh2ghgdsfds"}"
-            var result = response.Content;
+            //HttpResponseMessage response1 = await client.GetAsync("/api/database/DatabaseGetByGardenerID?id=5");
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                HttpContent responseContent = response.Content;
-                //var json = await responseContent.ReadAsStringAsync();
-                var ans = responseContent.ToString();
-
+                var token = await response.Content.ReadAsStringAsync();
+                UserSingleton.Instance.Token = token;
+                
                 //Переключаю на экран участков
                 Intent intent = new Intent(this, typeof(SteadsActivity));
                 StartActivity(intent);

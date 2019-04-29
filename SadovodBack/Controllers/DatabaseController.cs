@@ -18,11 +18,11 @@ namespace SadovodBack.Controllers
         //пример get запроса из базы данных
         [Route("DatabaseGetByGardenerID")]
         [HttpGet]
-        public async Task<JsonResult> DatabaseGetByGardenerID(int id)
+        public async Task<JsonResult> DatabaseGetByGardenerID()
         {
             var str = new List<string>();
             //происходит запрос с id, в базе данных ищутся все строки с id садовода == id, который пришел в запросе
-            string sqlExpression = $"SELECT * FROM Steads WHERE GardenerID = {id}";
+            string sqlExpression = $"SELECT * FROM Steads WHERE GardenerID = {User.Identity.Name}";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -46,10 +46,10 @@ namespace SadovodBack.Controllers
         //пример delete запроса(удаляется вся информация о данном садоводе из базы данных)
         [Route("DatabaseDeleteByGardenerID")]
         [HttpDelete]
-        public async void DatabaseDeleteByGardenerID(int id)
+        public async void DatabaseDeleteByGardenerID()
         {
             //происходит поиск строк в базе данных, у которых id садовода == id, который пришел в запросе, затем такие строки удаляются
-            string sqlExpression = $"DELETE  FROM Steads WHERE GardenerID={id}";
+            string sqlExpression = $"DELETE  FROM Steads WHERE GardenerID={User.Identity.Name}";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -76,7 +76,7 @@ namespace SadovodBack.Controllers
         //пример post запроса(добавляется грядка по id садовода)
         [Route("DatabasePostStead")]
         [HttpPost]
-        public async void DatabasePostStead(int id, [FromBody] string value)
+        public async void DatabasePostStead([FromBody] string value)
         {
             string sqlExpression = "INSERT INTO Steads (Stead, GardenerID) VALUES (@value, @GardenerID)";
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -88,7 +88,7 @@ namespace SadovodBack.Controllers
                 // добавляем параметр к команде
                 command.Parameters.Add(steadInfo);
                 // создаем параметр для id садовода
-                SqlParameter gardenerID = new SqlParameter("@GardenerID", id);
+                SqlParameter gardenerID = new SqlParameter("@GardenerID", User.Identity.Name);
                 // добавляем параметр к команде
                 command.Parameters.Add(gardenerID);
                 command.ExecuteNonQuery();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 
 using Android.App;
@@ -10,6 +11,8 @@ using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Widget;
+using Newtonsoft.Json;
+using static SadovodMobile.Activities.SignInActivity;
 
 namespace SadovodMobile.Activities
 {
@@ -22,7 +25,7 @@ namespace SadovodMobile.Activities
             SetContentView(Resource.Layout.SignUp);
 
             //Привязка кнопки регистрации
-            FindViewById<Button>(Resource.Id.button1).Click += SignUpOnClick;
+            FindViewById<Button>(Resource.Id.button1).Click += SignUpOnClickAsync;
         }
 
         private bool CheckSignUpData(object sender, string login, string email, string pass1, string pass2)
@@ -68,7 +71,7 @@ namespace SadovodMobile.Activities
             return true;
         }
         //нажатие на кнопку регистрации
-        private void SignUpOnClick(object sender, EventArgs eventArgs)
+        private async void SignUpOnClickAsync(object sender, EventArgs eventArgs)
         {
             string login = FindViewById<EditText>(Resource.Id.editText1).Text;
             string email = FindViewById<EditText>(Resource.Id.editText2).Text;
@@ -84,7 +87,23 @@ namespace SadovodMobile.Activities
             //ТУТ Я ПЫТАЮСЬ ЗАРЕГИСТРИРОВАТЬСЯ
             //Если был успешно авторизован, то авторизуюсь(если нужно будет) и переключаю на экран участков
             //Иначе снизу всплывает сообщение о неудачной регистрации
-            if(login != "wrong"){
+
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("https://sadovodhelperexample.azurewebsites.net");
+
+
+            UserDto dto1 = new UserDto() { Username = login, Password = pass1 };
+            string json1 = $"'{JsonConvert.SerializeObject(dto1)}'";
+            var content2 = new StringContent(json1, Encoding.UTF8, "application/json");
+            HttpResponseMessage response1 = await client.PostAsync("/api/signup/Register", content2);
+
+            if(response1.StatusCode == System.Net.HttpStatusCode.OK){
+                UserDto dto = new UserDto() { Username = login, Password = pass1 };
+                string json = $"'{JsonConvert.SerializeObject(dto)}'";
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync("/api/signup/Authenticate", content);
+                var token = await response.Content.ReadAsStringAsync();
+                UserSingleton.Instance.Token = token;
                 //Переключаю на экран участков
                 Intent intent = new Intent(this, typeof(SteadsActivity));
                 FinishAffinity();

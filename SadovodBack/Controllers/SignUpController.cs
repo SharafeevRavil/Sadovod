@@ -82,17 +82,18 @@ namespace SadovodBack.Controllers
         [AllowAnonymous]
         [HttpPost("Register/")]
         //public IActionResult Register([FromBody]string value)
-        public IActionResult Register([FromBody]UserDto userDto)
+        public IActionResult Register([FromBody]string input)
         {
             //var user = JsonConvert.DeserializeObject<User>(value);
             //User user = 
             // map dto to entity
-            var user = _mapper.Map<User>(userDto);
+            var dto = JsonConvert.DeserializeObject<UserDto>(input);
+            var user = _mapper.Map<User>(dto);
 
             try
             {
                 // save 
-                _userService.Create(user, userDto.Password);
+                _userService.Create(user, dto.Password);
                 return Ok();
             }
             catch (AppException ex)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 
 using Android.App;
@@ -10,6 +11,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Newtonsoft.Json;
 using SadovodClasses;
 
 namespace SadovodMobile
@@ -36,6 +38,28 @@ namespace SadovodMobile
             }
         }
 
+        private string token;
+        public string Token {
+            get
+            {
+                return token;
+            }
+            set
+            {
+                token = value;
+                penisAsync();
+            }
+        }
+
+        public async void penisAsync()
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("https://sadovodhelperexample.azurewebsites.net");
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {Token}");
+            HttpResponseMessage response = await client.GetAsync("/api/database/DatabaseGetByGardenerID");
+            string stead = await response.Content.ReadAsStringAsync();
+        }
+
         public UserSingleton()
         {
             //FIXME:: делать загрузку информации о юзере с бека
@@ -51,7 +75,21 @@ namespace SadovodMobile
         public void AddStead(Stead stead)
         {
             steads.Add(stead);
+
+            postStead(stead);
+
             SteadsChanged.Invoke(this, new EventArgs());
+        }
+
+        public async void postStead(Stead stead)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("https://sadovodhelperexample.azurewebsites.net");
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {Token}");
+
+            string json1 = $"'{JsonConvert.SerializeObject(stead)}'";
+            var content2 = new StringContent(json1, Encoding.UTF8, "application/json");
+            HttpResponseMessage response1 = await client.PostAsync("/api/database/DatabasePostStead", content2);
         }
 
         public event EventHandler SteadsChanged;
