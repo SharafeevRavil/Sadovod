@@ -39,10 +39,10 @@ namespace SadovodMobile.Activities
 
         public class SignedIn
         {
-            public int id { get; set; }
-            public string username { get; set; }
-            public string email { get; set; }
-            public string token { get; set; }
+            public int Id { get; set; }
+            public string Username { get; set; }
+            public string Email { get; set; }
+            public string Token { get; set; }
         }
         //нажатие на кнопку входа
         private async void SignInOnClickAsync(object sender, EventArgs eventArgs)
@@ -78,7 +78,8 @@ namespace SadovodMobile.Activities
             HttpResponseMessage response1 = await client.GetAsync("/api/database/DatabaseGetByGardenerID?id=5");
             var res1 = response1.Content;
 
-            //var signed = JsonConvert.DeserializeObject<SignedIn>(response.Content.ReadAsStringAsync());
+            var token = await response.Content.ReadAsStringAsync();
+            //var signed = JsonConvert.DeserializeObject<SignedIn>(resp);
 
             // this result string should be something like: "{"token":"rgh2ghgdsfds"}"
             var result = response.Content;
