@@ -52,7 +52,7 @@ namespace SadovodMobile.Activities
             return base.OnOptionsItemSelected(item);
         }
 
-
+        public static Stead SteadToBeAdded;
         public void AddSteadAction(object sender, EventArgs eventArgs)
         {
             string name = text.Text;
@@ -64,8 +64,11 @@ namespace SadovodMobile.Activities
             else
             {
                 //если все ок, то добавляем участок
-                UserSingleton.Instance.AddStead(new Stead(name));
+                //UserSingleton.Instance.AddStead(new Stead(name));
+                //Finish();
+                SteadToBeAdded = new Stead(name);
                 Finish();
+                StartActivity(new Intent(this, typeof(DrawSteadActivity)));
             }
         }
     }

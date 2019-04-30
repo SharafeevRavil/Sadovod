@@ -17,17 +17,10 @@ using SkiaSharp.Views.Android;
 
 namespace SadovodMobile
 {
-    public interface IDrawableActivity
+    [Activity(Label = "DrawBedsActivity")]
+    public class DrawBedsActivity : AppCompatActivity, IDrawableActivity
     {
-        void Scale(float inputX, float inputY, float scale);
-        void Swipe(float distX, float distY);
-        void Touch(float inputX, float inputY);
-    }
-
-    [Activity(Label = "DrawSteadActivity")]
-    public class DrawSteadActivity : AppCompatActivity, IDrawableActivity
-    {
-        private enum DrawSteadStates
+        private enum DrawBedsStates
         {
             Browse, AddPoint
         }
@@ -59,7 +52,7 @@ namespace SadovodMobile
         private SKBitmap bitmap;
         private Point screenSize;
 
-        private DrawSteadStates currentState;
+        private DrawBedsStates currentState;
 
         private SKCanvas shapesCanvas;
         private SKCanvas scaleCanvas;
@@ -77,15 +70,15 @@ namespace SadovodMobile
 
         private void OnPlus(object sender, EventArgs eventArgs)
         {
-            if (currentState == DrawSteadStates.Browse)
+            if (currentState == DrawBedsStates.Browse)
             {
-                currentState = DrawSteadStates.AddPoint;
+                currentState = DrawBedsStates.AddPoint;
                 FindViewById<ImageButton>(Resource.Id.imageButton2).SetColorFilter(
                     new PorterDuffColorFilter(new Color(0x8B, 0xC3, 0x4A), PorterDuff.Mode.DstAtop));
             }
             else
             {
-                currentState = DrawSteadStates.Browse;
+                currentState = DrawBedsStates.Browse;
                 FindViewById<ImageButton>(Resource.Id.imageButton2).ClearColorFilter();
             }
         }
@@ -105,7 +98,7 @@ namespace SadovodMobile
 
         public void Touch(float inputX, float inputY)
         {
-            if (currentState == DrawSteadStates.AddPoint)
+            if (currentState == DrawBedsStates.AddPoint)
             {
                 var point = Utilities.ToRealCoords(inputX, inputY, shapesCanvas.TotalMatrix);
                 shapePoints.Add(new SKPoint(point.X, point.Y));
@@ -145,21 +138,15 @@ namespace SadovodMobile
             };
 
             var path = new SKPath { FillType = SKPathFillType.EvenOdd };
-            if (shapePoints.Count >= 2)
+            if (shapePoints.Count > 0)
             {
                 path.MoveTo(shapePoints[0]);
-                shapesCanvas.DrawOval(shapePoints[0], new SKSize(5 / shapesCanvas.TotalMatrix.ScaleX, 5 / shapesCanvas.TotalMatrix.ScaleY), pathStroke);
                 for (int i = 1; i < shapePoints.Count; i++)
                 {
                     path.LineTo(shapePoints[i]);
-                    shapesCanvas.DrawOval(shapePoints[i], new SKSize(5 / shapesCanvas.TotalMatrix.ScaleX, 5 / shapesCanvas.TotalMatrix.ScaleY), pathStroke);
                 }
                 path.LineTo(shapePoints[0]);
                 shapesCanvas.DrawPath(path, pathStroke);
-            }
-            else if (shapePoints.Count == 1)
-            {
-                shapesCanvas.DrawOval(shapePoints[0], new SKSize(5 / shapesCanvas.TotalMatrix.ScaleX, 5 / shapesCanvas.TotalMatrix.ScaleY), pathStroke);
             }
 
             RedrawScale();

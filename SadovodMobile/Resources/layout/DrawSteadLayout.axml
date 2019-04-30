@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -12,33 +11,40 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/sKCanvasView1" />
-    </FrameLayout>
-    <!--<ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/scrollView1">
-        <HorizontalScrollView
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/horizontalScrollView1">
-            <RelativeLayout
+            android:id="@+id/linearLayout1" >
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/relativeLayout1">
-                <Button
-                    android:text="Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/button1" />
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="50dp"
-                    android:id="@+id/imageView1"
-                    android:background="@drawable/testbitmap" />
-            </RelativeLayout>
-        </HorizontalScrollView>
-    </ScrollView>-->
-
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout2" >
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7"
+                    android:id="@+id/space1" />
+                <ImageButton
+                    android:src="@drawable/Undo"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:id="@+id/imageButton1" />
+                <ImageButton
+                    android:src="@drawable/Plus"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:id="@+id/imageButton2" />
+                <ImageButton
+                    android:src="@drawable/Accept"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:id="@+id/imageButton3" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
 </LinearLayout>

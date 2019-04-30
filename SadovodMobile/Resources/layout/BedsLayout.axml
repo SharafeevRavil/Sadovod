@@ -12,11 +12,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/sKCanvasView1" />
-        <ImageButton
-            android:src="@android:drawable/ic_menu_gallery"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/imageButton1" />
     </FrameLayout>
     <!--<ScrollView
         android:layout_width="match_parent"
