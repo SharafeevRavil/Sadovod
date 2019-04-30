@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SadovodClasses;
 
 namespace SadovodBack.Controllers
 {
@@ -20,7 +21,7 @@ namespace SadovodBack.Controllers
         [HttpGet]
         public async Task<JsonResult> DatabaseGetByGardenerID()
         {
-            var str = new List<string>();
+            var str = new List<DatabaseStead>();
             //происходит запрос с id, в базе данных ищутся все строки с id садовода == id, который пришел в запросе
             string sqlExpression = $"SELECT * FROM Steads WHERE GardenerID = {User.Identity.Name}";
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -33,10 +34,11 @@ namespace SadovodBack.Controllers
                     //в этом месте присвоения можно создавать экземпляры классов с десериализацией или же просто доставать строку, затем добавлять в какой-то IEnumerable и возвращать его
                     while (reader.Read()) // построчно считываем данные
                     {
-                        object Id = reader.GetValue(0);
-                        object Stead = reader.GetValue(1);
-                        object GardnerID = reader.GetValue(2);
-                        str.Add($"{Id},{Stead},{GardnerID}");
+                        var stead = new DatabaseStead();
+                        stead.Id =(int) reader.GetValue(0);
+                        stead.Stead =(Stead) reader.GetValue(1);
+                        stead.GardenerID = (int) reader.GetValue(2);
+                        str.Add(stead);
                     }
                 }
                 return new JsonResult(str);
