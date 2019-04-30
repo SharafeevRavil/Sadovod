@@ -62,6 +62,32 @@ namespace SadovodMobile
             }
             return r.ToString();
         }
+        public static List<string> GetMagic(string input)
+        {
+            List<string> myString = new List<string>();
+            int cur = 0;
+            int start = -1;
+            int count = 0;
+            while (cur<input.Length)
+            {
+                if (input[cur] == '{')
+                {
+                    start = cur;
+                    count++;
+                }
+                if(input[cur] == '}')
+                {
+                    count--;
+                    if(count == 0)
+                    {
+                        myString.Add(input.Substring(start, cur - start + 1));
+                    }
+                }
+                cur++;
+            }
+            return myString;
+        }
+
         public static bool IsNumber(char symb)
         {
             return symb >= '0' && symb <= '9';

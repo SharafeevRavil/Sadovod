@@ -57,7 +57,12 @@ namespace SadovodMobile
             client.BaseAddress = new Uri("https://sadovodhelperexample.azurewebsites.net");
             client.DefaultRequestHeaders.Add("Authorization", $"Bearer {Token}");
             HttpResponseMessage response = await client.GetAsync("/api/database/DatabaseGetByGardenerID");
-            string stead = await response.Content.ReadAsStringAsync();
+            string mySteads = await response.Content.ReadAsStringAsync();
+            var a = Utilities.GetMagic(mySteads);
+            foreach(var b in a)
+            {
+                steads.Add(JsonConvert.DeserializeObject<Stead>(b));
+            }
         }
 
         public UserSingleton()
