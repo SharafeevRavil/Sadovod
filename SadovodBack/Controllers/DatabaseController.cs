@@ -98,26 +98,20 @@ namespace SadovodBack.Controllers
                 command.Parameters.Add(gardenerID);
                 command.ExecuteNonQuery();
             }
-            //string newSqlExpression = $"SELECT * FROM Steads WHERE Stead = {value} AND GardenerID = {User.Identity.Name}";
-            //var str = new List<DatabaseStead>();
-            //using (SqlConnection connection = new SqlConnection(connectionString))
-            //{
-            //    connection.Open();
-            //    SqlCommand command = new SqlCommand(sqlExpression, connection);
-            //    SqlDataReader reader = command.ExecuteReader();
-            //    if (reader.HasRows) // если есть данные
-            //    {
-            //            var stead = new DatabaseStead();
-            //            stead.Id = (int)reader.GetValue(0);
-            //            //stead.Stead = JsonConvert.DeserializeObject<Stead> ($"[{reader.GetValue(1)}]");
-            //            stead.GardenerID = (int)reader.GetValue(2);
-            //            str.Add(stead);
-
-            //    }
-            //}
-            //var last = str.LastOrDefault();
-            //return Ok(last.Id.ToString());
-            return Ok();
+            string newSqlExpression = $"SELECT * FROM Steads WHERE Stead = '{value}' AND GardenerID = {User.Identity.Name}";
+            var str = new List<int>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(newSqlExpression, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read()) // если есть данные
+                {
+                    var id = (int)reader["id"];
+                    str.Add(id);
+                }
+            }
+            return Ok(str.LastOrDefault());
         }
         //пример put запроса(изменяется информация о конкретной грядке садовода)
         [Route("DatabaseUpdateStead")]
