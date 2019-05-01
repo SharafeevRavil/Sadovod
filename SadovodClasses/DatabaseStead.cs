@@ -7,7 +7,7 @@ namespace SadovodClasses
     public class DatabaseStead
     {
         public int Id { get; set; }
-        public string Stead { get; set; }
+        public Stead Stead { get; set; }
         public int GardenerID { get; set; }
     }
 }

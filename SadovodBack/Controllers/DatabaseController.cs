@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SadovodClasses;
+using SadovodBack.Models;
 
 namespace SadovodBack.Controllers
 {
@@ -35,12 +36,15 @@ namespace SadovodBack.Controllers
                     //в этом месте присвоения можно создавать экземпляры классов с десериализацией или же просто доставать строку, затем добавлять в какой-то IEnumerable и возвращать его
                     while (reader.Read()) // построчно считываем данные
                     {
-                        var stead = new DatabaseStead();
+                        var stead = new ConvertClass();
                         stead.Id =(int) reader.GetValue(0);
                         stead.Stead = (string) reader.GetValue(1);
                         stead.GardenerID = (int) reader.GetValue(2);
-                        
-                        str.Add(stead);
+                        var convertedStead = new DatabaseStead();
+                        convertedStead.Id = stead.Id;
+                        convertedStead.Stead = JsonConvert.DeserializeObject<Stead>(stead.Stead);
+                        convertedStead.GardenerID = stead.GardenerID;
+                        str.Add(convertedStead);
                     }
                 }
                 
