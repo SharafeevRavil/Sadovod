@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using SadovodClasses;
 
 namespace SadovodBack.Controllers
@@ -36,13 +37,15 @@ namespace SadovodBack.Controllers
                     {
                         var stead = new DatabaseStead();
                         stead.Id =(int) reader.GetValue(0);
-                        stead.Stead =(Stead) reader.GetValue(1);
+                        stead.Stead = (string) reader.GetValue(1);
                         stead.GardenerID = (int) reader.GetValue(2);
+                        
                         str.Add(stead);
                     }
                 }
-                return new JsonResult(str);
+                
             }
+            return new JsonResult(JsonConvert.SerializeObject(str));
         }
 
         //пример delete запроса(удаляется вся информация о данном садоводе из базы данных)
@@ -78,7 +81,7 @@ namespace SadovodBack.Controllers
         //пример post запроса(добавляется грядка по id садовода)
         [Route("DatabasePostStead")]
         [HttpPost]
-        public async void DatabasePostStead([FromBody] string value)
+        public ActionResult DatabasePostStead([FromBody] string value)
         {
             string sqlExpression = "INSERT INTO Steads (Stead, GardenerID) VALUES (@value, @GardenerID)";
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -95,6 +98,26 @@ namespace SadovodBack.Controllers
                 command.Parameters.Add(gardenerID);
                 command.ExecuteNonQuery();
             }
+            //string newSqlExpression = $"SELECT * FROM Steads WHERE Stead = {value} AND GardenerID = {User.Identity.Name}";
+            //var str = new List<DatabaseStead>();
+            //using (SqlConnection connection = new SqlConnection(connectionString))
+            //{
+            //    connection.Open();
+            //    SqlCommand command = new SqlCommand(sqlExpression, connection);
+            //    SqlDataReader reader = command.ExecuteReader();
+            //    if (reader.HasRows) // если есть данные
+            //    {
+            //            var stead = new DatabaseStead();
+            //            stead.Id = (int)reader.GetValue(0);
+            //            //stead.Stead = JsonConvert.DeserializeObject<Stead> ($"[{reader.GetValue(1)}]");
+            //            stead.GardenerID = (int)reader.GetValue(2);
+            //            str.Add(stead);
+
+            //    }
+            //}
+            //var last = str.LastOrDefault();
+            //return Ok(last.Id.ToString());
+            return Ok();
         }
         //пример put запроса(изменяется информация о конкретной грядке садовода)
         [Route("DatabaseUpdateStead")]
