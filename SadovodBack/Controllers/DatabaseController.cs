@@ -15,7 +15,7 @@ namespace SadovodBack.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class DatabaseController : ControllerBase
+    public class DatabaseController : Controller
     {
         string connectionString = @"Server=tcp:sadovodhelperexampledbserver.database.windows.net,1433;Initial Catalog=Steads;Persist Security Info=False;User ID=Hikirangi;Password=Satana666;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         //пример get запроса из базы данных
@@ -49,7 +49,10 @@ namespace SadovodBack.Controllers
                 }
                 
             }
-            return new JsonResult(JsonConvert.SerializeObject(str));
+            return Json(str);
+            //var l = JsonConvert.SerializeObject(str);
+            //var k = l.Substring(1, l.Length);
+            //return new JsonResult(JsonConvert.SerializeObject(str));
         }
 
         //пример delete запроса(удаляется вся информация о данном садоводе из базы данных)

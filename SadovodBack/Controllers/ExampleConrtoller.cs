@@ -56,7 +56,7 @@ namespace SadovodBack.Controllers
         public async Task<JsonResult> Get()
         {
             
-            return new JsonResult("hello word");
+            return new JsonResult("hello");
         }
         //api/Example/GetByID?id=needId
         [Route("GetByID/")]
