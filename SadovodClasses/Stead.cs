@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
+using Newtonsoft.Json;
 
 namespace SadovodClasses
 {
@@ -25,6 +26,12 @@ namespace SadovodClasses
             Name = name;
             gardenBeds = new List<GardenBed>();
         }
+        [JsonConstructor]
+        public Stead(List<GardenBed> gardenBeds,string name)
+        {
+            Name = name;
+            this.gardenBeds = gardenBeds;
+        }
 
         //Добавить грядку на участок
         public void AddBed(GardenBed gardenBedToToAdd)
@@ -38,7 +45,7 @@ namespace SadovodClasses
         //Инвокер события
         public void InvokeBedsChanged()
         {
-            BedsChanged.Invoke(this, new EventArgs());
+            BedsChanged?.Invoke(this, new EventArgs());
         }
 
         //Убрать n-ую грядку из участка

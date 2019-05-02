@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using SadovodClasses;
+using SadovodBack.Models;
 
 namespace SadovodBack.Controllers
 {
@@ -34,15 +36,20 @@ namespace SadovodBack.Controllers
                     //в этом месте присвоения можно создавать экземпляры классов с десериализацией или же просто доставать строку, затем добавлять в какой-то IEnumerable и возвращать его
                     while (reader.Read()) // построчно считываем данные
                     {
-                        var stead = new DatabaseStead();
+                        var stead = new ConvertClass();
                         stead.Id =(int) reader.GetValue(0);
-                        stead.Stead =(Stead) reader.GetValue(1);
+                        stead.Stead = (string) reader.GetValue(1);
                         stead.GardenerID = (int) reader.GetValue(2);
-                        str.Add(stead);
+                        var convertedStead = new DatabaseStead();
+                        convertedStead.Id = stead.Id;
+                        convertedStead.Stead = JsonConvert.DeserializeObject<Stead>(stead.Stead);
+                        convertedStead.GardenerID = stead.GardenerID;
+                        str.Add(convertedStead);
                     }
                 }
-                return new JsonResult(str);
+                
             }
+            return new JsonResult(JsonConvert.SerializeObject(str));
         }
 
         //пример delete запроса(удаляется вся информация о данном садоводе из базы данных)
@@ -78,7 +85,7 @@ namespace SadovodBack.Controllers
         //пример post запроса(добавляется грядка по id садовода)
         [Route("DatabasePostStead")]
         [HttpPost]
-        public async void DatabasePostStead([FromBody] string value)
+        public ActionResult DatabasePostStead([FromBody] string value)
         {
             string sqlExpression = "INSERT INTO Steads (Stead, GardenerID) VALUES (@value, @GardenerID)";
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -95,6 +102,20 @@ namespace SadovodBack.Controllers
                 command.Parameters.Add(gardenerID);
                 command.ExecuteNonQuery();
             }
+            string newSqlExpression = $"SELECT * FROM Steads WHERE Stead = '{value}' AND GardenerID = {User.Identity.Name}";
+            var str = new List<int>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(newSqlExpression, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read()) // если есть данные
+                {
+                    var id = (int)reader["id"];
+                    str.Add(id);
+                }
+            }
+            return Ok(str.LastOrDefault());
         }
         //пример put запроса(изменяется информация о конкретной грядке садовода)
         [Route("DatabaseUpdateStead")]
