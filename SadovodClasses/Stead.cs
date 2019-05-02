@@ -27,7 +27,7 @@ namespace SadovodClasses
             gardenBeds = new List<GardenBed>();
         }
         [JsonConstructor]
-        public Stead(List<GardenBed> gardenBeds,string name)
+        public Stead(List<GardenBed> gardenBeds, string name)
         {
             Name = name;
             this.gardenBeds = gardenBeds;

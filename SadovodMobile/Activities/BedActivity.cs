@@ -33,6 +33,8 @@ namespace SadovodMobile.Activities
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.GardenBed);
 
+            FindViewById<Button>(Resource.Id.button1).Click += AddNoteAction;
+
             //Привязка поля вида растения
             typeName = FindViewById<EditText>(Resource.Id.editText1);
             //Привязка поля сорта растения
@@ -98,6 +100,7 @@ namespace SadovodMobile.Activities
         private void OnNoteChanged(object sender, NotesArgs args)
         {
             UserSingleton.Instance.CurrentBed.Notes[args.Position] = args.Text;
+            UserSingleton.Instance.CurrentStead.InvokeBedsChanged();
         }
 
         private RecyclerView mRecyclerView;
@@ -109,6 +112,7 @@ namespace SadovodMobile.Activities
         {
             UserSingleton.Instance.CurrentBed.AddNote("");
             mAdapter.NotifyDataSetChanged();
+            UserSingleton.Instance.CurrentStead.InvokeBedsChanged();
         }
 
         public class NotesArgs : EventArgs
@@ -190,6 +194,7 @@ namespace SadovodMobile.Activities
         public void WaterDateChanged(object sender, EventArgs eventArgs)
         {
             UserSingleton.Instance.CurrentBed.WaterDate = Utilities.DateTimeFormat(waterDate.Text);
+            UserSingleton.Instance.CurrentStead.InvokeBedsChanged();
         }
         //Действие при изменении периодичности полива
         public void WaterPeriodChanged(object sender, EventArgs eventArgs)
@@ -198,6 +203,7 @@ namespace SadovodMobile.Activities
             if (int.TryParse(waterPeriod.Text, out result))
             {
                 UserSingleton.Instance.CurrentBed.WaterPeriod = result;
+                UserSingleton.Instance.CurrentStead.InvokeBedsChanged();
             }
         }
 
@@ -205,6 +211,7 @@ namespace SadovodMobile.Activities
         public void WeedDateChanged(object sender, EventArgs eventArgs)
         {
             UserSingleton.Instance.CurrentBed.WeedDate = Utilities.DateTimeFormat(weedDate.Text);
+            UserSingleton.Instance.CurrentStead.InvokeBedsChanged();
         }
         //Действие при изменении периодичности прополки
         public void WeedPeriodChanged(object sender, EventArgs eventArgs)
@@ -213,6 +220,7 @@ namespace SadovodMobile.Activities
             if (int.TryParse(weedPeriod.Text, out result))
             {
                 UserSingleton.Instance.CurrentBed.WeedPeriod = result;
+                UserSingleton.Instance.CurrentStead.InvokeBedsChanged();
             }
         }
 
@@ -220,6 +228,7 @@ namespace SadovodMobile.Activities
         public void PileUpDateChanged(object sender, EventArgs eventArgs)
         {
             UserSingleton.Instance.CurrentBed.PileUpDate = Utilities.DateTimeFormat(pileUpDate.Text);
+            UserSingleton.Instance.CurrentStead.InvokeBedsChanged();
         }
         //Действие при изменении периодичности окучивания
         public void PileUpPeriodChanged(object sender, EventArgs eventArgs)
@@ -228,6 +237,7 @@ namespace SadovodMobile.Activities
             if (int.TryParse(pileUpPeriod.Text, out result))
             {
                 UserSingleton.Instance.CurrentBed.PileUpPeriod = result;
+                UserSingleton.Instance.CurrentStead.InvokeBedsChanged();
             }
         }
 
@@ -235,6 +245,7 @@ namespace SadovodMobile.Activities
         public void FertilizeDateChanged(object sender, EventArgs eventArgs)
         {
             UserSingleton.Instance.CurrentBed.FertilizeDate = Utilities.DateTimeFormat(fertilizeDate.Text);
+            UserSingleton.Instance.CurrentStead.InvokeBedsChanged();
         }
         //Действие при изменении периодичности удобрения
         public void FertilizePeriodChanged(object sender, EventArgs eventArgs)
@@ -243,6 +254,7 @@ namespace SadovodMobile.Activities
             if (int.TryParse(fertilizePeriod.Text, out result))
             {
                 UserSingleton.Instance.CurrentBed.FertilizePeriod = result;
+                UserSingleton.Instance.CurrentStead.InvokeBedsChanged();
             }
         }
     }

@@ -9,7 +9,7 @@ namespace SadovodClasses
         //Раcтение на грядке
         public PlantType Plant
         {
-            get;
+            get; set;
         }
 
         //Заметки о растениях
@@ -24,9 +24,9 @@ namespace SadovodClasses
             get; set;
         }
 
-        public GardenBed(PlantType plantType, GardenBedType bedType = GardenBedType.Alfresco)
+        public GardenBed(PlantType plant, GardenBedType bedType = GardenBedType.Alfresco)
         {
-            Plant = plantType;
+            Plant = plant;
             BedType = bedType;
             Notes = new List<string>();
 

@@ -66,6 +66,7 @@ namespace SadovodMobile
             {
                 databaseSteads.Add(b);
                 steads.Add(b.Stead);
+                b.Stead.BedsChanged += UpdateSteadAsync;
             }
             SteadsChanged.Invoke(this, new EventArgs());
         }
@@ -75,6 +76,18 @@ namespace SadovodMobile
             //FIXME:: делать загрузку информации о юзере с бека
             steads = new List<Stead>();
             databaseSteads = new List<DatabaseStead>();
+        }
+
+        public async void UpdateSteadAsync(object sender, EventArgs args)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("https://sadovodhelperexample.azurewebsites.net");
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+
+            string json1 = $"'{JsonConvert.SerializeObject(CurrentStead)}'";
+            var content2 = new StringContent(json1, Encoding.UTF8, "application/json");
+            int id = databaseSteads.Where(x => x.Stead == currentStead).First().Id;
+            HttpResponseMessage response = await client.PutAsync($"/api/database/DatabaseUpdateStead?id={id}", content2);
         }
 
         private List<Stead> steads;
@@ -88,6 +101,7 @@ namespace SadovodMobile
         public void AddStead(Stead stead)
         {
             steads.Add(stead);
+            stead.BedsChanged += UpdateSteadAsync;
 
             postStead(stead);
 
