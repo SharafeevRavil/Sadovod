@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 
@@ -39,7 +40,8 @@ namespace SadovodMobile
         }
 
         private string token;
-        public string Token {
+        public string Token
+        {
             get
             {
                 return token;
@@ -47,28 +49,32 @@ namespace SadovodMobile
             set
             {
                 token = value;
-                penisAsync();
+                GetAllSteads();
             }
         }
 
-        public async void penisAsync()
+        public async void GetAllSteads()
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri("https://sadovodhelperexample.azurewebsites.net");
             client.DefaultRequestHeaders.Add("Authorization", $"Bearer {Token}");
             HttpResponseMessage response = await client.GetAsync("/api/database/DatabaseGetByGardenerID");
             string mySteads = await response.Content.ReadAsStringAsync();
-            var a = Utilities.GetMagic(mySteads);
-            foreach(var b in a)
+            var a = JsonConvert.DeserializeObject<List<DatabaseStead>>(mySteads);
+
+            foreach (var b in a)
             {
-                steads.Add(JsonConvert.DeserializeObject<Stead>(b));
+                databaseSteads.Add(b);
+                steads.Add(b.Stead);
             }
+            SteadsChanged.Invoke(this, new EventArgs());
         }
 
         public UserSingleton()
         {
             //FIXME:: делать загрузку информации о юзере с бека
             steads = new List<Stead>();
+            databaseSteads = new List<DatabaseStead>();
         }
 
         private List<Stead> steads;
@@ -76,6 +82,8 @@ namespace SadovodMobile
         {
             get => new ReadOnlyCollection<Stead>(steads);
         }
+
+        private List<DatabaseStead> databaseSteads;
 
         public void AddStead(Stead stead)
         {
@@ -94,7 +102,12 @@ namespace SadovodMobile
 
             string json1 = $"'{JsonConvert.SerializeObject(stead)}'";
             var content2 = new StringContent(json1, Encoding.UTF8, "application/json");
-            HttpResponseMessage response1 = await client.PostAsync("/api/database/DatabasePostStead", content2);
+            HttpResponseMessage response = await client.PostAsync("/api/database/DatabasePostStead", content2);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                int globalId = int.Parse(await response.Content.ReadAsStringAsync());
+                databaseSteads.Add(new DatabaseStead() { Id = globalId, Stead = stead });
+            }
         }
 
         public event EventHandler SteadsChanged;
