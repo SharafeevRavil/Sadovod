@@ -84,7 +84,50 @@ namespace SadovodBack.Controllers
                 command.ExecuteNonQuery();
             }
         }
+        [Route("DatabaseDeleteGardenBed")]
+        [HttpDelete]
+        public async void DatabaseDeleteGardenBed(int steadId, int posInList)
+        {
+            var str = new List<DatabaseStead>();
+            //происходит запрос с id, в базе данных ищутся все строки с id садовода == id, который пришел в запросе
+            string sqlExpression = $"SELECT * FROM Steads WHERE id={steadId}";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(sqlExpression, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows) // если есть данные
+                {
+                    //в этом месте присвоения можно создавать экземпляры классов с десериализацией или же просто доставать строку, затем добавлять в какой-то IEnumerable и возвращать его
+                    while (reader.Read()) // построчно считываем данные
+                    {
+                        var stead = new ConvertClass();
+                        stead.Id = (int)reader.GetValue(0);
+                        stead.Stead = (string)reader.GetValue(1);
+                        stead.GardenerID = (int)reader.GetValue(2);
+                        var convertedStead = new DatabaseStead();
+                        convertedStead.Id = stead.Id;
+                        convertedStead.Stead = JsonConvert.DeserializeObject<Stead>(stead.Stead);
+                        convertedStead.GardenerID = stead.GardenerID;
+                        str.Add(convertedStead);
+                    }
+                }
+            }
+            var newList = new List<GardenBed>();
+            var beds = str.FirstOrDefault().Stead.GardenBeds;
+            for (var i=0;i<beds.Count;i++)
+            {
+                if (i!=posInList)
+                {
+                    newList.Add(beds[i]);
+                }
+            }
+            var steadd = str.FirstOrDefault();
+            steadd.Stead = new Stead(newList, steadd.Stead.Name);
+            DatabaseUpdateStead(steadId, JsonConvert.SerializeObject(steadd.Stead));
+            
 
+        }
         //пример post запроса(добавляется грядка по id садовода)
         [Route("DatabasePostStead")]
         [HttpPost]
