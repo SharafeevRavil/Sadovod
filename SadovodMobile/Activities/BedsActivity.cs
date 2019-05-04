@@ -48,7 +48,7 @@ namespace SadovodMobile.Activities
             mLayoutManager = new LinearLayoutManager(this);
             mRecyclerView.SetLayoutManager(mLayoutManager);
             // Plug in my adapter:
-            mAdapter = new BedsAdapter(UserSingleton.Instance.CurrentStead.GardenBeds);
+            mAdapter = new BedsAdapter(UserSingleton.Instance.CurrentStead.GardenBeds, this);
             mRecyclerView.SetAdapter(mAdapter);
             //Привязываю нажатия на элементы адаптера
             mAdapter.ItemClick += OnBedClick;
@@ -56,7 +56,14 @@ namespace SadovodMobile.Activities
             mAdapter.WeedClick += OnWeedClick;
             mAdapter.PileUpClick += OnPileUpClick;
             mAdapter.FertilizeClick += OnFertilizeClick;
+            //mAdapter.LongClick += OnLongClick;
             UserSingleton.Instance.CurrentStead.BedsChanged += OnCollectionChanged;
+        }
+
+        //Длинное нажатие
+        public void OnLongClick(object sender, int position)
+        {
+
         }
 
         //Событие изменения коллекции грядок
@@ -102,16 +109,16 @@ namespace SadovodMobile.Activities
             public event EventHandler<int> PileUpClick;
             public event EventHandler<int> FertilizeClick;
             public ReadOnlyCollection<GardenBed> Beds;
-            public BedsAdapter(ReadOnlyCollection<GardenBed> steads)
+            public BedsAdapter(ReadOnlyCollection<GardenBed> beds)
             {
-                Beds = steads;
+                Beds = beds;
             }
 
             public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
             {
                 View itemView = LayoutInflater.From(parent.Context).
                             Inflate(Resource.Layout.BedView, parent, false);
-                SteadViewHolder vh = new SteadViewHolder(itemView, OnClick, OnWaterClick, OnWeedClick, OnPileUpClick, OnFertilizeClick);
+                SteadViewHolder vh = new SteadViewHolder(itemView, OnClick, OnWaterClick, OnWeedClick, OnPileUpClick, OnFertilizeClick, OnLongClick);
                 return vh;
             }
 
@@ -148,6 +155,36 @@ namespace SadovodMobile.Activities
             {
                 FertilizeClick?.Invoke(this, position);
             }
+
+
+            private Activity mActivity;
+            private MyActionMode mActionMode;
+            public BedsAdapter(ReadOnlyCollection<GardenBed> beds, Activity activity)
+            {
+                Beds = beds;
+                mActivity = activity;
+            }
+            void OnLongClick(object sender, int position)
+            {
+                mActionMode = new MyActionMode(mActivity);
+                mActivity.StartActionMode(mActionMode);
+                ((View)sender).Selected = true;
+            }
+
+            /*private Activity mActivity;
+            private MyActionMode mActionMode;
+            public BedsAdapter(ReadOnlyCollection<GardenBed> beds, Activity activity)
+            {
+                Beds = beds;
+                mActivity = activity;
+            }
+            void OnLongClick(object sender, View.LongClickEventArgs args)
+            {
+                mActionMode = new MyActionMode(mActivity);
+                mActivity.StartActionMode(mActionMode);
+                ((View)sender).Selected = true;
+                return;
+            }*/
         }
         public class SteadViewHolder : RecyclerView.ViewHolder
         {
@@ -155,12 +192,13 @@ namespace SadovodMobile.Activities
             public TextView TypeName { get; private set; }
             public TextView SortName { get; private set; }
 
-            public SteadViewHolder(View itemView, Action<int> listener,
-                Action<int> waterListener, Action<int> weedListener, Action<int> pileUpListener, Action<int> fertilizeListener) : base(itemView)
+            public SteadViewHolder(View itemView, Action<int> listener, Action<int> waterListener, Action<int> weedListener,
+                Action<int> pileUpListener, Action<int> fertilizeListener, Action<object, int> longListener) : base(itemView)
             {
                 // Locate and cache view references:
                 MainBedLayout = itemView.FindViewById<LinearLayout>(Resource.Id.bedLinLayout);
                 MainBedLayout.Click += (sender, e) => listener(LayoutPosition);
+                MainBedLayout.LongClick += (sender, e) => longListener(sender, LayoutPosition);
 
                 TypeName = itemView.FindViewById<TextView>(Resource.Id.textView1);
                 SortName = itemView.FindViewById<TextView>(Resource.Id.textView2);
