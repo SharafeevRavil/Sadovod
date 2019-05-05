@@ -105,7 +105,7 @@ namespace SadovodBack.Controllers
                 command.Parameters.Add(gardenerID);
                 command.ExecuteNonQuery();
             }
-            string newSqlExpression = $"SELECT * FROM Steads WHERE Stead = '{value}' AND GardenerID = {User.Identity.Name}";
+            string newSqlExpression = $"SELECT * FROM Steads WHERE GardenerID = {User.Identity.Name}";
             var str = new List<int>();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -126,11 +126,18 @@ namespace SadovodBack.Controllers
         public async void DatabaseUpdateStead(int id, [FromBody] string newSteadInfo)
         {
             //находится строка с данным уникальным id, затем в ней значение ячейке Stead заменяется на новую информацию 
-            string sqlExpression = $"UPDATE Steads Set Stead = '{newSteadInfo}' WHERE id = {id} AND GardnerID={User.Identity.Name}" ;
+            string sqlExpression = $"UPDATE Steads Set Stead = @newSteadInfo WHERE id = @id AND GardenerID=@gardenerId" ;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                var p = new List<SqlParameter>()
+                {
+                    new SqlParameter("@newSteadInfo",newSteadInfo),
+                    new SqlParameter("@id",id),
+                    new SqlParameter("@gardenerId",User.Identity.Name)
+                };
                 connection.Open();
                 SqlCommand command = new SqlCommand(sqlExpression, connection);
+                command.Parameters.AddRange(p.ToArray());
                 command.ExecuteNonQuery();
             }
         }
