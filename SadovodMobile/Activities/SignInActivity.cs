@@ -10,6 +10,7 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
@@ -17,12 +18,14 @@ using Newtonsoft.Json;
 namespace SadovodMobile.Activities
 {
     [Activity(Label = "Войдите в аккаунт", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
-    public class SignInActivity : Activity
+    public class SignInActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.SignIn);
+            Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+            SetSupportActionBar(toolbar);
 
             //Привязка кнопки входа
             FindViewById<Button>(Resource.Id.button1).Click += SignInOnClickAsync;

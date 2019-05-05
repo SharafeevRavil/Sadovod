@@ -55,7 +55,7 @@ namespace SadovodClasses
             {
                 return false;
             }
-            gardenBeds.RemoveAt(numberOfBed - 1);
+            gardenBeds.RemoveAt(numberOfBed);
             InvokeBedsChanged();
             return true;
         }

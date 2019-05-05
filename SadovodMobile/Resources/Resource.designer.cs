@@ -2411,8 +2411,8 @@ namespace SadovodMobile
 			// aapt resource value: 0x7f08005c
 			public const int action_mode_close_button = 2131230812;
 			
-			// aapt resource value: 0x7f0800f6
-			public const int action_settings = 2131230966;
+			// aapt resource value: 0x7f0800f5
+			public const int action_settings = 2131230965;
 			
 			// aapt resource value: 0x7f0800e0
 			public const int action_text = 2131230944;
@@ -2641,9 +2641,6 @@ namespace SadovodMobile
 			
 			// aapt resource value: 0x7f080059
 			public const int italic = 2131230809;
-			
-			// aapt resource value: 0x7f0800f5
-			public const int itemOneId = 2131230965;
 			
 			// aapt resource value: 0x7f080000
 			public const int item_touch_helper_previous_elevation = 2131230720;
@@ -3369,10 +3366,7 @@ namespace SadovodMobile
 		{
 			
 			// aapt resource value: 0x7f0e0000
-			public const int ContextualMenu = 2131623936;
-			
-			// aapt resource value: 0x7f0e0001
-			public const int menu_main = 2131623937;
+			public const int menu_main = 2131623936;
 			
 			static Menu()
 			{

@@ -7,20 +7,23 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using SadovodClasses;
 
 namespace SadovodMobile.Activities
 {
-    [Activity(Label = "AddSteadActivity")]
-    public class AddSteadActivity : Activity
+    [Activity(Label = "Добавить участок", Theme = "@style/AppTheme.NoActionBar")]
+    public class AddSteadActivity : AppCompatActivity
     {
         private EditText text;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.AddStead);
+            Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+            SetSupportActionBar(toolbar);
 
             //Привязка кнопки добавления участка
             FindViewById<Button>(Resource.Id.button1).Click += AddSteadAction;

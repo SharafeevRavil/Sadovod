@@ -7,6 +7,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
@@ -14,8 +15,8 @@ using SadovodClasses;
 
 namespace SadovodMobile.Activities
 {
-    [Activity(Label = "BedActivity")]
-    public class BedActivity : Activity
+    [Activity(Label = "Параметры грядки", Theme = "@style/AppTheme.NoActionBar")]
+    public class BedActivity : AppCompatActivity
     {
         private EditText typeName;
         private EditText sortName;
@@ -32,6 +33,8 @@ namespace SadovodMobile.Activities
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.GardenBed);
+            Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+            SetSupportActionBar(toolbar);
 
             FindViewById<Button>(Resource.Id.button1).Click += AddNoteAction;
 
@@ -91,10 +94,42 @@ namespace SadovodMobile.Activities
             mLayoutManager = new LinearLayoutManager(this);
             mRecyclerView.SetLayoutManager(mLayoutManager);
             // Plug in my adapter:
-            mAdapter = new NotesAdapter(bed.Notes);
+            mAdapter = new NotesAdapter(bed.Notes, this);
             mRecyclerView.SetAdapter(mAdapter);
             //Привязываю нажатия на элементы адаптера
             mAdapter.NoteChanged += OnNoteChanged;
+            RegisterForContextMenu(mRecyclerView);
+        }
+
+        public override void OnCreateContextMenu(IContextMenu menu, View v, IContextMenuContextMenuInfo menuInfo)
+        {
+            IMenuItem delete = menu.Add(Menu.None, 0, 0, "Удалить записку");
+            delete.SetOnMenuItemClickListener(new MenuClick(this));
+        }
+
+        public int MenuPosition { get; set; }
+        public class MenuClick : Java.Lang.Object, IMenuItemOnMenuItemClickListener
+        {
+            private BedActivity bedActivity;
+
+            public MenuClick(BedActivity bedActivity)
+            {
+                this.bedActivity = bedActivity;
+            }
+
+            public bool OnMenuItemClick(IMenuItem item)
+            {
+                switch (item.ItemId)
+                {
+                    case 0:
+                        UserSingleton.Instance.CurrentBed.DeleteNote(bedActivity.MenuPosition);
+                        bedActivity.mAdapter.NotifyDataSetChanged();
+                        UserSingleton.Instance.CurrentStead.InvokeBedsChanged();
+                        return true;
+                    default:
+                        return false;
+                }
+            }
         }
 
         private void OnNoteChanged(object sender, NotesArgs args)
@@ -131,22 +166,18 @@ namespace SadovodMobile.Activities
         {
             public event EventHandler<NotesArgs> NoteChanged;
             public List<string> Notes;
-            public NotesAdapter(List<string> notes)
-            {
-                Notes = notes;
-            }
 
             public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
             {
                 View itemView = LayoutInflater.From(parent.Context).
                             Inflate(Resource.Layout.GardenNoteView, parent, false);
-                SteadViewHolder vh = new SteadViewHolder(itemView, OnNoteChanged);
+                NoteViewHolder vh = new NoteViewHolder(itemView, OnNoteChanged, OnLongClick);
                 return vh;
             }
 
             public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
             {
-                SteadViewHolder vh = holder as SteadViewHolder;
+                NoteViewHolder vh = holder as NoteViewHolder;
                 vh.NoteName.Text = $"Записка {position}";
                 vh.Note.Text = Notes[position];
             }
@@ -160,19 +191,33 @@ namespace SadovodMobile.Activities
             {
                 NoteChanged?.Invoke(this, new NotesArgs(position, text));
             }
+
+            private BedActivity mActivity;
+            public NotesAdapter(List<string> notes, BedActivity activity)
+            {
+                Notes = notes;
+                mActivity = activity;
+            }
+            void OnLongClick(int position)
+            {
+                mActivity.MenuPosition = position;
+                mActivity.mRecyclerView.ShowContextMenu();
+            }
         }
-        public class SteadViewHolder : RecyclerView.ViewHolder
+        public class NoteViewHolder : RecyclerView.ViewHolder
         {
             public TextView NoteName { get; private set; }
             public EditText Note { get; private set; }
 
-            public SteadViewHolder(View itemView, Action<int, string> listener) : base(itemView)
+            public NoteViewHolder(View itemView, Action<int, string> listener, Action<int> longListener) : base(itemView)
             {
                 // Locate and cache view references:
                 NoteName = itemView.FindViewById<TextView>(Resource.Id.textView1);
 
                 Note = itemView.FindViewById<EditText>(Resource.Id.editText1);
                 Note.TextChanged += (sender, e) => listener(LayoutPosition, Note.Text);
+
+                itemView.FindViewById<LinearLayout>(Resource.Id.linearLayout1).LongClick += (sender, e) => longListener(LayoutPosition);
             }
         }
 

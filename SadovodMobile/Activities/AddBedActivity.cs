@@ -8,6 +8,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
@@ -15,13 +16,15 @@ using SadovodClasses;
 
 namespace SadovodMobile.Activities
 {
-    [Activity(Label = "BedActivity")]
-    public class AddBedActivity : Activity
+    [Activity(Label = "Добавить грядку", Theme = "@style/AppTheme.NoActionBar")]
+    public class AddBedActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.AddGardenBed);
+            Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+            SetSupportActionBar(toolbar);
 
             //Привязка кнопки добавления записки
             FindViewById<Button>(Resource.Id.button1).Click += AddNoteAction;
@@ -103,6 +106,37 @@ namespace SadovodMobile.Activities
             mRecyclerView.SetAdapter(mAdapter);
             //Привязываю нажатия на элементы адаптера
             mAdapter.NoteChanged += OnNoteChanged;
+            RegisterForContextMenu(mRecyclerView);
+        }
+
+        public override void OnCreateContextMenu(IContextMenu menu, View v, IContextMenuContextMenuInfo menuInfo)
+        {
+            IMenuItem delete = menu.Add(Menu.None, 0, 0, "Удалить записку");
+            delete.SetOnMenuItemClickListener(new MenuClick(this));
+        }
+
+        public int MenuPosition { get; set; }
+        public class MenuClick : Java.Lang.Object, IMenuItemOnMenuItemClickListener
+        {
+            private AddBedActivity addBedActivity;
+
+            public MenuClick(AddBedActivity addBedActivity)
+            {
+                this.addBedActivity = addBedActivity;
+            }
+
+            public bool OnMenuItemClick(IMenuItem item)
+            {
+                switch (item.ItemId)
+                {
+                    case 0:
+                        addBedActivity.bed.DeleteNote(addBedActivity.MenuPosition);
+                        addBedActivity.mAdapter.NotifyDataSetChanged();
+                        return true;
+                    default:
+                        return false;
+                }
+            }
         }
 
         private void OnNoteChanged(object sender, NotesArgs args)
@@ -181,7 +215,7 @@ namespace SadovodMobile.Activities
             {
                 View itemView = LayoutInflater.From(parent.Context).
                             Inflate(Resource.Layout.GardenNoteView, parent, false);
-                SteadViewHolder vh = new SteadViewHolder(itemView, OnNoteChanged);
+                SteadViewHolder vh = new SteadViewHolder(itemView, OnNoteChanged, OnLongClick);
                 return vh;
             }
 
@@ -201,19 +235,33 @@ namespace SadovodMobile.Activities
             {
                 NoteChanged?.Invoke(this, new NotesArgs(position, text));
             }
+
+            private AddBedActivity mActivity;
+            public NotesAdapter(List<string> notes, AddBedActivity activity)
+            {
+                Notes = notes;
+                mActivity = activity;
+            }
+            void OnLongClick(int position)
+            {
+                mActivity.MenuPosition = position;
+                mActivity.mRecyclerView.ShowContextMenu();
+            }
         }
         public class SteadViewHolder : RecyclerView.ViewHolder
         {
             public TextView NoteName { get; private set; }
             public EditText Note { get; private set; }
 
-            public SteadViewHolder(View itemView, Action<int, string> listener) : base(itemView)
+            public SteadViewHolder(View itemView, Action<int, string> listener, Action<int> longListener) : base(itemView)
             {
                 // Locate and cache view references:
                 NoteName = itemView.FindViewById<TextView>(Resource.Id.textView1);
 
                 Note = itemView.FindViewById<EditText>(Resource.Id.editText1);
                 Note.TextChanged += (sender, e) => listener(LayoutPosition, Note.Text);
+
+                itemView.FindViewById<LinearLayout>(Resource.Id.linearLayout1).LongClick += (sender, e) => longListener(LayoutPosition);
             }
         }
     }

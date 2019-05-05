@@ -108,6 +108,17 @@ namespace SadovodMobile
             SteadsChanged.Invoke(this, new EventArgs());
         }
 
+        public async void RemoveSteadAtAsync(int position)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("https://sadovodhelperexample.azurewebsites.net");
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {Token}");
+            HttpResponseMessage response = await client.DeleteAsync($"/api/database/DatabaseDeleteStead?id={databaseSteads[position].Id}");
+            databaseSteads.RemoveAt(position);
+            steads.RemoveAt(position);
+            SteadsChanged.Invoke(this, new EventArgs());
+        }
+
         public async void postStead(Stead stead)
         {
             var client = new HttpClient();

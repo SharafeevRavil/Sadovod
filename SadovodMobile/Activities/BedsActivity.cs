@@ -8,6 +8,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
@@ -16,13 +17,15 @@ using SadovodClasses;
 
 namespace SadovodMobile.Activities
 {
-    [Activity(Label = "GardenBedsActivity")]
-    public class BedsActivity : Activity
+    [Activity(Label = "Мои грядки", Theme = "@style/AppTheme.NoActionBar")]
+    public class BedsActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.GardenBeds);
+            Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+            SetSupportActionBar(toolbar);
 
             //Привязка кнопки добавления грядки
             FindViewById<Button>(Resource.Id.button1).Click += AddBedAction;
@@ -56,14 +59,38 @@ namespace SadovodMobile.Activities
             mAdapter.WeedClick += OnWeedClick;
             mAdapter.PileUpClick += OnPileUpClick;
             mAdapter.FertilizeClick += OnFertilizeClick;
-            //mAdapter.LongClick += OnLongClick;
+
             UserSingleton.Instance.CurrentStead.BedsChanged += OnCollectionChanged;
+            RegisterForContextMenu(mRecyclerView);
         }
 
-        //Длинное нажатие
-        public void OnLongClick(object sender, int position)
+        public override void OnCreateContextMenu(IContextMenu menu, View v, IContextMenuContextMenuInfo menuInfo)
         {
+            IMenuItem delete = menu.Add(Menu.None, 0, 0, "Удалить грядку");
+            delete.SetOnMenuItemClickListener(new MenuClick(this));
+        }
 
+        public int MenuPosition { get; set; }
+        public class MenuClick : Java.Lang.Object, IMenuItemOnMenuItemClickListener
+        {
+            private BedsActivity bedsActivity;
+
+            public MenuClick(BedsActivity bedsActivity)
+            {
+                this.bedsActivity = bedsActivity;
+            }
+
+            public bool OnMenuItemClick(IMenuItem item)
+            {
+                switch (item.ItemId)
+                {
+                    case 0:
+                        UserSingleton.Instance.CurrentStead.RemoveBed(bedsActivity.MenuPosition);
+                        return true;
+                    default:
+                        return false;
+                }
+            }
         }
 
         //Событие изменения коллекции грядок
@@ -109,22 +136,18 @@ namespace SadovodMobile.Activities
             public event EventHandler<int> PileUpClick;
             public event EventHandler<int> FertilizeClick;
             public ReadOnlyCollection<GardenBed> Beds;
-            public BedsAdapter(ReadOnlyCollection<GardenBed> beds)
-            {
-                Beds = beds;
-            }
 
             public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
             {
                 View itemView = LayoutInflater.From(parent.Context).
                             Inflate(Resource.Layout.BedView, parent, false);
-                SteadViewHolder vh = new SteadViewHolder(itemView, OnClick, OnWaterClick, OnWeedClick, OnPileUpClick, OnFertilizeClick, OnLongClick);
+                BedViewHolder vh = new BedViewHolder(itemView, OnClick, OnWaterClick, OnWeedClick, OnPileUpClick, OnFertilizeClick, OnLongClick);
                 return vh;
             }
 
             public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
             {
-                SteadViewHolder vh = holder as SteadViewHolder;
+                BedViewHolder vh = holder as BedViewHolder;
                 vh.TypeName.Text = Beds[position].Plant.TypeName;
                 vh.SortName.Text = Beds[position].Plant.SortName;
             }
@@ -156,43 +179,26 @@ namespace SadovodMobile.Activities
                 FertilizeClick?.Invoke(this, position);
             }
 
-
-            private Activity mActivity;
-            private MyActionMode mActionMode;
-            public BedsAdapter(ReadOnlyCollection<GardenBed> beds, Activity activity)
+            private BedsActivity mActivity;
+            public BedsAdapter(ReadOnlyCollection<GardenBed> beds, BedsActivity activity)
             {
                 Beds = beds;
                 mActivity = activity;
             }
             void OnLongClick(object sender, int position)
             {
-                mActionMode = new MyActionMode(mActivity);
-                mActivity.StartActionMode(mActionMode);
-                ((View)sender).Selected = true;
+                mActivity.MenuPosition = position;
+                mActivity.mRecyclerView.ShowContextMenu();
             }
-
-            /*private Activity mActivity;
-            private MyActionMode mActionMode;
-            public BedsAdapter(ReadOnlyCollection<GardenBed> beds, Activity activity)
-            {
-                Beds = beds;
-                mActivity = activity;
-            }
-            void OnLongClick(object sender, View.LongClickEventArgs args)
-            {
-                mActionMode = new MyActionMode(mActivity);
-                mActivity.StartActionMode(mActionMode);
-                ((View)sender).Selected = true;
-                return;
-            }*/
         }
-        public class SteadViewHolder : RecyclerView.ViewHolder
+
+        public class BedViewHolder : RecyclerView.ViewHolder
         {
             public LinearLayout MainBedLayout { get; private set; }
             public TextView TypeName { get; private set; }
             public TextView SortName { get; private set; }
 
-            public SteadViewHolder(View itemView, Action<int> listener, Action<int> waterListener, Action<int> weedListener,
+            public BedViewHolder(View itemView, Action<int> listener, Action<int> waterListener, Action<int> weedListener,
                 Action<int> pileUpListener, Action<int> fertilizeListener, Action<object, int> longListener) : base(itemView)
             {
                 // Locate and cache view references:

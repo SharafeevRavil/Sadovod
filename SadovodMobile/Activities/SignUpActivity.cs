@@ -9,6 +9,7 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
@@ -16,13 +17,15 @@ using static SadovodMobile.Activities.SignInActivity;
 
 namespace SadovodMobile.Activities
 {
-    [Activity(Label = "SignUpActivity")]
-    public class SignUpActivity : Activity
+    [Activity(Label = "Зарегистрируйте аккаунт", Theme = "@style/AppTheme.NoActionBar")]
+    public class SignUpActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.SignUp);
+            Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+            SetSupportActionBar(toolbar);
 
             //Привязка кнопки регистрации
             FindViewById<Button>(Resource.Id.button1).Click += SignUpOnClickAsync;

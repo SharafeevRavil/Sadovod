@@ -8,6 +8,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
@@ -16,13 +17,15 @@ using SadovodClasses;
 
 namespace SadovodMobile.Activities
 {
-    [Activity(Label = "SteadsActivity")]
-    public class SteadsActivity : Activity
+    [Activity(Label = "Ваши участки", Theme = "@style/AppTheme.NoActionBar")]
+    public class SteadsActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Steads);
+            Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+            SetSupportActionBar(toolbar);
 
             //Привязка кнопки добавления участка
             FindViewById<Button>(Resource.Id.button1).Click += AddSteadAction;
@@ -49,12 +52,44 @@ namespace SadovodMobile.Activities
             mLayoutManager = new LinearLayoutManager(this);
             mRecyclerView.SetLayoutManager(mLayoutManager);
             // Plug in my adapter:
-            mAdapter = new SteadsAdapter(UserSingleton.Instance.Steads);
+            mAdapter = new SteadsAdapter(UserSingleton.Instance.Steads, this);
             mRecyclerView.SetAdapter(mAdapter);
             //Привязываю нажатия на элементы адаптера
             mAdapter.ItemClick += OnSteadClick;
             UserSingleton.Instance.SteadsChanged += OnCollectionChanged;
+            RegisterForContextMenu(mRecyclerView);
         }
+
+
+        public override void OnCreateContextMenu(IContextMenu menu, View v, IContextMenuContextMenuInfo menuInfo)
+        {
+            IMenuItem delete = menu.Add(Menu.None, 0, 0, "Удалить участок");
+            delete.SetOnMenuItemClickListener(new MenuClick(this));
+        }
+
+        public int MenuPosition { get; set; }
+        public class MenuClick : Java.Lang.Object, IMenuItemOnMenuItemClickListener
+        {
+            private SteadsActivity steadsActivity;
+
+            public MenuClick(SteadsActivity steadsActivity)
+            {
+                this.steadsActivity = steadsActivity;
+            }
+
+            public bool OnMenuItemClick(IMenuItem item)
+            {
+                switch (item.ItemId)
+                {
+                    case 0:
+                        UserSingleton.Instance.RemoveSteadAtAsync(steadsActivity.MenuPosition);
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        }
+
         //Событие изменения коллекции участков
         public void OnCollectionChanged(object sender, EventArgs eventArgs)
         {
@@ -74,16 +109,12 @@ namespace SadovodMobile.Activities
         {
             public event EventHandler<int> ItemClick;
             public ReadOnlyCollection<Stead> Steads;
-            public SteadsAdapter(ReadOnlyCollection<Stead> steads)
-            {
-                Steads = steads;
-            }
 
             public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
             {
                 View itemView = LayoutInflater.From(parent.Context).
                             Inflate(Resource.Layout.SteadView, parent, false);
-                SteadViewHolder vh = new SteadViewHolder(itemView, OnClick);
+                SteadViewHolder vh = new SteadViewHolder(itemView, OnClick, OnLongClick);
                 return vh;
             }
 
@@ -102,16 +133,29 @@ namespace SadovodMobile.Activities
             {
                 ItemClick?.Invoke(this, position);
             }
+
+            private SteadsActivity mActivity;
+            public SteadsAdapter(ReadOnlyCollection<Stead> steads, SteadsActivity activity)
+            {
+                Steads = steads;
+                mActivity = activity;
+            }
+            void OnLongClick(int position)
+            {
+                mActivity.MenuPosition = position;
+                mActivity.mRecyclerView.ShowContextMenu();
+            }
         }
         public class SteadViewHolder : RecyclerView.ViewHolder
         {
             public Button Button { get; private set; }
 
-            public SteadViewHolder(View itemView, Action<int> listener) : base(itemView)
+            public SteadViewHolder(View itemView, Action<int> listener, Action<int> longListener) : base(itemView)
             {
                 // Locate and cache view references:
                 Button = itemView.FindViewById<Button>(Resource.Id.button);
-                Button.Click += (sender, e) => listener(base.LayoutPosition);
+                Button.Click += (sender, e) => listener(LayoutPosition);
+                Button.LongClick += (sender, e) => longListener(LayoutPosition);
             }
         }
     }
