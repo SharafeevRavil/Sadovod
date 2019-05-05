@@ -14,6 +14,7 @@ using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
 using SadovodClasses;
+using Xamarin.Essentials;
 
 namespace SadovodMobile
 {
@@ -49,6 +50,7 @@ namespace SadovodMobile
             set
             {
                 token = value;
+                Preferences.Set("token", token);
                 GetAllSteads();
             }
         }
@@ -58,9 +60,14 @@ namespace SadovodMobile
             var client = new HttpClient();
             client.BaseAddress = new Uri("https://sadovodhelperexample.azurewebsites.net");
             client.DefaultRequestHeaders.Add("Authorization", $"Bearer {Token}");
-            HttpResponseMessage response = await client.GetAsync("/api/database/DatabaseGetByGardenerID");
-            string mySteads = await response.Content.ReadAsStringAsync();
+            HttpResponseMessage response = client.GetAsync("/api/database/DatabaseGetByGardenerID").Result;
+            string mySteads = response.Content.ReadAsStringAsync().Result;
             var a = JsonConvert.DeserializeObject<List<DatabaseStead>>(mySteads);
+
+            databaseSteads = new List<DatabaseStead>();
+            steads = new List<Stead>();
+            currentBed = null;
+            currentStead = null;
 
             foreach (var b in a)
             {
@@ -68,7 +75,7 @@ namespace SadovodMobile
                 steads.Add(b.Stead);
                 b.Stead.BedsChanged += UpdateSteadAsync;
             }
-            SteadsChanged.Invoke(this, new EventArgs());
+            SteadsChanged?.Invoke(this, new EventArgs());
         }
 
         public UserSingleton()
@@ -113,7 +120,7 @@ namespace SadovodMobile
             var client = new HttpClient();
             client.BaseAddress = new Uri("https://sadovodhelperexample.azurewebsites.net");
             client.DefaultRequestHeaders.Add("Authorization", $"Bearer {Token}");
-            HttpResponseMessage response = await client.DeleteAsync($"/api/database/DatabaseDeleteStead?id={databaseSteads[position].Id}");
+            HttpResponseMessage response = client.DeleteAsync($"/api/database/DatabaseDeleteStead?id={databaseSteads[position].Id}").Result;
             databaseSteads.RemoveAt(position);
             steads.RemoveAt(position);
             SteadsChanged.Invoke(this, new EventArgs());

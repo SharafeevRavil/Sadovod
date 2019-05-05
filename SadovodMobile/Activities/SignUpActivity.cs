@@ -80,7 +80,7 @@ namespace SadovodMobile.Activities
             string email = FindViewById<EditText>(Resource.Id.editText2).Text;
             string pass1 = FindViewById<EditText>(Resource.Id.editText3).Text;
             string pass2 = FindViewById<EditText>(Resource.Id.editText4).Text;
-            
+
             if (!CheckSignUpData(sender, login, email, pass1, pass2))
             {
                 return;
@@ -98,14 +98,15 @@ namespace SadovodMobile.Activities
             UserDto dto1 = new UserDto() { Username = login, Password = pass1 };
             string json1 = $"'{JsonConvert.SerializeObject(dto1)}'";
             var content2 = new StringContent(json1, Encoding.UTF8, "application/json");
-            HttpResponseMessage response1 = await client.PostAsync("/api/signup/Register", content2);
+            HttpResponseMessage response1 = client.PostAsync("/api/signup/Register", content2).Result;
 
-            if(response1.StatusCode == System.Net.HttpStatusCode.OK){
+            if (response1.StatusCode == System.Net.HttpStatusCode.OK)
+            {
                 UserDto dto = new UserDto() { Username = login, Password = pass1 };
                 string json = $"'{JsonConvert.SerializeObject(dto)}'";
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await client.PostAsync("/api/signup/Authenticate", content);
-                var token = await response.Content.ReadAsStringAsync();
+                HttpResponseMessage response = client.PostAsync("/api/signup/Authenticate", content).Result;
+                var token = response.Content.ReadAsStringAsync().Result;
                 UserSingleton.Instance.Token = token;
                 //Переключаю на экран участков
                 Intent intent = new Intent(this, typeof(SteadsActivity));

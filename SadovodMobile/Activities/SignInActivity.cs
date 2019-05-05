@@ -17,7 +17,7 @@ using Newtonsoft.Json;
 
 namespace SadovodMobile.Activities
 {
-    [Activity(Label = "Войдите в аккаунт", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
+    [Activity(Label = "Войдите в аккаунт", Theme = "@style/AppTheme.NoActionBar")]
     public class SignInActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -75,12 +75,12 @@ namespace SadovodMobile.Activities
             UserDto dto = new UserDto() { Username = username, Password = password };
             string json = $"'{JsonConvert.SerializeObject(dto)}'";
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync("/api/signup/Authenticate", content);
+            HttpResponseMessage response = client.PostAsync("/api/signup/Authenticate", content).Result;
             //HttpResponseMessage response1 = await client.GetAsync("/api/database/DatabaseGetByGardenerID?id=5");
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                var token = await response.Content.ReadAsStringAsync();
+                var token = response.Content.ReadAsStringAsync().Result;
                 UserSingleton.Instance.Token = token;
                 
                 //Переключаю на экран участков
