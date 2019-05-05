@@ -76,7 +76,7 @@ namespace SadovodBack.Controllers
         {
             //после get запроса у нас будут все данные по грядкам садовода
             //если пользователь захочет удалить какую-то грядку, то она удалится по своему уникальному id
-            string sqlExpression = $"DELETE  FROM Steads WHERE id={id}";
+            string sqlExpression = $"DELETE  FROM Steads WHERE id={id} AND GardenerID={User.Identity.Name}";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
