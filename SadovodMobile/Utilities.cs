@@ -68,17 +68,17 @@ namespace SadovodMobile
             int cur = 0;
             int start = -1;
             int count = 0;
-            while (cur<input.Length)
+            while (cur < input.Length)
             {
                 if (input[cur] == '{')
                 {
                     start = cur;
                     count++;
                 }
-                if(input[cur] == '}')
+                if (input[cur] == '}')
                 {
                     count--;
-                    if(count == 0)
+                    if (count == 0)
                     {
                         myString.Add(input.Substring(start, cur - start + 1));
                     }
@@ -97,7 +97,7 @@ namespace SadovodMobile
         {
             return symb >= 'a' && symb <= 'z' || symb >= 'A' && symb <= 'Z';
         }
-        
+
         public static DateTime DateTimeFormat(string input)
         {
             try
@@ -113,6 +113,12 @@ namespace SadovodMobile
             {
                 return DateTime.Now;
             }
+        }
+
+        public static bool CheckActionNeed(DateTime last, DateTime now, int period)
+        {
+            var delta = (now.Date - last.Date).TotalDays;
+            return delta >= period;
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.App;
@@ -133,21 +134,25 @@ namespace SadovodMobile.Activities
         private void OnWaterClick(object sender, int position)
         {
             UserSingleton.Instance.CurrentStead.GardenBeds[position].WaterDate = DateTime.Now;
+            UserSingleton.Instance.CurrentStead.InvokeBedsChanged();
         }
         //Событие нажатия на прополку
         private void OnWeedClick(object sender, int position)
         {
             UserSingleton.Instance.CurrentStead.GardenBeds[position].WeedDate = DateTime.Now;
+            UserSingleton.Instance.CurrentStead.InvokeBedsChanged();
         }
         //Событие нажатия на окучивание
         private void OnPileUpClick(object sender, int position)
         {
             UserSingleton.Instance.CurrentStead.GardenBeds[position].PileUpDate = DateTime.Now;
+            UserSingleton.Instance.CurrentStead.InvokeBedsChanged();
         }
         //Событие нажатия на удобрение
         private void OnFertilizeClick(object sender, int position)
         {
             UserSingleton.Instance.CurrentStead.GardenBeds[position].FertilizeDate = DateTime.Now;
+            UserSingleton.Instance.CurrentStead.InvokeBedsChanged();
         }
 
         public class BedsAdapter : RecyclerView.Adapter
@@ -172,6 +177,21 @@ namespace SadovodMobile.Activities
                 BedViewHolder vh = holder as BedViewHolder;
                 vh.TypeName.Text = Beds[position].Plant.TypeName;
                 vh.SortName.Text = Beds[position].Plant.SortName;
+
+                Color falseColor = Color.OrangeRed;
+                Color trueColor = new Color(0x8B, 0xC3, 0x4A);
+                vh.Button1.SetColorFilter(new PorterDuffColorFilter(
+                    Utilities.CheckActionNeed(Beds[position].WaterDate, DateTime.Now, Beds[position].WaterPeriod) ? falseColor : trueColor,
+                    PorterDuff.Mode.DstAtop));
+                vh.Button2.SetColorFilter(new PorterDuffColorFilter(
+                    Utilities.CheckActionNeed(Beds[position].WeedDate, DateTime.Now, Beds[position].WeedPeriod) ? falseColor : trueColor,
+                    PorterDuff.Mode.DstAtop));
+                vh.Button3.SetColorFilter(new PorterDuffColorFilter(
+                    Utilities.CheckActionNeed(Beds[position].PileUpDate, DateTime.Now, Beds[position].PileUpPeriod) ? falseColor : trueColor,
+                    PorterDuff.Mode.DstAtop));
+                vh.Button4.SetColorFilter(new PorterDuffColorFilter(
+                    Utilities.CheckActionNeed(Beds[position].FertilizeDate, DateTime.Now, Beds[position].FertilizePeriod) ? falseColor : trueColor,
+                    PorterDuff.Mode.DstAtop));
             }
 
             public override int ItemCount
@@ -220,6 +240,11 @@ namespace SadovodMobile.Activities
             public TextView TypeName { get; private set; }
             public TextView SortName { get; private set; }
 
+            public ImageButton Button1 { get; private set; }
+            public ImageButton Button2 { get; private set; }
+            public ImageButton Button3 { get; private set; }
+            public ImageButton Button4 { get; private set; }
+
             public BedViewHolder(View itemView, Action<int> listener, Action<int> waterListener, Action<int> weedListener,
                 Action<int> pileUpListener, Action<int> fertilizeListener, Action<object, int> longListener) : base(itemView)
             {
@@ -231,10 +256,15 @@ namespace SadovodMobile.Activities
                 TypeName = itemView.FindViewById<TextView>(Resource.Id.textView1);
                 SortName = itemView.FindViewById<TextView>(Resource.Id.textView2);
 
-                itemView.FindViewById<ImageButton>(Resource.Id.imageButton1).Click += (sender, r) => waterListener(LayoutPosition);
-                itemView.FindViewById<ImageButton>(Resource.Id.imageButton2).Click += (sender, r) => weedListener(LayoutPosition);
-                itemView.FindViewById<ImageButton>(Resource.Id.imageButton3).Click += (sender, r) => pileUpListener(LayoutPosition);
-                itemView.FindViewById<ImageButton>(Resource.Id.imageButton4).Click += (sender, r) => fertilizeListener(LayoutPosition);
+                Button1 = itemView.FindViewById<ImageButton>(Resource.Id.imageButton1);
+                Button2 = itemView.FindViewById<ImageButton>(Resource.Id.imageButton2);
+                Button3 = itemView.FindViewById<ImageButton>(Resource.Id.imageButton3);
+                Button4 = itemView.FindViewById<ImageButton>(Resource.Id.imageButton4);
+
+                Button1.Click += (sender, r) => waterListener(LayoutPosition);
+                Button2.Click += (sender, r) => weedListener(LayoutPosition);
+                Button3.Click += (sender, r) => pileUpListener(LayoutPosition);
+                Button4.Click += (sender, r) => fertilizeListener(LayoutPosition);
             }
         }
     }
