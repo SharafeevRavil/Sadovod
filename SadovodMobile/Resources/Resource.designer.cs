@@ -2417,9 +2417,6 @@ namespace SadovodMobile
 			// aapt resource value: 0x7f08005c
 			public const int action_mode_close_button = 2131230812;
 			
-			// aapt resource value: 0x7f0800f5
-			public const int action_settings = 2131230965;
-			
 			// aapt resource value: 0x7f0800e0
 			public const int action_text = 2131230944;
 			
@@ -2677,6 +2674,9 @@ namespace SadovodMobile
 			
 			// aapt resource value: 0x7f080061
 			public const int list_item = 2131230817;
+			
+			// aapt resource value: 0x7f0800f5
+			public const int logOut = 2131230965;
 			
 			// aapt resource value: 0x7f0800f4
 			public const int masked = 2131230964;
@@ -3391,10 +3391,7 @@ namespace SadovodMobile
 			public const int ic_launcher = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int ic_launcher_foreground = 2130903041;
-			
-			// aapt resource value: 0x7f030002
-			public const int ic_launcher_round = 2130903042;
+			public const int ic_launcher_round = 2130903041;
 			
 			static Mipmap()
 			{

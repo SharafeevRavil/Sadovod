@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SadovodMobile</string>
+    <string name="app_name">Помидорка</string>
     <string name="action_settings">Settings</string>
     <string name="signin_username">Имя пользователя</string>
     <string name="signin_password">Пароль</string>

@@ -27,7 +27,7 @@ namespace SadovodMobile.Activities
             //fab.Click += FabOnClick;
         }
 
-        public override bool OnCreateOptionsMenu(IMenu menu)
+        /*public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.menu_main, menu);
             return true;
@@ -42,7 +42,7 @@ namespace SadovodMobile.Activities
             }
 
             return base.OnOptionsItemSelected(item);
-        }
+        }*/
 
         private void FabOnClick(object sender, EventArgs eventArgs)
         {

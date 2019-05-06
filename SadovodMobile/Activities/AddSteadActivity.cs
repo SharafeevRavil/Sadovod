@@ -31,6 +31,28 @@ namespace SadovodMobile.Activities
             text = FindViewById<EditText>(Resource.Id.editText1);
         }
 
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.menu_main, menu);
+            return true;
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            int id = item.ItemId;
+            if (id == Resource.Id.logOut)
+            {
+                UserSingleton.Instance.LogOut();
+                Intent intent = new Intent(this, typeof(SignInActivity));
+                FinishAffinity();
+                StartActivity(intent);
+                return true;
+            }
+
+            return base.OnOptionsItemSelected(item);
+        }
+
+
         public void AddSteadAction(object sender, EventArgs eventArgs)
         {
             string name = text.Text;

@@ -27,7 +27,7 @@ namespace SadovodMobile
             {
                 if (instance == null)
                 {
-                    Instance = new UserSingleton();
+                    instance = new UserSingleton();
                 }
                 return instance;
             }
@@ -64,10 +64,7 @@ namespace SadovodMobile
             string mySteads = response.Content.ReadAsStringAsync().Result;
             var a = JsonConvert.DeserializeObject<List<DatabaseStead>>(mySteads);
 
-            databaseSteads = new List<DatabaseStead>();
-            steads = new List<Stead>();
-            currentBed = null;
-            currentStead = null;
+            Clear();
 
             foreach (var b in a)
             {
@@ -83,6 +80,21 @@ namespace SadovodMobile
             //FIXME:: делать загрузку информации о юзере с бека
             steads = new List<Stead>();
             databaseSteads = new List<DatabaseStead>();
+        }
+
+        public void LogOut()
+        {
+            token = null;
+            Preferences.Remove("token");
+            Clear();
+        }
+
+        private void Clear()
+        {
+            steads.Clear();
+            databaseSteads.Clear();
+            currentBed = null;
+            currentStead = null;
         }
 
         public async void UpdateSteadAsync(object sender, EventArgs args)
