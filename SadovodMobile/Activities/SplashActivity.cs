@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -33,6 +33,7 @@ namespace SadovodMobile.Activities
         // Simulates background work that happens behind the splash screen
         async void SimulateStartup()
         {
+            StartService(new Android.Content.Intent(this, typeof(MyService)));
             //await Task.Delay(2000); // Simulate a bit of startup work.
             RunOnUiThread(() =>
             {
