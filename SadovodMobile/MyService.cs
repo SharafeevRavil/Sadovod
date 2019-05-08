@@ -31,19 +31,19 @@ namespace SadovodMobile
             {
                 Log.Debug("ZHOPA", "Debug service");
                 Notification();
-                Parse();
-            }, null, 0, 2000);
+                //Parse();
+            }, null, 0, 10000);
         }
 
         private void Notification()
         {
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "25")
-                .SetContentTitle("Sample Notification")
-                .SetContentText("Hello World! This is my first notification!");
-            Notification notification = builder.Build();
-            NotificationManager manager = GetSystemService(Context.NotificationService) as NotificationManager;
-            const int id = 0;
-            manager.Notify(id, notification);
+            Notification.Builder notificationBuilder = new Notification.Builder(this)
+            .SetSmallIcon(Resource.Drawable.Splash)
+            .SetContentTitle("Уведомление блять")
+            .SetContentText(DateTime.Now.ToString());
+
+            var notificationManager = (NotificationManager)GetSystemService(NotificationService);
+            notificationManager.Notify(41441, notificationBuilder.Build());
         }
 
         public static void Parse()
