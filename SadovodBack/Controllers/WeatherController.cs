@@ -81,7 +81,7 @@ namespace SadovodBack.Controllers
                 {"heavy intensity shower rain ","интенсивный проливной дождь" },
                 {"ragged shower rain","рваный дождь"}
             };
-            var url = string.Format("http://api.openweathermap.org/data/2.5/forecast/hourly?lat={0}&lon={1}&appid=20a742a2d44a20b0e9a9fecfa38609b9",lat,lon);
+            var url = string.Format("http://api.openweathermap.org/data/2.5/forecast/hourly?q=London&appid=20a742a2d44a20b0e9a9fecfa38609b9",lat,lon);
             WebRequest request = WebRequest.Create(url);
             WebResponse response = request.GetResponse();
             string answer = string.Empty;

@@ -30,17 +30,24 @@ namespace SadovodMobile
             timerData = new Timer((x) =>
             {
                 Log.Debug("ZHOPA", "Debug service");
-                Notification();
-                //Parse();
+                
+                SendNotification();
             }, null, 0, 10000);
         }
-
-        private void Notification()
+        
+        private void SendNotification()
         {
+            Intent resultIntent = new Intent(this, typeof(Activities.NotificationActivity));
+PendingIntent resultPendingIntent = PendingIntent.GetActivity(this, 0, resultIntent,
+               PendingIntentFlags.UpdateCurrent);
+        var info = Utilities.GetSteadsNotificationText();
             Notification.Builder notificationBuilder = new Notification.Builder(this)
             .SetSmallIcon(Resource.Drawable.Splash)
-            .SetContentTitle("Уведомление блять")
-            .SetContentText(DateTime.Now.ToString());
+            .SetContentTitle("Задачи на сегодня:")
+            .SetStyle(new Notification.BigTextStyle()
+                .BigText(info))
+            .SetContentText(info)
+            .SetContentIntent(resultPendingIntent);
 
             var notificationManager = (NotificationManager)GetSystemService(NotificationService);
             notificationManager.Notify(41441, notificationBuilder.Build());
