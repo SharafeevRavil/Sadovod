@@ -29,6 +29,7 @@ namespace SadovodMobile.Activities
         }
         public override void OnBackPressed()
         {
+            var intent = new Intent();
             string token = Preferences.Get("token", null);
             if (token != null)
             {
@@ -39,18 +40,24 @@ namespace SadovodMobile.Activities
                 HttpResponseMessage response = client.GetAsync("/api/signup/getlogin").Result;
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    var intent = new Intent(this, typeof(SteadsActivity));
-                    StartActivity(intent);
-                    Finish();
-                }
-                else
-                {
-                    var intent = new Intent(this, typeof(SignInActivity));
-                    StartActivity(intent);
-                    FinishAffinity();
+                    intent = new Intent(this, typeof(SteadsActivity));
                 }
                 
+                else
+                {
+                    intent = new Intent(this, typeof(SignInActivity));
+                }
+                intent.SetFlags(ActivityFlags.NewTask | ActivityFlags.ClearTask);
+                StartActivity(intent);
+                FinishAffinity();
             }
+            else
+            {
+                intent = new Intent(this, typeof(SignInActivity));
+            }
+            intent.SetFlags(ActivityFlags.NewTask | ActivityFlags.ClearTask);
+            StartActivity(intent);
+            FinishAffinity();
         }
     }
 }
