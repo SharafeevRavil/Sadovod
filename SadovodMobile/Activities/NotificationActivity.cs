@@ -31,18 +31,28 @@ namespace SadovodMobile.Activities
         {
             var intent = new Intent();
             string token = Preferences.Get("token", null);
-            if (token != null)
+            try
             {
-                //если есть токен, проверяю его валидность через getlogin
-                var client = new HttpClient();
-                client.BaseAddress = new Uri("https://sadovodhelperexample.azurewebsites.net");
-                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
-                HttpResponseMessage response = client.GetAsync("/api/signup/getlogin").Result;
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                if (token != null)
                 {
-                    intent = new Intent(this, typeof(SteadsActivity));
+                    //если есть токен, проверяю его валидность через getlogin
+                    var client = new HttpClient();
+                    client.BaseAddress = new Uri("https://sadovodhelperexample.azurewebsites.net");
+                    client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+                    HttpResponseMessage response = client.GetAsync("/api/signup/getlogin").Result;
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        intent = new Intent(this, typeof(SteadsActivity));
+                    }
+
+                    else
+                    {
+                        intent = new Intent(this, typeof(SignInActivity));
+                    }
+                    intent.SetFlags(ActivityFlags.NewTask | ActivityFlags.ClearTask);
+                    StartActivity(intent);
+                    FinishAffinity();
                 }
-                
                 else
                 {
                     intent = new Intent(this, typeof(SignInActivity));
@@ -51,13 +61,14 @@ namespace SadovodMobile.Activities
                 StartActivity(intent);
                 FinishAffinity();
             }
-            else
+            catch
             {
                 intent = new Intent(this, typeof(SignInActivity));
+                intent.SetFlags(ActivityFlags.NewTask | ActivityFlags.ClearTask);
+                StartActivity(intent);
+                FinishAffinity();
             }
-            intent.SetFlags(ActivityFlags.NewTask | ActivityFlags.ClearTask);
-            StartActivity(intent);
-            FinishAffinity();
+           
         }
     }
 }

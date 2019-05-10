@@ -131,7 +131,7 @@ namespace SadovodMobile
             using (var reader = new StreamReader(backingFile, true))
             {
                 string line;
-                while ((line = await reader.ReadLineAsync()) != null)
+                while ((line = reader.ReadLine()) != null)
                 {
                     steads = JsonConvert.DeserializeObject<List<Stead>>(line);
                 }
@@ -164,6 +164,7 @@ namespace SadovodMobile
             HttpResponseMessage response = client.DeleteAsync($"/api/database/DatabaseDeleteStead?id={databaseSteads[position].Id}").Result;
             databaseSteads.RemoveAt(position);
             steads.RemoveAt(position);
+            SaveSteadsInfoAsync();
             SteadsChanged.Invoke(this, new EventArgs());
         }
 
@@ -181,6 +182,7 @@ namespace SadovodMobile
                 int globalId = int.Parse(await response.Content.ReadAsStringAsync());
                 databaseSteads.Add(new DatabaseStead() { Id = globalId, Stead = stead });
             }
+            SaveSteadsInfoAsync();
         }
 
         public event EventHandler SteadsChanged;

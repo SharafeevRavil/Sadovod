@@ -48,112 +48,101 @@ namespace SadovodMobile
         {
             string token = Preferences.Get("token", null);
             var steads = new List<Stead>();
-            if (token != null)
+            try
             {
-                //если есть токен, проверяю его валидность через getlogin
-                var client = new HttpClient();
-                client.BaseAddress = new Uri("https://sadovodhelperexample.azurewebsites.net");
-                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
-                HttpResponseMessage response = client.GetAsync("/api/signup/getlogin").Result;
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                if (token != null)
                 {
-                    HttpResponseMessage response1 = client.GetAsync("/api/database/DatabaseGetByGardenerID").Result;
-                    string mySteads = response1.Content.ReadAsStringAsync().Result;
-                    var a = JsonConvert.DeserializeObject<List<DatabaseStead>>(mySteads);
-                    foreach (var b in a)
+                    //если есть токен, проверяю его валидность через getlogin
+                    var client = new HttpClient();
+                    client.BaseAddress = new Uri("https://sadovodhelperexample.azurewebsites.net");
+                    client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+                    HttpResponseMessage response = client.GetAsync("/api/signup/getlogin").Result;
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        steads.Add(b.Stead);
+                        HttpResponseMessage response1 = client.GetAsync("/api/database/DatabaseGetByGardenerID").Result;
+                        string mySteads = response1.Content.ReadAsStringAsync().Result;
+                        var a = JsonConvert.DeserializeObject<List<DatabaseStead>>(mySteads);
+                        foreach (var b in a)
+                        {
+                            steads.Add(b.Stead);
+                        }
+                    }
+                    else
+                    {
+                        steads = UserSingleton.Instance.ReadSteadsAsync().Result;
                     }
                 }
                 else
                 {
                     steads = UserSingleton.Instance.ReadSteadsAsync().Result;
                 }
+                var result = new StringBuilder();
+                foreach (var stead in steads)
+                {
+                    var curSteadInfo = new StringBuilder();
+                    foreach (var gardenBed in stead.GardenBeds)
+                    {
+                        if (Math.Abs(gardenBed.WaterDate.DayOfYear - DateTime.Now.DayOfYear) >= gardenBed.WaterPeriod)
+                        {
+                            curSteadInfo.Append($"Полить {gardenBed.Plant.TypeName} {gardenBed.Plant.SortName}\n");
+                        }
+                        if (Math.Abs(gardenBed.WeedDate.DayOfYear - DateTime.Now.DayOfYear) >= gardenBed.WeedPeriod)
+                        {
+                            curSteadInfo.Append($"Прополоть {gardenBed.Plant.TypeName} {gardenBed.Plant.SortName}\n");
+                        }
+                        if (Math.Abs(gardenBed.FertilizeDate.DayOfYear - DateTime.Now.DayOfYear) >= gardenBed.FertilizePeriod)
+                        {
+                            curSteadInfo.Append($"Удобрить {gardenBed.Plant.TypeName} {gardenBed.Plant.SortName}\n");
+                        }
+                        if (Math.Abs(gardenBed.PileUpDate.DayOfYear - DateTime.Now.DayOfYear) >= gardenBed.PileUpPeriod)
+                        {
+                            curSteadInfo.Append($"Полить {gardenBed.Plant.TypeName} {gardenBed.Plant.SortName}\n");
+                        }
+                    }
+                    if (curSteadInfo.Length == 0)
+                    {
+                        continue;
+                    }
+                    result.Append($"Для {stead.Name}:\n{curSteadInfo.ToString()}");
+                }
+                return result.ToString();
             }
-            else
+            catch
             {
                 steads = UserSingleton.Instance.ReadSteadsAsync().Result;
-            }
-            var result = new StringBuilder();
-            foreach (var stead in steads)
-            {
-                var curSteadInfo = new StringBuilder();
-                foreach (var gardenBed in stead.GardenBeds)
+                var result = new StringBuilder();
+                foreach (var stead in steads)
                 {
-                    if (Math.Abs(gardenBed.WaterDate.DayOfYear - DateTime.Now.DayOfYear) >= gardenBed.WaterPeriod)
+                    var curSteadInfo = new StringBuilder();
+                    foreach (var gardenBed in stead.GardenBeds)
                     {
-                        curSteadInfo.Append($"Полить {gardenBed.Plant.TypeName} {gardenBed.Plant.SortName}\n");
+                        if (Math.Abs(gardenBed.WaterDate.DayOfYear - DateTime.Now.DayOfYear) >= gardenBed.WaterPeriod)
+                        {
+                            curSteadInfo.Append($"Полить {gardenBed.Plant.TypeName} {gardenBed.Plant.SortName}\n");
+                        }
+                        if (Math.Abs(gardenBed.WeedDate.DayOfYear - DateTime.Now.DayOfYear) >= gardenBed.WeedPeriod)
+                        {
+                            curSteadInfo.Append($"Прополоть {gardenBed.Plant.TypeName} {gardenBed.Plant.SortName}\n");
+                        }
+                        if (Math.Abs(gardenBed.FertilizeDate.DayOfYear - DateTime.Now.DayOfYear) >= gardenBed.FertilizePeriod)
+                        {
+                            curSteadInfo.Append($"Удобрить {gardenBed.Plant.TypeName} {gardenBed.Plant.SortName}\n");
+                        }
+                        if (Math.Abs(gardenBed.PileUpDate.DayOfYear - DateTime.Now.DayOfYear) >= gardenBed.PileUpPeriod)
+                        {
+                            curSteadInfo.Append($"Полить {gardenBed.Plant.TypeName} {gardenBed.Plant.SortName}\n");
+                        }
                     }
-                    if (Math.Abs(gardenBed.WeedDate.DayOfYear - DateTime.Now.DayOfYear) >= gardenBed.WeedPeriod)
+                    if (curSteadInfo.Length == 0)
                     {
-                        curSteadInfo.Append($"Прополоть {gardenBed.Plant.TypeName} {gardenBed.Plant.SortName}\n");
+                        continue;
                     }
-                    if (Math.Abs(gardenBed.FertilizeDate.DayOfYear - DateTime.Now.DayOfYear) >= gardenBed.FertilizePeriod)
-                    {
-                        curSteadInfo.Append($"Удобрить {gardenBed.Plant.TypeName} {gardenBed.Plant.SortName}\n");
-                    }
-                    if (Math.Abs(gardenBed.PileUpDate.DayOfYear - DateTime.Now.DayOfYear) >= gardenBed.PileUpPeriod)
-                    {
-                        curSteadInfo.Append($"Полить {gardenBed.Plant.TypeName} {gardenBed.Plant.SortName}\n");
-                    }
+                    result.Append($"Для {stead.Name}:\n{curSteadInfo.ToString()}");
                 }
-                if (curSteadInfo.Length==0)
-                {
-                    continue;
-                }
-                result.Append($"Для {stead.Name}:\n{curSteadInfo.ToString()}");
-            }
-            return result.ToString();
+                return result.ToString();
+            }                
         }
-        public static string Parse(string stead)
-        {
-            var g = stead.Split(',');
-            var r = new StringBuilder();
-            var l = stead.Where(v => v != '\\').ToList();
-            var flag = false;
-            for (var i = 0; i < l.Count(); i++)
-            {
-                if (l[i] == '{')
-                {
-                    flag = true;
-
-
-                }
-                if (flag)
-                {
-                    r.Append(l[i]);
-                    if (l[i] == '}')
-                        break;
-                }
-            }
-            return r.ToString();
-        }
-        public static List<string> GetMagic(string input)
-        {
-            List<string> myString = new List<string>();
-            int cur = 0;
-            int start = -1;
-            int count = 0;
-            while (cur < input.Length)
-            {
-                if (input[cur] == '{')
-                {
-                    start = cur;
-                    count++;
-                }
-                if (input[cur] == '}')
-                {
-                    count--;
-                    if (count == 0)
-                    {
-                        myString.Add(input.Substring(start, cur - start + 1));
-                    }
-                }
-                cur++;
-            }
-            return myString;
-        }
-
+        
         public static bool IsNumber(char symb)
         {
             return symb >= '0' && symb <= '9';

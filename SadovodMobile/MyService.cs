@@ -32,7 +32,7 @@ namespace SadovodMobile
                 Log.Debug("ZHOPA", "Debug service");
                 
                 SendNotification();
-            }, null, 0, 10000);
+            }, null, 0, 1100000000);
         }
         
         private void SendNotification()
