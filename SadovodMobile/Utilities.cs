@@ -22,9 +22,7 @@ namespace SadovodMobile
         public static void ShowMessage(object sender, string message)
         {
             View view = (View)sender;
-            Snackbar
-                .Make(view, message, Snackbar.LengthLong)
-                .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
+            Toast.MakeText(view.Context, message, ToastLength.Short).Show();
         }
 
         public static bool IsFromLatinOrNums(string login)

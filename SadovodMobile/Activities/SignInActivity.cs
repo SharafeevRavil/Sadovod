@@ -90,10 +90,7 @@ namespace SadovodMobile.Activities
             }
             else
             {
-                View view = (View)sender;
-                Snackbar
-                    .Make(view, "Неправильные данные входа", Snackbar.LengthLong)
-                    .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
+                Utilities.ShowMessage(sender,"Неправильные данные входа");
             }
         }
         //нажатие на кнопку регистрации
