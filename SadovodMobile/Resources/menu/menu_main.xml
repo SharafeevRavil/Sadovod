@@ -8,7 +8,17 @@
       app:showAsAction="never" />
   <item
       android:id="@+id/settings"
-      android:orderInCategory="101"
+      android:orderInCategory="97"
       android:title="Настойки"
+      app:showAsAction="never" />
+  <item
+      android:id="@+id/tasks"
+      android:orderInCategory="98"
+      android:title="Задачи на сегодня"
+      app:showAsAction="never" />
+  <item
+      android:id="@+id/rain"
+      android:orderInCategory="99"
+      android:title="Прогноз дождей на сегодня"
       app:showAsAction="never" />
 </menu>

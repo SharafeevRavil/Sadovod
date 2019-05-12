@@ -2741,6 +2741,9 @@ namespace SadovodMobile
 			// aapt resource value: 0x7f080075
 			public const int radio = 2131230837;
 			
+			// aapt resource value: 0x7f0800fa
+			public const int rain = 2131230970;
+			
 			// aapt resource value: 0x7f0800c0
 			public const int recyclerView1 = 2131230912;
 			
@@ -2968,6 +2971,9 @@ namespace SadovodMobile
 			
 			// aapt resource value: 0x7f080019
 			public const int tag_transition_group = 2131230745;
+			
+			// aapt resource value: 0x7f0800f9
+			public const int tasks = 2131230969;
 			
 			// aapt resource value: 0x7f08001a
 			public const int text = 2131230746;

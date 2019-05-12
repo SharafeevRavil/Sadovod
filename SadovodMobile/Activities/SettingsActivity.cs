@@ -25,6 +25,8 @@ namespace SadovodMobile.Activities
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.SettingsLayout);
+            Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+            SetSupportActionBar(toolbar);
             lonText = (EditText)FindViewById(Resource.Id.editText1);
             if (Preferences.ContainsKey("lon"))
             {
@@ -48,6 +50,38 @@ namespace SadovodMobile.Activities
             var saveButton = (Button)FindViewById(Resource.Id.button1);
             saveButton.Click += new EventHandler(this.SaveSettings);
         }
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.menu_main, menu);
+            return true;
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            int id = item.ItemId;
+            if (id == Resource.Id.logOut)
+            {
+                UserSingleton.Instance.LogOut();
+                Intent intent = new Intent(this, typeof(SignInActivity));
+                FinishAffinity();
+                StartActivity(intent);
+                return true;
+            }
+            if (id == Resource.Id.rain)
+            {
+                Intent intenet = new Intent(this, typeof(WeatherNotificationActivity));
+                StartActivity(intenet);
+                return true;
+            }
+            if (id == Resource.Id.tasks)
+            {
+                Intent intenet = new Intent(this, typeof(NotificationActivity));
+                StartActivity(intenet);
+                return true;
+            }
+            return base.OnOptionsItemSelected(item);
+        }
+
         void SaveSettings(Object sender, EventArgs e)
         {
             double lon;

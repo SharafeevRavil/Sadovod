@@ -24,6 +24,8 @@ namespace SadovodMobile.Activities
             base.OnCreate(savedInstanceState);
             var info = Utilities.GetSteadsNotificationText();
             SetContentView(Resource.Layout.MyNotificationLayout);
+            Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+            SetSupportActionBar(toolbar);
             var textView = (TextView)FindViewById(Resource.Id.dynamicNotificationTextView);
             textView.SetText(info, TextView.BufferType.Normal);
             

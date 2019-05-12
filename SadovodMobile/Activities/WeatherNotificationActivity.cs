@@ -34,6 +34,8 @@ namespace SadovodMobile.Activities
                 info = "Требуется подключение к интернету";
             }
             SetContentView(Resource.Layout.WeatherNotification);
+            Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+            SetSupportActionBar(toolbar);
             var textView = (TextView)FindViewById(Resource.Id.dynamicNotificationTextView);
             textView.SetText(info, TextView.BufferType.Normal);
             var button = (Button)FindViewById(Resource.Id.refreshButton);

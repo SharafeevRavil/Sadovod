@@ -56,6 +56,18 @@ namespace SadovodMobile.Activities
                 StartActivity(intent);
                 return true;
             }
+            if (id == Resource.Id.rain)
+            {
+                Intent intenet = new Intent(this, typeof(WeatherNotificationActivity));
+                StartActivity(intenet);
+                return true;
+            }
+            if (id == Resource.Id.tasks)
+            {
+                Intent intenet = new Intent(this, typeof(NotificationActivity));
+                StartActivity(intenet);
+                return true;
+            }
             return base.OnOptionsItemSelected(item);
         }
 
