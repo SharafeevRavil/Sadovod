@@ -48,7 +48,12 @@ namespace SadovodMobile.Activities
                 StartActivity(intent);
                 return true;
             }
-
+            if (id == Resource.Id.settings)
+            {
+                Intent intent = new Intent(this, typeof(SettingsActivity));
+                StartActivity(intent);
+                return true;
+            }
             return base.OnOptionsItemSelected(item);
         }
 

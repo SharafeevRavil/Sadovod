@@ -6,4 +6,9 @@
       android:orderInCategory="100"
       android:title="Выйти из аккаунта"
       app:showAsAction="never" />
+  <item
+      android:id="@+id/settings"
+      android:orderInCategory="101"
+      android:title="Настойки"
+      app:showAsAction="never" />
 </menu>

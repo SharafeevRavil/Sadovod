@@ -2678,11 +2678,11 @@ namespace SadovodMobile
 			// aapt resource value: 0x7f080061
 			public const int list_item = 2131230817;
 			
-			// aapt resource value: 0x7f0800f6
-			public const int logOut = 2131230966;
+			// aapt resource value: 0x7f0800f7
+			public const int logOut = 2131230967;
 			
-			// aapt resource value: 0x7f0800f5
-			public const int masked = 2131230965;
+			// aapt resource value: 0x7f0800f6
+			public const int masked = 2131230966;
 			
 			// aapt resource value: 0x7f0800e5
 			public const int media_actions = 2131230949;
@@ -2743,6 +2743,9 @@ namespace SadovodMobile
 			
 			// aapt resource value: 0x7f0800c0
 			public const int recyclerView1 = 2131230912;
+			
+			// aapt resource value: 0x7f0800f4
+			public const int refreshButton = 2131230964;
 			
 			// aapt resource value: 0x7f08004a
 			public const int right = 2131230794;
@@ -2815,6 +2818,9 @@ namespace SadovodMobile
 			
 			// aapt resource value: 0x7f08008a
 			public const int select_dialog_listview = 2131230858;
+			
+			// aapt resource value: 0x7f0800f8
+			public const int settings = 2131230968;
 			
 			// aapt resource value: 0x7f080074
 			public const int shortcut = 2131230836;
@@ -3080,8 +3086,8 @@ namespace SadovodMobile
 			// aapt resource value: 0x7f080016
 			public const int view_offset_helper = 2131230742;
 			
-			// aapt resource value: 0x7f0800f4
-			public const int visible = 2131230964;
+			// aapt resource value: 0x7f0800f5
+			public const int visible = 2131230965;
 			
 			// aapt resource value: 0x7f08003c
 			public const int withText = 2131230780;
@@ -3347,22 +3353,28 @@ namespace SadovodMobile
 			public const int select_dialog_singlechoice_material = 2130968642;
 			
 			// aapt resource value: 0x7f040043
-			public const int SignIn = 2130968643;
+			public const int SettingsLayout = 2130968643;
 			
 			// aapt resource value: 0x7f040044
-			public const int SignUp = 2130968644;
+			public const int SignIn = 2130968644;
 			
 			// aapt resource value: 0x7f040045
-			public const int Steads = 2130968645;
+			public const int SignUp = 2130968645;
 			
 			// aapt resource value: 0x7f040046
-			public const int SteadView = 2130968646;
+			public const int Steads = 2130968646;
 			
 			// aapt resource value: 0x7f040047
-			public const int support_simple_spinner_dropdown_item = 2130968647;
+			public const int SteadView = 2130968647;
 			
 			// aapt resource value: 0x7f040048
-			public const int tooltip = 2130968648;
+			public const int support_simple_spinner_dropdown_item = 2130968648;
+			
+			// aapt resource value: 0x7f040049
+			public const int tooltip = 2130968649;
+			
+			// aapt resource value: 0x7f04004a
+			public const int WeatherNotification = 2130968650;
 			
 			static Layout()
 			{

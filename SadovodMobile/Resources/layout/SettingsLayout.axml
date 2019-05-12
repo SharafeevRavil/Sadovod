@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text = "Введите долготу в градусах:"
+    />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="139,8"
+        android:id="@id/editText1"
+    />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text = "Введите широту в градусах:"
+    />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="35,5"
+        android:id="@id/editText2"
+    />
+     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text = "Введите время утренненго уведомления:"
+    />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="6:00"
+        android:id="@id/editText3"
+    />
+     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text = "Введите время вечернего уведомления:"
+    />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="20:00"
+        android:id="@id/editText4"
+    />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:text="Сохранить"
+        android:id="@+id/button1"
+    />
+
+</LinearLayout>

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Globalization;
 
 namespace SadovodBack.Controllers
 {
@@ -67,10 +68,12 @@ namespace SadovodBack.Controllers
         [Route("GetRain/")]
         // GET: api/Weather
         [HttpGet]
-        public string Get(int lat, int lon)
+        public string Get(string lat, string lon)
         {
-            var rainTypeDictionary = new Dictionary<string, string>()
+            try
             {
+                var rainTypeDictionary = new Dictionary<string, string>()
+                {
                 {"light rain","легкий дождь"},
                 {"moderate rain","умеренный дождь"},
                 {"heavy intensity rain","сильный дождь" },
@@ -80,63 +83,69 @@ namespace SadovodBack.Controllers
                 {"shower rain","проливной дождь" },
                 {"heavy intensity shower rain ","интенсивный проливной дождь" },
                 {"ragged shower rain","рваный дождь"}
-            };
-            var url = string.Format("http://api.openweathermap.org/data/2.5/forecast/hourly?q=London&appid=20a742a2d44a20b0e9a9fecfa38609b9",lat,lon);
-            WebRequest request = WebRequest.Create(url);
-            WebResponse response = request.GetResponse();
-            string answer = string.Empty;
-            using (Stream s = response.GetResponseStream())
-            {
-                using (StreamReader reader = new StreamReader(s))
+                };
+                var url = string.Format("http://api.openweathermap.org/data/2.5/forecast/hourly?lat={0}&lon={1}&appid=20a742a2d44a20b0e9a9fecfa38609b9",lat,lon);
+                WebRequest request = WebRequest.Create(url);
+                WebResponse response = request.GetResponse();
+                string answer = string.Empty;
+                using (Stream s = response.GetResponseStream())
                 {
-                    answer = reader.ReadLine().ToString();
-                }
-            }
-            var weatherInfo = JsonConvert.DeserializeObject<OpenWeatherMap>(answer);
-            var l = weatherInfo.list
-                .Where(v => v.weather.FirstOrDefault().main == "Rain" && v.dt_txt.Substring(0, 10) == DateTime.Now.ToString("yyyy-MM-dd") && DateTime.Parse(v.dt_txt) > DateTime.Now)
-                .Select(v => new { Weather = v.weather.FirstOrDefault().description, Time = DateTime.Parse(v.dt_txt).Hour }).ToList();
-            var prevTime = 0;
-            var j = 0;
-            var prevWeather = default(string);
-            var result = new List<Tuple<string, int, int>>();
-            if (l.Count() == 0) return null;
-            for (var i = 0; i < l.Count(); i++)
-            {
-                if (i == 0)
-                {
-                    prevTime = l[i].Time;
-                    prevWeather = l[i].Weather;
-                }
-                else
-                {
-                    if (l[i].Weather != prevWeather || l[i].Time != prevTime + 1)
+                    using (StreamReader reader = new StreamReader(s))
                     {
-                        result.Add(Tuple.Create(prevWeather, j + 1, prevTime + 1));
+                        answer = reader.ReadLine().ToString();
+                    }
+                }
+                var weatherInfo = JsonConvert.DeserializeObject<OpenWeatherMap>(answer);
+                var l = weatherInfo.list
+                    .Where(v => v.weather.FirstOrDefault().main == "Rain" && v.dt_txt.Substring(0, 10) == DateTime.Now.ToString("yyyy-MM-dd") /*&& DateTime.Parse(v.dt_txt) > DateTime.Now*/)
+                    .Select(v => new { Weather = v.weather.FirstOrDefault().description, Time = DateTime.Parse(v.dt_txt).Hour }).ToList();
+                var prevTime = 0;
+                var j = 0;
+                var prevWeather = default(string);
+                var result = new List<Tuple<string, int, int>>();
+                if (l.Count() == 0) return "Сегодня дождей не ожидается";
+                for (var i = 0; i < l.Count(); i++)
+                {
+                    if (i == 0)
+                    {
                         prevTime = l[i].Time;
                         prevWeather = l[i].Weather;
-                        j = 0;
                     }
                     else
                     {
-                        prevTime = l[i].Time;
-                        prevWeather = l[i].Weather;
-                        j++;
-                    }
+                        if (l[i].Weather != prevWeather || l[i].Time != prevTime + 1)
+                        {
+                            result.Add(Tuple.Create(prevWeather, j + 1, prevTime + 1));
+                            prevTime = l[i].Time;
+                            prevWeather = l[i].Weather;
+                            j = 0;
+                        }
+                        else
+                        {
+                            prevTime = l[i].Time;
+                            prevWeather = l[i].Weather;
+                            j++;
+                        }
 
+                    }
+                    if (i == l.Count() - 1)
+                    {
+                        result.Add(Tuple.Create(l[l.Count() - 1].Weather, j + 1, prevTime + 1));
+                    }
                 }
-                if (i == l.Count() - 1)
+                var superResult = new StringBuilder("Сегодня ожидается дождь:\n");
+                foreach (var e in result)
                 {
-                    result.Add(Tuple.Create(l[l.Count() - 1].Weather, j + 1, prevTime + 1));
+                    superResult.Append(string.Format("{0} с {1}:00 до {2}:00\n", rainTypeDictionary[e.Item1], e.Item3 - e.Item2, e.Item3));
                 }
+                var asdsad = superResult.ToString();
+                return asdsad;
+
             }
-            var superResult = new StringBuilder("Сегодня будет дождь:\n");
-            foreach (var e in result)
+            catch
             {
-                superResult.Append(string.Format("{0} с {1}:00 до {2}:00\n", rainTypeDictionary[e.Item1], e.Item3 - e.Item2, e.Item3));
+                return "Подключите интернет-соединение для получаения прогноза дождей на сегодня";
             }
-            var asdsad = superResult.ToString();
-            return asdsad;
         }
     }
 }

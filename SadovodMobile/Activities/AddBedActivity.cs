@@ -24,7 +24,7 @@ namespace SadovodMobile.Activities
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.AddGardenBed);
             Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
-            SetSupportActionBar(toolbar);
+            SetSupportActionBar(toolbar);   
 
             //Привязка кнопки добавления записки
             FindViewById<Button>(Resource.Id.button1).Click += AddNoteAction;
@@ -126,7 +126,12 @@ namespace SadovodMobile.Activities
                 StartActivity(intent);
                 return true;
             }
-
+            if(id == Resource.Id.settings)
+            {
+                Intent intent = new Intent(this, typeof(SettingsActivity));
+                StartActivity(intent);
+                return true;
+            }
             return base.OnOptionsItemSelected(item);
         }
 

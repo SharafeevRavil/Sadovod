@@ -15,18 +15,47 @@ using Xamarin.Essentials;
 
 namespace SadovodMobile.Activities
 {
-    [Activity(Label ="Задачи на сегодня", Theme = "@style/AppTheme.NoActionBar")]
-    class NotificationActivity: AppCompatActivity
+    [Activity(Label ="Прогноз дождей", Theme ="@style/AppTheme.NoActionBar")]
+    class WeatherNotificationActivity:AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            
             base.OnCreate(savedInstanceState);
-            var info = Utilities.GetSteadsNotificationText();
-            SetContentView(Resource.Layout.MyNotificationLayout);
+            string info;
+            try
+            {
+                var client = new HttpClient();
+                client.BaseAddress = new Uri("https://sadovodhelperexample.azurewebsites.net");
+                var response = client.GetAsync($"api/weather/getrain?lat={Preferences.Get("lat",0.0)}&lon={Preferences.Get("lon",0.0)}").Result;
+                info = response.Content.ReadAsStringAsync().Result;
+            }
+            catch
+            {
+                info = "Требуется подключение к интернету";
+            }
+            SetContentView(Resource.Layout.WeatherNotification);
             var textView = (TextView)FindViewById(Resource.Id.dynamicNotificationTextView);
             textView.SetText(info, TextView.BufferType.Normal);
+            var button = (Button)FindViewById(Resource.Id.refreshButton);
+            button.Click += new EventHandler(this.RefreshWeather);
             
+        }
+        private void RefreshWeather(Object sender,EventArgs e)
+        {
+                string info;
+                try
+                {
+                    var client = new HttpClient();
+                    client.BaseAddress = new Uri("https://sadovodhelperexample.azurewebsites.net");
+                    var response = client.GetAsync($"api/weather/getrain?lat={Preferences.Get("lat", 0.0)}&lon={Preferences.Get("lon", 0.0)}").Result;
+                    info = response.Content.ReadAsStringAsync().Result;
+                }
+                catch
+                {
+                    info = "Требуется подключение к интернету";
+                }
+                var textView = (TextView)FindViewById(Resource.Id.dynamicNotificationTextView);
+                textView.SetText(info, TextView.BufferType.Normal);                        
         }
         public override void OnBackPressed()
         {
@@ -69,7 +98,7 @@ namespace SadovodMobile.Activities
                 StartActivity(intent);
                 FinishAffinity();
             }
-           
+
         }
     }
 }

@@ -13,6 +13,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
+using Xamarin.Essentials;
 
 namespace SadovodMobile
 {
@@ -30,39 +31,70 @@ namespace SadovodMobile
             timerData = new Timer((x) =>
             {
                 Log.Debug("ZHOPA", "Debug service");
-                
-                SendNotification();
-            }, null, 0, 1100000000);
+                if ((DateTime.Now.Hour == Preferences.Get("morning", 0) || DateTime.Now.Hour == Preferences.Get("evening", 0)) && (Preferences.Get("lastDayMorning", 0) < DateTime.Now.DayOfYear) || Preferences.Get("lastDayEvening", 0) < DateTime.Now.DayOfYear)
+                {
+                    if (DateTime.Now.Hour == Preferences.Get("morning", 0))
+                        Preferences.Set("lastDayMorning", DateTime.Now.DayOfYear);
+                    else
+                        if (DateTime.Now.Hour == Preferences.Get("evening", 0))
+                            Preferences.Set("lastDayEvening", DateTime.Now.DayOfYear);
+                    SendPlanNotification();
+                    SendWeatherNotification();
+                }
+
+            }, null, 0, 40000);
         }
-        
-        private void SendNotification()
+
+        private void SendPlanNotification()
         {
             Intent resultIntent = new Intent(this, typeof(Activities.NotificationActivity));
-PendingIntent resultPendingIntent = PendingIntent.GetActivity(this, 0, resultIntent,
+            PendingIntent resultPendingIntent = PendingIntent.GetActivity(this, 0, resultIntent,
                PendingIntentFlags.UpdateCurrent);
-        var info = Utilities.GetSteadsNotificationText();
+            var info = Utilities.GetSteadsNotificationText();
             Notification.Builder notificationBuilder = new Notification.Builder(this)
             .SetSmallIcon(Resource.Drawable.Splash)
-            .SetContentTitle("Задачи на сегодня:")
+            .SetContentTitle("Задачи на сегодня")
             .SetStyle(new Notification.BigTextStyle()
                 .BigText(info))
             .SetContentText(info)
             .SetContentIntent(resultPendingIntent);
-
             var notificationManager = (NotificationManager)GetSystemService(NotificationService);
-            notificationManager.Notify(41441, notificationBuilder.Build());
+            notificationManager.Notify(41442, notificationBuilder.Build());
         }
-
-        public static void Parse()
+        private void SendWeatherNotification()
         {
-            var client = new HttpClient();
-            client.BaseAddress = new Uri("https://sadovodhelperexample.azurewebsites.net");
-            client.DefaultRequestHeaders.Add("Authorization", $"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMjA4OTQ0ODciLCJleHAiOjE1NTc0MzEwNjd9.DAn-3drgDnUumHotJVP-gPkgAsFKl-ufiLiyxyy3bVA");
-
-            string json1 = $"'{JsonConvert.SerializeObject($"{DateTime.Now}")}'";
-            var content2 = new StringContent(json1, Encoding.UTF8, "application/json");
-            int id = 52;
-            HttpResponseMessage response = client.PutAsync($"/api/database/DatabaseUpdateStead?id={id}", content2).Result;
+            try
+            {
+                Intent weatherIntent = new Intent(this, typeof(Activities.WeatherNotificationActivity));
+                PendingIntent weatherPendingIntent = PendingIntent.GetActivity(this, 0, weatherIntent,
+                               PendingIntentFlags.UpdateCurrent);
+                var client = new HttpClient();
+                client.BaseAddress = new Uri("https://sadovodhelperexample.azurewebsites.net");
+                var response = client.GetAsync($"api/weather/getrain?lat={Preferences.Get("lat", 0.0)}&lon={Preferences.Get("lon", 0.0)}").Result;
+                var info = response.Content.ReadAsStringAsync().Result;
+                Notification.Builder notificationBuilder = new Notification.Builder(this)
+                .SetSmallIcon(Resource.Drawable.Splash)
+                .SetContentTitle("Прогноз дождей")
+                .SetStyle(new Notification.BigTextStyle()
+                    .BigText(info))
+                .SetContentText(info)
+                .SetContentIntent(weatherPendingIntent);
+                var notificationManager = (NotificationManager)GetSystemService(NotificationService);
+                notificationManager.Notify(41441, notificationBuilder.Build());
+            }
+            catch
+            {
+                Intent weatherIntent = new Intent(this, typeof(Activities.WeatherNotificationActivity));
+                PendingIntent weatherPendingIntent = PendingIntent.GetActivity(this, 0, weatherIntent,
+                               PendingIntentFlags.UpdateCurrent);
+                Notification.Builder notificationBuilder = new Notification.Builder(this)
+                .SetSmallIcon(Resource.Drawable.Splash)
+                .SetContentTitle("Прогноз дождей")
+                .SetStyle(new Notification.BigTextStyle()
+                    .BigText("Требуется подключение к интернету"))
+                .SetContentText("Требуется подключение к интернету")
+                .SetContentIntent(weatherPendingIntent);
+            }
 
         }
 
