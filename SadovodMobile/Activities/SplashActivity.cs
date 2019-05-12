@@ -34,9 +34,10 @@ namespace SadovodMobile.Activities
         // Simulates background work that happens behind the splash screen
         async void SimulateStartup()
         {
-            StartService(new Android.Content.Intent(this, typeof(MyService)));
+            //StartService(new Android.Content.Intent(this, typeof(MyService)));
+            StartActivity(new Intent(Application.Context, typeof(DrawSteadActivity)));
             //await Task.Delay(2000); // Simulate a bit of startup work.
-            RunOnUiThread(() =>
+            /*RunOnUiThread(() =>
             {
                 string token = Preferences.Get("token", null);
                 if (token != null)
@@ -61,7 +62,7 @@ namespace SadovodMobile.Activities
                 {
                     StartActivity(new Intent(Application.Context, typeof(SignInActivity)));
                 }
-            });
+            });*/
         }
     }
 }

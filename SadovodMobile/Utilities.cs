@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Widget;
+using SkiaSharp;
 
 namespace SadovodMobile
 {
@@ -119,6 +120,31 @@ namespace SadovodMobile
         {
             var delta = (now.Date - last.Date).TotalDays;
             return delta >= period;
+        }
+
+        public static SKPoint ToRealCoords(float inputX, float inputY, SKMatrix matrix)
+        {
+            SKMatrix inverse;
+            matrix.TryInvert(out inverse);
+            var ans = ToMatrixCoords(inputX, inputY, inverse);
+            return new SKPoint(ans.X, ans.Y);
+        }
+
+        public static SKPoint ToRealCoords(SKPoint input, SKMatrix matrix)
+        {
+            return ToRealCoords(input.X, input.Y, matrix);
+        }
+
+        public static SKPoint ToMatrixCoords(float inputX, float inputY, SKMatrix matrix)
+        {
+            float x = matrix.ScaleX * inputX + matrix.SkewX * inputY + matrix.TransX;
+            float y = matrix.SkewY * inputX + matrix.ScaleY * inputY + matrix.TransY;
+            return new SKPoint(x, y);
+        }
+
+        public static SKPoint ToMatrixCoords(SKPoint input, SKMatrix matrix)
+        {
+            return ToMatrixCoords(input.X, input.Y, matrix);
         }
     }
 }
