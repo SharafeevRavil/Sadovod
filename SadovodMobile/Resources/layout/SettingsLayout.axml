@@ -31,24 +31,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text = "Введите время утренненго уведомления:"
+        android:text = "Введите время утренненго уведомления в часах:"
     />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="6:00"
+        android:hint="6"
         android:id="@id/editText3"
     />
      <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text = "Введите время вечернего уведомления:"
+        android:text = "Введите время вечернего уведомления в часах:"
     />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="20:00"
+        android:hint="20"
         android:id="@id/editText4"
     />
     <Button

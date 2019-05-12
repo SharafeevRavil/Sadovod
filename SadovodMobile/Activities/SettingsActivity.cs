@@ -52,8 +52,8 @@ namespace SadovodMobile.Activities
         {
             double lon;
             double lat;
-            DateTime morningTime;
-            DateTime eveningTime;
+            int morningTime;
+            int eveningTime;
             var correctLat = double.TryParse(latText.Text,out lat);
             if (correctLat)
             {
@@ -70,12 +70,26 @@ namespace SadovodMobile.Activities
                     correctLat = false;
                 }
             }
-            var correctEveningTime = DateTime.TryParse(morningNotifyTime.Text, out eveningTime);
-            var correctMorningTime = DateTime.TryParse(eveningNotifyTime.Text, out morningTime);
+            var correctEveningTime = int.TryParse(eveningNotifyTime.Text, out eveningTime);
+            if (correctEveningTime)
+            {
+                if (0 > eveningTime || 24 < eveningTime)
+                {
+                    correctEveningTime = false;
+                }
+            }
+            var correctMorningTime = int.TryParse(morningNotifyTime.Text, out morningTime);
+            if (correctMorningTime)
+            {
+                if (0 > morningTime || 24 < morningTime)
+                {
+                    correctMorningTime = false;
+                }
+            }
             if (correctLat && correctLon && correctMorningTime && correctEveningTime)
             {
-                Preferences.Set("morning", morningTime.Hour);
-                Preferences.Set("evening", eveningTime.Hour);
+                Preferences.Set("morning", morningTime);
+                Preferences.Set("evening", eveningTime);
                 Preferences.Set("lat", lat);
                 Preferences.Set("lon", lon);
                 Finish();
