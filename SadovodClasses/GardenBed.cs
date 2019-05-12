@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace SadovodClasses
 {
@@ -8,13 +9,13 @@ namespace SadovodClasses
         //Раcтение на грядке
         public PlantType Plant
         {
-            get;
+            get; set;
         }
 
         //Заметки о растениях
         public List<string> Notes
         {
-            get;
+            get; set;
         }
 
         //Тип грядки
@@ -23,11 +24,21 @@ namespace SadovodClasses
             get; set;
         }
 
-        public GardenBed(PlantType plantType, GardenBedType bedType = GardenBedType.Alfresco)
+        public GardenBed(PlantType plant, GardenBedType bedType = GardenBedType.Alfresco)
         {
-            Plant = plantType;
+            Plant = plant;
             BedType = bedType;
             Notes = new List<string>();
+
+            WaterDate = DateTime.Now;
+            WeedDate = DateTime.Now;
+            PileUpDate = DateTime.Now;
+            FertilizeDate = DateTime.Now;
+
+            WaterPeriod = 1;
+            WeedPeriod = 14;
+            PileUpPeriod = 14;
+            FertilizePeriod = 14;
         }
 
         //Сделать заметку о грядке
@@ -48,6 +59,43 @@ namespace SadovodClasses
         public bool DeleteNote(string note)
         {
             return Notes.Remove(note);
+        }
+
+        //Полив
+        public DateTime WaterDate
+        {
+            get; set;
+        }
+        public int WaterPeriod
+        {
+            get; set;
+        }
+        //Прополка
+        public DateTime WeedDate
+        {
+            get; set;
+        }
+        public int WeedPeriod
+        {
+            get; set;
+        }
+        //Окучивание
+        public DateTime PileUpDate
+        {
+            get; set;
+        }
+        public int PileUpPeriod
+        {
+            get; set;
+        }
+        //Удобрение
+        public DateTime FertilizeDate
+        {
+            get; set;
+        }
+        public int FertilizePeriod
+        {
+            get; set;
         }
     }
 }

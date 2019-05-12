@@ -1,9 +1,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+  <item
+      android:id="@+id/logOut"
+      android:orderInCategory="100"
+      android:title="Выйти из аккаунта"
+      app:showAsAction="never" />
+  <item
+      android:id="@+id/settings"
+      android:orderInCategory="97"
+      android:title="Настойки"
+      app:showAsAction="never" />
+  <item
+      android:id="@+id/tasks"
+      android:orderInCategory="98"
+      android:title="Задачи на сегодня"
+      app:showAsAction="never" />
+  <item
+      android:id="@+id/rain"
+      android:orderInCategory="99"
+      android:title="Прогноз дождей на сегодня"
+      app:showAsAction="never" />
 </menu>

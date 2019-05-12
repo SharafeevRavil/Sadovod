@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text = "Введите долготу в градусах:"
+    />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="139,8"
+        android:id="@id/editText1"
+    />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text = "Введите широту в градусах:"
+    />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="35,5"
+        android:id="@id/editText2"
+    />
+     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text = "Введите время утренненго уведомления в часах:"
+    />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="6"
+        android:id="@id/editText3"
+    />
+     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text = "Введите время вечернего уведомления в часах:"
+    />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="20"
+        android:id="@id/editText4"
+    />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:text="Сохранить"
+        android:id="@+id/button1"
+    />
+
+</LinearLayout>

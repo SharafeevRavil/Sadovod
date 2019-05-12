@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
+using System.Resources;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -10,58 +13,28 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using SadovodClasses;
 
-namespace WebApplication3.Controllers
+namespace SadovodBack.Controllers
 {
-    public class User
+    public class Garedener
     {
         public string Id { get; set; }
-
-        public string Name { get; set; }
-
-        public string FirstName { get; set; }
-
-        public string MiddleName { get; set; }
-
-        public string LastName { get; set; }
-
-        public string UserName { get; set; }
-
-        public string Gender { get; set; }
-
-        public string Email { get; set; }
+        public List<Stead> Stead { get; set; }
     }
-
     [Route("api/[controller]")]
     [ApiController]
     public class ExampleController : ControllerBase
     {
+        //JSON Examples
+        #region
         [Route("ExampleGetJSON/")]
         [HttpGet]
         public async Task<JsonResult> ExampleGetJSON()
         {
             var user = new User()
             {
-                Id = "404",
-                Email = "chernikov@gmail.com",
-                UserName = "rollinx",
-                Name = "Andrey",
-                FirstName = "Andrey",
-                MiddleName = "Alexandrovich",
-                LastName = "Chernikov",
-                Gender = "M"
+                ID = 0        
             };
-            var user1 = new User()
-            {
-                Id = "4",
-                Email = "che",
-                UserName = "r",
-                Name = "An",
-                FirstName = "Ay",
-                MiddleName = "Aledh",
-                LastName = "Cherov",
-                Gender = "F"
-            };
-            var users = new List<User> { user, user1 };
+            var users = new List<User> {user};
             var jsonUsers = JsonConvert.SerializeObject(users);
             return new JsonResult(jsonUsers);
         }
@@ -71,11 +44,19 @@ namespace WebApplication3.Controllers
         {
             var users = JsonConvert.DeserializeObject<List<User>>(value);
         }
+        #endregion
+        //DB Actions
+        #region
+        
+        #endregion
+        //Simple Actions
+        #region
         [Route("GetAll/")]
         [HttpGet]
         public async Task<JsonResult> Get()
         {
-            return new JsonResult("example");
+            
+            return new JsonResult("hello");
         }
         //api/Example/GetByID?id=needId
         [Route("GetByID/")]
@@ -106,5 +87,6 @@ namespace WebApplication3.Controllers
         {
 
         }
+        #endregion
     }
 }
