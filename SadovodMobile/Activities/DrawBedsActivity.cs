@@ -9,6 +9,7 @@ using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.App;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using SadovodMobile.Activities;
@@ -20,10 +21,6 @@ namespace SadovodMobile
     [Activity(Label = "DrawBedsActivity")]
     public class DrawBedsActivity : AppCompatActivity, IDrawableActivity
     {
-        private enum DrawBedsStates
-        {
-            Browse, AddPoint
-        }
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -32,17 +29,29 @@ namespace SadovodMobile
             gestureRecognizerView = new GestureRecognizerView(this);
             FindViewById<FrameLayout>(Resource.Id.frameLayout1).AddView(gestureRecognizerView, 0);
 
-            FindViewById<ImageButton>(Resource.Id.imageButton1).Click += OnUndo;
-            FindViewById<ImageButton>(Resource.Id.imageButton2).Click += OnPlus;
-            FindViewById<ImageButton>(Resource.Id.imageButton3).Click += OnAccept;
-
             canvasView = FindViewById<SKCanvasView>(Resource.Id.sKCanvasView1);
             canvasView.PaintSurface += OnPainting;
 
             screenSize = new Point();
             WindowManager.DefaultDisplay.GetSize(screenSize);
             bitmap = new SKBitmap(screenSize.X, screenSize.Y);
-            shapePoints = new List<SKPoint>();
+
+            steadPoints = new List<SKPoint>();
+            foreach (var a in UserSingleton.Instance.CurrentStead.Points)
+            {
+                steadPoints.Add(new SKPoint(a.X, a.Y));
+            }
+            allBeds = new List<List<SKPoint>>();
+            foreach (var bed in UserSingleton.Instance.CurrentStead.GardenBeds)
+            {
+                var ans = new List<SKPoint>();
+                foreach (var a in bed.Points)
+                {
+                    ans.Add(new SKPoint(a.X, a.Y));
+                }
+                allBeds.Add(ans);
+            }
+
             shapesCanvas = new SKCanvas(bitmap);
             scaleCanvas = new SKCanvas(bitmap);
 
@@ -52,57 +61,35 @@ namespace SadovodMobile
         private SKBitmap bitmap;
         private Point screenSize;
 
-        private DrawBedsStates currentState;
-
         private SKCanvas shapesCanvas;
         private SKCanvas scaleCanvas;
 
         private GestureRecognizerView gestureRecognizerView;
-
-        private void OnUndo(object sender, EventArgs eventArgs)
-        {
-            if (shapePoints.Count > 0)
-            {
-                shapePoints.RemoveAt(shapePoints.Count - 1);
-                Redraw();
-            }
-        }
-
-        private void OnPlus(object sender, EventArgs eventArgs)
-        {
-            if (currentState == DrawBedsStates.Browse)
-            {
-                currentState = DrawBedsStates.AddPoint;
-                FindViewById<ImageButton>(Resource.Id.imageButton2).SetColorFilter(
-                    new PorterDuffColorFilter(new Color(0x8B, 0xC3, 0x4A), PorterDuff.Mode.DstAtop));
-            }
-            else
-            {
-                currentState = DrawBedsStates.Browse;
-                FindViewById<ImageButton>(Resource.Id.imageButton2).ClearColorFilter();
-            }
-        }
-
-        private void OnAccept(object sender, EventArgs eventArgs)
-        {
-            UserSingleton.Instance.AddStead(AddSteadActivity.SteadToBeAdded);
-            Finish();
-        }
 
         private void OnPainting(object sender, SKPaintSurfaceEventArgs e)
         {
             e.Surface.Canvas.DrawBitmap(bitmap, 0, 0);
         }
 
-        private List<SKPoint> shapePoints;
+        private List<SKPoint> steadPoints;
+        private List<List<SKPoint>> allBeds;
+
+        public void OnPlus(object sender, EventArgs eventArgs)
+        {
+            //включаю добавление грядок
+            StartActivity(new Intent(this, typeof(AddBedActivity)));
+        }
 
         public void Touch(float inputX, float inputY)
         {
-            if (currentState == DrawBedsStates.AddPoint)
+            var point = Utilities.ToRealCoords(inputX, inputY, shapesCanvas.TotalMatrix);
+            //Проверяем грядки
+            for (int i = 0; i < allBeds.Count; i++)
             {
-                var point = Utilities.ToRealCoords(inputX, inputY, shapesCanvas.TotalMatrix);
-                shapePoints.Add(new SKPoint(point.X, point.Y));
-                Redraw();
+                if (Utilities.CheckInside(point, allBeds[i]))
+                {
+                    Log.Debug("SUKAAAAAAAA", i.ToString());
+                }
             }
         }
 
@@ -137,17 +124,32 @@ namespace SadovodMobile
                 StrokeWidth = 5
             };
 
+            /*ПЕРЕРИСОВКА УЧАСТКА*/
             var path = new SKPath { FillType = SKPathFillType.EvenOdd };
-            if (shapePoints.Count > 0)
+            if (steadPoints.Count > 0)
             {
-                path.MoveTo(shapePoints[0]);
-                for (int i = 1; i < shapePoints.Count; i++)
+                path.MoveTo(steadPoints[0]);
+                for (int i = 1; i < steadPoints.Count; i++)
                 {
-                    path.LineTo(shapePoints[i]);
+                    path.LineTo(steadPoints[i]);
                 }
-                path.LineTo(shapePoints[0]);
+                path.LineTo(steadPoints[0]);
                 shapesCanvas.DrawPath(path, pathStroke);
             }
+            /**/
+            /*ПЕРЕРИСОВКА ГРЯДОК*/
+            foreach (var a in allBeds)
+            {
+                path = new SKPath { FillType = SKPathFillType.EvenOdd };
+                path.MoveTo(a[0]);
+                for (int i = 1; i < a.Count; i++)
+                {
+                    path.LineTo(a[i]);
+                }
+                path.LineTo(a[0]);
+                shapesCanvas.DrawPath(path, pathStroke);
+            }
+            /**/
 
             RedrawScale();
 

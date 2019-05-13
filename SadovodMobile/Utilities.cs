@@ -146,5 +146,74 @@ namespace SadovodMobile
         {
             return ToMatrixCoords(input.X, input.Y, matrix);
         }
+
+        public static bool CheckInside(SKPoint point, List<SKPoint> points)
+        {
+            return GetPointInPolygon(point, points) != PointInPolygon.OUTSIDE;
+        }
+
+        private static PointOverEdge Classify(SKPoint p, SKPoint v, SKPoint w) //положение точки p относительно отрезка vw
+        {
+            //коэффициенты уравнения прямой
+            float a = v.Y - w.Y;
+            float b = w.X - v.X;
+            float c = v.X * w.Y - w.X * v.Y;
+
+            //подставим точку в уравнение прямой
+            float f = a * p.X + b * p.Y + c;
+            if (f > 0)
+                return PointOverEdge.RIGHT; //точка лежит справа от отрезка
+            if (f < 0)
+                return PointOverEdge.LEFT; //слева от отрезка
+
+            float minX = Math.Min(v.X, w.X);
+            float maxX = Math.Max(v.X, w.X);
+            float minY = Math.Min(v.Y, w.Y);
+            float maxY = Math.Max(v.Y, w.Y);
+
+            if (minX <= p.X && p.X <= maxX && minY <= p.Y && p.Y <= maxY)
+                return PointOverEdge.BETWEEN; //точка лежит на отрезке
+            return PointOverEdge.OUTSIDE; //точка лежит на прямой, но не на отрезке
+        }
+
+        private static EdgeType GetEdgeType(SKPoint a, SKPoint v, SKPoint w) //тип ребра vw для точки a
+        {
+            switch (Classify(a, v, w))
+            {
+                case PointOverEdge.LEFT:
+                    return ((v.Y < a.Y) && (a.Y <= w.Y)) ? EdgeType.CROSSING : EdgeType.INESSENTIAL;
+                case PointOverEdge.RIGHT:
+                    return ((w.Y < a.Y) && (a.Y <= v.Y)) ? EdgeType.CROSSING : EdgeType.INESSENTIAL;
+                case PointOverEdge.BETWEEN:
+                    return EdgeType.TOUCHING;
+                default:
+                    return EdgeType.INESSENTIAL;
+            }
+        }
+
+        private enum PointOverEdge { LEFT, RIGHT, BETWEEN, OUTSIDE }
+        private enum EdgeType { TOUCHING, CROSSING, INESSENTIAL }
+        private enum PointInPolygon { INSIDE, OUTSIDE, BOUNDARY }
+
+        private static PointInPolygon GetPointInPolygon(SKPoint a, List<SKPoint> points) //положение точки в многоугольнике
+        {
+            bool parity = true;
+            for (int i = 0; i < points.Count; i++)
+            {
+                SKPoint v = points[i];
+                SKPoint w = points[(i + 1) % points.Count];
+
+                switch (GetEdgeType(a, v, w))
+                {
+                    case EdgeType.TOUCHING:
+                        return PointInPolygon.BOUNDARY;
+                    case EdgeType.CROSSING:
+                        parity = !parity;
+                        break;
+                }
+            }
+
+            return parity ? PointInPolygon.OUTSIDE : PointInPolygon.INSIDE;
+        }
     }
 }

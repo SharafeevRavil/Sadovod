@@ -122,7 +122,8 @@ namespace SadovodMobile.Activities
             //Toast.MakeText(this, $"This is stead {position + 1}", ToastLength.Short).Show();
             UserSingleton.Instance.CurrentStead = UserSingleton.Instance.Steads[position];
             //Переключаюсь на окно грядок
-            Intent intent = new Intent(this, typeof(BedsActivity));
+            //Intent intent = new Intent(this, typeof(BedsActivity));
+            Intent intent = new Intent(this, typeof(DrawBedsActivity));
             StartActivity(intent);
         }
 

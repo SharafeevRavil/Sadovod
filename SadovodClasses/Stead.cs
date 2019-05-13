@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
+using System.Drawing;
 
 namespace SadovodClasses
 {
@@ -25,12 +26,20 @@ namespace SadovodClasses
         {
             Name = name;
             gardenBeds = new List<GardenBed>();
+            Points = new List<PointF>();
         }
+
+        public List<PointF> Points
+        {
+            get; set;
+        }
+
         [JsonConstructor]
-        public Stead(List<GardenBed> gardenBeds, string name)
+        public Stead(List<GardenBed> gardenBeds, string name, List<PointF> points)
         {
             Name = name;
             this.gardenBeds = gardenBeds;
+            this.Points = points;
         }
 
         //Добавить грядку на участок

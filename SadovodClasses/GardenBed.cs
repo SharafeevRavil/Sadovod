@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
 
 namespace SadovodClasses
 {
@@ -20,6 +21,11 @@ namespace SadovodClasses
 
         //Тип грядки
         public GardenBedType BedType
+        {
+            get; set;
+        }
+
+        public List<PointF> Points
         {
             get; set;
         }

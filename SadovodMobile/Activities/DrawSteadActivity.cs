@@ -92,6 +92,10 @@ namespace SadovodMobile
 
         private void OnAccept(object sender, EventArgs eventArgs)
         {
+            foreach (var a in shapePoints)
+            {
+                AddSteadActivity.SteadToBeAdded.Points.Add(new System.Drawing.PointF(a.X, a.Y));
+            }
             UserSingleton.Instance.AddStead(AddSteadActivity.SteadToBeAdded);
             Finish();
         }

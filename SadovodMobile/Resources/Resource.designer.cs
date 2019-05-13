@@ -2381,8 +2381,8 @@ namespace SadovodMobile
 			// aapt resource value: 0x7f080037
 			public const int SYM = 2131230775;
 			
-			// aapt resource value: 0x7f0800e4
-			public const int action0 = 2131230948;
+			// aapt resource value: 0x7f0800e3
+			public const int action0 = 2131230947;
 			
 			// aapt resource value: 0x7f08007c
 			public const int action_bar = 2131230844;
@@ -2405,17 +2405,17 @@ namespace SadovodMobile
 			// aapt resource value: 0x7f08005a
 			public const int action_bar_title = 2131230810;
 			
-			// aapt resource value: 0x7f0800e1
-			public const int action_container = 2131230945;
+			// aapt resource value: 0x7f0800e0
+			public const int action_container = 2131230944;
 			
 			// aapt resource value: 0x7f08007d
 			public const int action_context_bar = 2131230845;
 			
-			// aapt resource value: 0x7f0800e8
-			public const int action_divider = 2131230952;
+			// aapt resource value: 0x7f0800e7
+			public const int action_divider = 2131230951;
 			
-			// aapt resource value: 0x7f0800e2
-			public const int action_image = 2131230946;
+			// aapt resource value: 0x7f0800e1
+			public const int action_image = 2131230945;
 			
 			// aapt resource value: 0x7f080003
 			public const int action_menu_divider = 2131230723;
@@ -2432,11 +2432,11 @@ namespace SadovodMobile
 			// aapt resource value: 0x7f08005c
 			public const int action_mode_close_button = 2131230812;
 			
-			// aapt resource value: 0x7f0800e3
-			public const int action_text = 2131230947;
+			// aapt resource value: 0x7f0800e2
+			public const int action_text = 2131230946;
 			
-			// aapt resource value: 0x7f0800f1
-			public const int actions = 2131230961;
+			// aapt resource value: 0x7f0800f0
+			public const int actions = 2131230960;
 			
 			// aapt resource value: 0x7f08005d
 			public const int activity_chooser_view_content = 2131230813;
@@ -2471,8 +2471,8 @@ namespace SadovodMobile
 			// aapt resource value: 0x7f08003d
 			public const int bottom = 2131230781;
 			
-			// aapt resource value: 0x7f0800f4
-			public const int button = 2131230964;
+			// aapt resource value: 0x7f0800f3
+			public const int button = 2131230963;
 			
 			// aapt resource value: 0x7f0800c3
 			public const int button1 = 2131230915;
@@ -2483,8 +2483,8 @@ namespace SadovodMobile
 			// aapt resource value: 0x7f080063
 			public const int buttonPanel = 2131230819;
 			
-			// aapt resource value: 0x7f0800e5
-			public const int cancel_action = 2131230949;
+			// aapt resource value: 0x7f0800e4
+			public const int cancel_action = 2131230948;
 			
 			// aapt resource value: 0x7f080045
 			public const int center = 2131230789;
@@ -2498,8 +2498,8 @@ namespace SadovodMobile
 			// aapt resource value: 0x7f080073
 			public const int checkbox = 2131230835;
 			
-			// aapt resource value: 0x7f0800ed
-			public const int chronometer = 2131230957;
+			// aapt resource value: 0x7f0800ec
+			public const int chronometer = 2131230956;
 			
 			// aapt resource value: 0x7f08004e
 			public const int clip_horizontal = 2131230798;
@@ -2585,8 +2585,8 @@ namespace SadovodMobile
 			// aapt resource value: 0x7f080030
 			public const int end = 2131230768;
 			
-			// aapt resource value: 0x7f0800f3
-			public const int end_padder = 2131230963;
+			// aapt resource value: 0x7f0800f2
+			public const int end_padder = 2131230962;
 			
 			// aapt resource value: 0x7f08003f
 			public const int enterAlways = 2131230783;
@@ -2624,9 +2624,6 @@ namespace SadovodMobile
 			// aapt resource value: 0x7f0800cb
 			public const int frameLayout1 = 2131230923;
 			
-			// aapt resource value: 0x7f0800e0
-			public const int frameLayout2 = 2131230944;
-			
 			// aapt resource value: 0x7f08000a
 			public const int ghost_view = 2131230730;
 			
@@ -2639,8 +2636,8 @@ namespace SadovodMobile
 			// aapt resource value: 0x7f080062
 			public const int icon = 2131230818;
 			
-			// aapt resource value: 0x7f0800f2
-			public const int icon_group = 2131230962;
+			// aapt resource value: 0x7f0800f1
+			public const int icon_group = 2131230961;
 			
 			// aapt resource value: 0x7f08003a
 			public const int ifRoom = 2131230778;
@@ -2660,8 +2657,8 @@ namespace SadovodMobile
 			// aapt resource value: 0x7f0800d1
 			public const int imageButton4 = 2131230929;
 			
-			// aapt resource value: 0x7f0800ee
-			public const int info = 2131230958;
+			// aapt resource value: 0x7f0800ed
+			public const int info = 2131230957;
 			
 			// aapt resource value: 0x7f080059
 			public const int italic = 2131230809;
@@ -2696,17 +2693,17 @@ namespace SadovodMobile
 			// aapt resource value: 0x7f080061
 			public const int list_item = 2131230817;
 			
-			// aapt resource value: 0x7f0800f8
-			public const int logOut = 2131230968;
-			
 			// aapt resource value: 0x7f0800f7
-			public const int masked = 2131230967;
+			public const int logOut = 2131230967;
 			
-			// aapt resource value: 0x7f0800e7
-			public const int media_actions = 2131230951;
+			// aapt resource value: 0x7f0800f6
+			public const int masked = 2131230966;
 			
-			// aapt resource value: 0x7f0800f5
-			public const int message = 2131230965;
+			// aapt resource value: 0x7f0800e6
+			public const int media_actions = 2131230950;
+			
+			// aapt resource value: 0x7f0800f4
+			public const int message = 2131230964;
 			
 			// aapt resource value: 0x7f080031
 			public const int middle = 2131230769;
@@ -2729,14 +2726,14 @@ namespace SadovodMobile
 			// aapt resource value: 0x7f08001e
 			public const int normal = 2131230750;
 			
-			// aapt resource value: 0x7f0800f0
-			public const int notification_background = 2131230960;
-			
-			// aapt resource value: 0x7f0800ea
-			public const int notification_main_column = 2131230954;
+			// aapt resource value: 0x7f0800ef
+			public const int notification_background = 2131230959;
 			
 			// aapt resource value: 0x7f0800e9
-			public const int notification_main_column_container = 2131230953;
+			public const int notification_main_column = 2131230953;
+			
+			// aapt resource value: 0x7f0800e8
+			public const int notification_main_column_container = 2131230952;
 			
 			// aapt resource value: 0x7f08004c
 			public const int parallax = 2131230796;
@@ -2765,11 +2762,11 @@ namespace SadovodMobile
 			// aapt resource value: 0x7f08004a
 			public const int right = 2131230794;
 			
-			// aapt resource value: 0x7f0800ef
-			public const int right_icon = 2131230959;
+			// aapt resource value: 0x7f0800ee
+			public const int right_icon = 2131230958;
 			
-			// aapt resource value: 0x7f0800eb
-			public const int right_side = 2131230955;
+			// aapt resource value: 0x7f0800ea
+			public const int right_side = 2131230954;
 			
 			// aapt resource value: 0x7f0800cc
 			public const int sKCanvasView1 = 2131230924;
@@ -2969,8 +2966,8 @@ namespace SadovodMobile
 			// aapt resource value: 0x7f08004b
 			public const int start = 2131230795;
 			
-			// aapt resource value: 0x7f0800e6
-			public const int status_bar_latest_event_content = 2131230950;
+			// aapt resource value: 0x7f0800e5
+			public const int status_bar_latest_event_content = 2131230949;
 			
 			// aapt resource value: 0x7f080076
 			public const int submenuarrow = 2131230838;
@@ -3050,8 +3047,8 @@ namespace SadovodMobile
 			// aapt resource value: 0x7f080015
 			public const int textinput_error = 2131230741;
 			
-			// aapt resource value: 0x7f0800ec
-			public const int time = 2131230956;
+			// aapt resource value: 0x7f0800eb
+			public const int time = 2131230955;
 			
 			// aapt resource value: 0x7f08001c
 			public const int title = 2131230748;
@@ -3101,8 +3098,8 @@ namespace SadovodMobile
 			// aapt resource value: 0x7f080016
 			public const int view_offset_helper = 2131230742;
 			
-			// aapt resource value: 0x7f0800f6
-			public const int visible = 2131230966;
+			// aapt resource value: 0x7f0800f5
+			public const int visible = 2131230965;
 			
 			// aapt resource value: 0x7f08003c
 			public const int withText = 2131230780;
@@ -3305,88 +3302,91 @@ namespace SadovodMobile
 			public const int design_text_input_password_icon = 2130968621;
 			
 			// aapt resource value: 0x7f04002e
-			public const int DrawSteadLayout = 2130968622;
+			public const int DrawBedsLayout = 2130968622;
 			
 			// aapt resource value: 0x7f04002f
-			public const int GardenBed = 2130968623;
+			public const int DrawSteadLayout = 2130968623;
 			
 			// aapt resource value: 0x7f040030
-			public const int GardenBeds = 2130968624;
+			public const int GardenBed = 2130968624;
 			
 			// aapt resource value: 0x7f040031
-			public const int GardenNoteView = 2130968625;
+			public const int GardenBeds = 2130968625;
 			
 			// aapt resource value: 0x7f040032
-			public const int notification_action = 2130968626;
+			public const int GardenNoteView = 2130968626;
 			
 			// aapt resource value: 0x7f040033
-			public const int notification_action_tombstone = 2130968627;
+			public const int notification_action = 2130968627;
 			
 			// aapt resource value: 0x7f040034
-			public const int notification_media_action = 2130968628;
+			public const int notification_action_tombstone = 2130968628;
 			
 			// aapt resource value: 0x7f040035
-			public const int notification_media_cancel_action = 2130968629;
+			public const int notification_media_action = 2130968629;
 			
 			// aapt resource value: 0x7f040036
-			public const int notification_template_big_media = 2130968630;
+			public const int notification_media_cancel_action = 2130968630;
 			
 			// aapt resource value: 0x7f040037
-			public const int notification_template_big_media_custom = 2130968631;
+			public const int notification_template_big_media = 2130968631;
 			
 			// aapt resource value: 0x7f040038
-			public const int notification_template_big_media_narrow = 2130968632;
+			public const int notification_template_big_media_custom = 2130968632;
 			
 			// aapt resource value: 0x7f040039
-			public const int notification_template_big_media_narrow_custom = 2130968633;
+			public const int notification_template_big_media_narrow = 2130968633;
 			
 			// aapt resource value: 0x7f04003a
-			public const int notification_template_custom_big = 2130968634;
+			public const int notification_template_big_media_narrow_custom = 2130968634;
 			
 			// aapt resource value: 0x7f04003b
-			public const int notification_template_icon_group = 2130968635;
+			public const int notification_template_custom_big = 2130968635;
 			
 			// aapt resource value: 0x7f04003c
-			public const int notification_template_lines_media = 2130968636;
+			public const int notification_template_icon_group = 2130968636;
 			
 			// aapt resource value: 0x7f04003d
-			public const int notification_template_media = 2130968637;
+			public const int notification_template_lines_media = 2130968637;
 			
 			// aapt resource value: 0x7f04003e
-			public const int notification_template_media_custom = 2130968638;
+			public const int notification_template_media = 2130968638;
 			
 			// aapt resource value: 0x7f04003f
-			public const int notification_template_part_chronometer = 2130968639;
+			public const int notification_template_media_custom = 2130968639;
 			
 			// aapt resource value: 0x7f040040
-			public const int notification_template_part_time = 2130968640;
+			public const int notification_template_part_chronometer = 2130968640;
 			
 			// aapt resource value: 0x7f040041
-			public const int select_dialog_item_material = 2130968641;
+			public const int notification_template_part_time = 2130968641;
 			
 			// aapt resource value: 0x7f040042
-			public const int select_dialog_multichoice_material = 2130968642;
+			public const int select_dialog_item_material = 2130968642;
 			
 			// aapt resource value: 0x7f040043
-			public const int select_dialog_singlechoice_material = 2130968643;
+			public const int select_dialog_multichoice_material = 2130968643;
 			
 			// aapt resource value: 0x7f040044
-			public const int SignIn = 2130968644;
+			public const int select_dialog_singlechoice_material = 2130968644;
 			
 			// aapt resource value: 0x7f040045
-			public const int SignUp = 2130968645;
+			public const int SignIn = 2130968645;
 			
 			// aapt resource value: 0x7f040046
-			public const int Steads = 2130968646;
+			public const int SignUp = 2130968646;
 			
 			// aapt resource value: 0x7f040047
-			public const int SteadView = 2130968647;
+			public const int Steads = 2130968647;
 			
 			// aapt resource value: 0x7f040048
-			public const int support_simple_spinner_dropdown_item = 2130968648;
+			public const int SteadView = 2130968648;
 			
 			// aapt resource value: 0x7f040049
-			public const int tooltip = 2130968649;
+			public const int support_simple_spinner_dropdown_item = 2130968649;
+			
+			// aapt resource value: 0x7f04004a
+			public const int tooltip = 2130968650;
 			
 			static Layout()
 			{
