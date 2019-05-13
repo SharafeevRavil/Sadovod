@@ -94,7 +94,7 @@ namespace SadovodMobile
                         }
                         if (Math.Abs(gardenBed.PileUpDate.DayOfYear - DateTime.Now.DayOfYear) >= gardenBed.PileUpPeriod)
                         {
-                            curSteadInfo.Append($"Полить {gardenBed.Plant.TypeName} {gardenBed.Plant.SortName}\n");
+                            curSteadInfo.Append($"Окучить {gardenBed.Plant.TypeName} {gardenBed.Plant.SortName}\n");
                         }
                     }
                     if (curSteadInfo.Length == 0)

@@ -31,7 +31,7 @@ namespace SadovodMobile
             timerData = new Timer((x) =>
             {
                 Log.Debug("ZHOPA", "Debug service");
-                if ((DateTime.Now.Hour == Preferences.Get("morning", 0) || DateTime.Now.Hour == Preferences.Get("evening", 0)) && (Preferences.Get("lastDayMorning", 0) < DateTime.Now.DayOfYear) || Preferences.Get("lastDayEvening", 0) < DateTime.Now.DayOfYear)
+                if ((DateTime.Now.Hour == Preferences.Get("morning", 0) || DateTime.Now.Hour == Preferences.Get("evening", 0)) /*&& (Preferences.Get("lastDayMorning", 0) < DateTime.Now.DayOfYear) || Preferences.Get("lastDayEvening", 0) < DateTime.Now.DayOfYear*/)
                 {
                     if (DateTime.Now.Hour == Preferences.Get("morning", 0))
                         Preferences.Set("lastDayMorning", DateTime.Now.DayOfYear);

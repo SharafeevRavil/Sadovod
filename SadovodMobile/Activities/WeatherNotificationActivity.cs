@@ -26,7 +26,7 @@ namespace SadovodMobile.Activities
             {
                 var client = new HttpClient();
                 client.BaseAddress = new Uri("https://sadovodhelperexample.azurewebsites.net");
-                var response = client.GetAsync($"api/weather/getrain?lat={Preferences.Get("lat",0.0)}&lon={Preferences.Get("lon",0.0)}").Result;
+                var response = client.GetAsync($"/api/weather/getrain?lat={Preferences.Get("lat",0.0)}&lon={Preferences.Get("lon",0.0)}").Result;
                 info = response.Content.ReadAsStringAsync().Result;
             }
             catch
@@ -47,6 +47,7 @@ namespace SadovodMobile.Activities
                 string info;
                 try
                 {
+                var lat = Preferences.Get("lat", 0.0);
                     var client = new HttpClient();
                     client.BaseAddress = new Uri("https://sadovodhelperexample.azurewebsites.net");
                     var response = client.GetAsync($"api/weather/getrain?lat={Preferences.Get("lat", 0.0)}&lon={Preferences.Get("lon", 0.0)}").Result;

@@ -103,7 +103,7 @@ namespace SadovodBack.Controllers
                 var j = 0;
                 var prevWeather = default(string);
                 var result = new List<Tuple<string, int, int>>();
-                if (l.Count() == 0) return "Сегодня дождей не ожидается";
+                if (l.Count() == 0) return $"Дождей не ожидается";
                 for (var i = 0; i < l.Count(); i++)
                 {
                     if (i == 0)
